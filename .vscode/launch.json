@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Build",
+      "request": "launch",
+      "command": "pnpm run build",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Dev",
+      "request": "launch",
+      "command": "pnpm run dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Generate",
+      "request": "launch",
+      "command": "pnpm run generate",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Preview",
+      "request": "launch",
+      "command": "pnpm run preview",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Postinstall",
+      "request": "launch",
+      "command": "pnpm run postinstall",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
