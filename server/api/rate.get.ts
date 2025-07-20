@@ -44,20 +44,14 @@ export default defineEventHandler(async (event) => {
     return;
   }
 
-  logger.info(
-    `Fetching exchange rate for ${query.data.transCur} to ${query.data.baseCur} on ${query.data.year}-${query.data.month}-${query.data.day}`
-  );
-
   const response = await axios
     .get('https://www.unionpayintl.com/upload/jfimg/' + query.data.year + query.data.month + query.data.day + '.json')
     .then((response) => {
-      logger.info('External API response received successfully');
       const data = response.data;
       const exchangeRateJson: { transCur: string; baseCur: string; rateData: number }[] = data.exchangeRateJson;
       const rate = exchangeRateJson.find(
         (element) => element.transCur === query.data.transCur && element.baseCur === query.data.baseCur
       );
-      logger.debug('Found rate:', rate);
       return {
         rate: rate,
       };
@@ -74,6 +68,5 @@ export default defineEventHandler(async (event) => {
       return;
     });
 
-  logger.debug('Returning response:', response);
   return response;
 });
