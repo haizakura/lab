@@ -3,10 +3,8 @@ import { logger } from '../utils/logger';
 export default defineEventHandler((event) => {
   const { method, url, headers } = event.node.req;
   const userAgent = headers['user-agent'] || 'Unknown';
+  const ip = headers['x-forwarded-for'] || 'Unknown';
+  const host = headers['host'] || 'Unknown';
 
-  logger.info(`[${method}] ${url} - User-Agent: ${userAgent}`);
-
-  if (method !== 'GET' && method !== 'HEAD') {
-    logger.info(`Request body will be processed for ${method} ${url}`);
-  }
+  logger.info(`[${method}] ${url} - IP: ${ip} - Host: ${host} - User-Agent: ${userAgent}`);
 });
