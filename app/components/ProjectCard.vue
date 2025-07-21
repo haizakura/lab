@@ -2,16 +2,19 @@
   <el-card shadow="always" class="card">
     <template #header>
       <div class="card-header">
-        <el-text tag="b" size="large" class="card-header-title" @click="goTo(name)">{{ title }}</el-text>
+        <el-text
+          tag="b"
+          size="large"
+          class="card-header-title"
+          @click="goTo(path as string)"
+        >{{ $t(title as string) }}</el-text>
       </div>
     </template>
     <div class="card-body mb-8">
-      <el-text line-clamp="2">{{ desc }}</el-text>
+      <el-text line-clamp="2">{{ $t(desc as string) }}</el-text>
     </div>
     <div class="card-bottom mt-16">
-      <el-link :href="path" underline="never">
-        <el-text type="info" size="small">{{ currentUrl + path }}</el-text>
-      </el-link>
+      <el-text class="card-bottom-link" type="info" size="small" @click="goTo(path as string)">{{ currentUrl + path }}</el-text>
     </div>
   </el-card>
 </template>
@@ -24,16 +27,16 @@ const props = defineProps({
   desc: String,
 });
 
-const router = useRouter();
-
 const currentUrl = 'https://lab.nya.run';
 
-const goTo = (name: string | undefined) => {
-  name && router.push({ name });
+const goTo = (path: string) => {
+  const localeRoute = useLocaleRoute();
+  const route = localeRoute(path);
+  route ? navigateTo(route) : navigateTo(path);
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .card {
   height: 100%;
   display: flex;
@@ -63,5 +66,9 @@ const goTo = (name: string | undefined) => {
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+}
+
+.card-bottom-link {
+  cursor: pointer;
 }
 </style>
