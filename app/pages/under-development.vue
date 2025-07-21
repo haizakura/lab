@@ -9,5 +9,3 @@ definePageMeta({
   name: 'underDevelopment',
 });
 </script>
-
-<style lang="scss" scoped></style>

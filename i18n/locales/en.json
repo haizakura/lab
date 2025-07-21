@@ -1,0 +1,23 @@
+{
+  "💰 Exchange Rate Query": "💰 Exchange Rate Query",
+  "Exchange rates provided on this website are from UnionPay System.": "Exchange rates provided on this website are from UnionPay System.",
+  "Transaction Currency": "Transaction Currency",
+  "Base Currency": "Base Currency",
+  "Settlement Date": "Settlement Date",
+  "Pick a Transaction Currency": "Pick a Transaction Currency",
+  "Pick a Base Currency": "Pick a Base Currency",
+  "Pick a Settlement Date": "Pick a Settlement Date",
+  "CNY, Yuan Renminbi": "CNY, Yuan Renminbi",
+  "JPY, Yen": "JPY, Yen",
+  "EUR, Euro": "EUR, Euro",
+  "GBP, Pound Sterling": "GBP, Pound Sterling",
+  "HKD, Hong Kong Dollar": "HKD, Hong Kong Dollar",
+  "USD, U.S.Dollar": "USD, U.S.Dollar",
+  "Failed to fetch exchange rate": "Failed to fetch exchange rate",
+
+  "🔤 Long Text Maker": "🔤 Long Text Maker",
+  "Make long text with ease.": "Make long text with ease.",
+
+  "⚒️ Under Development": "⚒️ Under Development",
+  "This project is under development.": "This project is under development."
+}

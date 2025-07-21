@@ -1,9 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
-  devtools: { enabled: true },
-  modules: ['@element-plus/nuxt'],
-  css: ['@/assets/style.scss'],
+  devtools: { enabled: false },
+  modules: ['@element-plus/nuxt', '@nuxtjs/i18n'],
+  css: ['@/assets/style.css'],
   vite: {
     ssr: {
       noExternal: ['log4js', 'dayjs'],
@@ -11,6 +11,14 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: ['dayjs'],
     },
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'zh-CN', name: '简体中文', file: 'zh-CN.json' },
+      { code: 'ja', name: '日本語', file: 'ja.json' },
+    ],
   },
   app: {
     head: {

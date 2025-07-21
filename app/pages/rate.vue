@@ -3,12 +3,12 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <el-text class="card-header-title" tag="b" @click="getRate">💰 Exchange Rate Query</el-text>
+          <el-text class="card-header-title" tag="b" @click="getRate">{{ $t('💰 Exchange Rate Query') }}</el-text>
         </div>
       </template>
       <el-form size="large" label-position="left" label-width="auto">
-        <el-form-item label="Transaction Currency">
-          <el-select v-model="transCur" placeholder="Pick a Transaction Currency" filterable>
+        <el-form-item :label="$t('Transaction Currency')">
+          <el-select v-model="transCur" :placeholder="$t('Pick a Transaction Currency')" filterable>
             <el-option
               v-for="item in transCurList"
               :key="item.value"
@@ -18,8 +18,8 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Base Currency">
-          <el-select v-model="baseCur" placeholder="Pick a Base Currency" filterable>
+        <el-form-item :label="$t('Base Currency')">
+          <el-select v-model="baseCur" :placeholder="$t('Pick a Base Currency')" filterable>
             <el-option
               v-for="item in baseCurList"
               :key="item.value"
@@ -29,17 +29,17 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Settlement Date">
+        <el-form-item :label="$t('Settlement Date')">
           <el-date-picker
             v-model="selectedDate"
             type="date"
-            placeholder="Pick a Settlement Date"
+            :placeholder="$t('Pick a Settlement Date')"
           />
         </el-form-item>
       </el-form>
 
       <div class="get-rate-button">
-        <el-button type="success" size="large" :icon="Search" circle @click="getRate"></el-button>
+        <el-button type="success" size="large" :icon="ElIconSearch" circle @click="getRate"></el-button>
       </div>
 
       <el-divider v-if="rateData"></el-divider>
@@ -77,7 +77,6 @@ definePageMeta({
 });
 
 import { ref } from 'vue';
-import { Search } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 
 const appConfig = useAppConfig();
@@ -95,21 +94,21 @@ const baseNum = ref<number>(0);
 const rateData = ref<number>(0);
 
 const transCurList = [
-  { value: 'CNY', label: 'CNY, Yuan Renminbi' },
-  { value: 'JPY', label: 'JPY, Yen' },
-  { value: 'EUR', label: 'EUR, Euro' },
-  { value: 'GBP', label: 'GBP, Pound Sterling' },
-  { value: 'HKD', label: 'HKD, Hong Kong Dollar' },
-  { value: 'USD', label: 'USD, U.S.Dollar' },
+  { value: 'CNY', label: $t('CNY, Yuan Renminbi') },
+  { value: 'JPY', label: $t('JPY, Yen') },
+  { value: 'EUR', label: $t('EUR, Euro') },
+  { value: 'GBP', label: $t('GBP, Pound Sterling') },
+  { value: 'HKD', label: $t('HKD, Hong Kong Dollar') },
+  { value: 'USD', label: $t('USD, U.S.Dollar') },
 ];
 
 const baseCurList = [
-  { value: 'CNY', label: 'CNY, Yuan Renminbi' },
-  { value: 'JPY', label: 'JPY, Yen' },
-  { value: 'EUR', label: 'EUR, Euro' },
-  { value: 'GBP', label: 'GBP, Pound Sterling' },
-  { value: 'HKD', label: 'HKD, Hong Kong Dollar' },
-  { value: 'USD', label: 'USD, U.S.Dollar' },
+  { value: 'CNY', label: $t('CNY, Yuan Renminbi') },
+  { value: 'JPY', label: $t('JPY, Yen') },
+  { value: 'EUR', label: $t('EUR, Euro') },
+  { value: 'GBP', label: $t('GBP, Pound Sterling') },
+  { value: 'HKD', label: $t('HKD, Hong Kong Dollar') },
+  { value: 'USD', label: $t('USD, U.S.Dollar') },
 ];
 
 const getRate = async () => {
@@ -134,10 +133,10 @@ const getRate = async () => {
         }
       })
       .catch((error) => {
-        ElMessage.error(`Failed to fetch exchange rate: ${error.response.statusText}`);
+        ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`);
       });
   } catch (error) {
-    ElMessage.error(`Failed to fetch exchange rate: ${error}`);
+    ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error}`);
   }
 };
 
@@ -148,7 +147,7 @@ const calcRate = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .rate-container {
   display: flex;
   justify-content: center;

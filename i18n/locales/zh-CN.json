@@ -1,0 +1,23 @@
+{
+  "💰 Exchange Rate Query": "💰 汇率查询",
+  "Exchange rates provided on this website are from UnionPay System.": "本网站提供的国际货币汇率数据来源于银联国际系统。",
+  "Transaction Currency": "交易币种",
+  "Base Currency": "基准币种",
+  "Settlement Date": "结算日期",
+  "Pick a Transaction Currency": "选择交易币种",
+  "Pick a Base Currency": "选择基准币种",
+  "Pick a Settlement Date": "选择结算日期",
+  "CNY, Yuan Renminbi": "CNY, 人民币",
+  "JPY, Yen": "JPY, 日元",
+  "EUR, Euro": "EUR, 欧元",
+  "GBP, Pound Sterling": "GBP, 英镑",
+  "HKD, Hong Kong Dollar": "HKD, 港币",
+  "USD, U.S.Dollar": "USD, 美元",
+  "Failed to fetch exchange rate": "获取汇率失败",
+
+  "🔤 Long Text Maker": "🔤 长文本生成器",
+  "Make long text with ease.": "轻松生成长文本。",
+
+  "⚒️ Under Development": "⚒️ 开发中",
+  "This project is under development.": "本项目正在开发中。"
+}
