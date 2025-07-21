@@ -15,25 +15,19 @@ export default defineAppConfig({
     item01: {
       title: '⚒️ Under Development',
       name: 'underDevelopment',
-      path: '/under-development',
+      path: '/under-dev',
       desc: 'This project is under development.',
     },
     item02: {
       title: '⚒️ Under Development',
       name: 'underDevelopment',
-      path: '/under-development',
+      path: '/under-dev',
       desc: 'This project is under development.',
     },
     item03: {
       title: '⚒️ Under Development',
       name: 'underDevelopment',
-      path: '/under-development',
-      desc: 'This project is under development.',
-    },
-    item04: {
-      title: '⚒️ Under Development',
-      name: 'underDevelopment',
-      path: '/under-development',
+      path: '/under-dev',
       desc: 'This project is under development.',
     },
   },

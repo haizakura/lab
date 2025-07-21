@@ -14,7 +14,7 @@ const appConfig = useAppConfig();
 const itemConfig = appConfig.itemConfig;
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .project-card-container {
   margin: calc(-0.5rem);
   display: flex;
