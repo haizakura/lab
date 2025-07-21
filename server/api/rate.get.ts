@@ -1,10 +1,10 @@
 import { getValidatedQuery, getQuery } from 'h3';
 import { z } from 'zod';
-import axios from 'axios';
 import { logger } from '../utils/logger';
+import type { H3Event } from 'h3';
 
-export default defineEventHandler(async (event) => {
-  logger.info('Rate API called with query:', getQuery(event));
+export default defineEventHandler(async (event: H3Event) => {
+  logger.info('Rate API', '- called with query:', getQuery(event));
 
   const today = new Date();
   const nowYear = today.getFullYear().toString();
@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
   const query = await getValidatedQuery(event, querySchema.safeParse);
 
   if (!query.success) {
-    logger.error('Validation failed:', z.flattenError(query.error).fieldErrors);
+    logger.error('Rate API', '- Validation failed:', z.flattenError(query.error).fieldErrors);
     sendError(
       event,
       createError({
@@ -44,20 +44,30 @@ export default defineEventHandler(async (event) => {
     return;
   }
 
-  const response = await axios
-    .get('https://www.unionpayintl.com/upload/jfimg/' + query.data.year + query.data.month + query.data.day + '.json')
+  const response = await $fetch(
+    'https://www.unionpayintl.com/upload/jfimg/' + query.data.year + query.data.month + query.data.day + '.json'
+  )
     .then((response) => {
-      const data = response.data;
+      const data = response as { exchangeRateJson: { transCur: string; baseCur: string; rateData: number }[] };
       const exchangeRateJson: { transCur: string; baseCur: string; rateData: number }[] = data.exchangeRateJson;
       const rate = exchangeRateJson.find(
         (element) => element.transCur === query.data.transCur && element.baseCur === query.data.baseCur
       );
       return {
-        rate: rate,
+        data: {
+          rate: rate,
+        },
       };
     })
     .catch((error) => {
-      logger.error('External API error:', error?.response?.status, error?.response?.statusText);
+      logger.error(
+        'Rate API',
+        '- External API error:',
+        error?.response?.status,
+        error?.response?.statusText,
+        '- called with query:',
+        getQuery(event)
+      );
       sendError(
         event,
         createError({
