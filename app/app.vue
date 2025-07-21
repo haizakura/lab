@@ -1,14 +1,15 @@
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <div class="app-container">
+    <el-header class="header">
+      <AppHeader />
+    </el-header>
 
-  <SpeedInsights />
-  <Analytics />
+    <el-main class="main">
+      <NuxtPage />
+    </el-main>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { SpeedInsights } from '@vercel/speed-insights/vue';
-import { Analytics } from '@vercel/analytics/nuxt';
+import AppHeader from '~/components/AppHeader.vue';
 </script>

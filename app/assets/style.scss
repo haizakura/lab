@@ -1,0 +1,52 @@
+body {
+  line-height: 1.55;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pt-16 {
+  padding-top: 16px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1000;
+  display: block;
+  height: auto;
+  position: static;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-bottom: 0.0625rem solid rgb(233, 236, 239);
+}
+
+.main {
+  display: block;
+  padding: 1rem 1rem 2rem;
+  max-width: 82.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer {
+  flex-shrink: 0;
+  text-align: center;
+}
