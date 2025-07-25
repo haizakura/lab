@@ -60,7 +60,7 @@
                 <el-checkbox v-model="charTypes.halfwidthLowercase">Half-width Letters (Lower)</el-checkbox>
               </el-col>
             </el-row>
-            <el-row :gutter="10" class="mt-8">
+            <el-row :gutter="10" class="mt-2">
               <el-col :span="8">
                 <el-checkbox v-model="charTypes.halfwidthSymbols">Half-width Symbols</el-checkbox>
               </el-col>
@@ -71,7 +71,7 @@
                 <el-checkbox v-model="charTypes.katakana">Katakana</el-checkbox>
               </el-col>
             </el-row>
-            <el-row :gutter="10" class="mt-8">
+            <el-row :gutter="10" class="mt-2">
               <el-col :span="8">
                 <el-checkbox v-model="charTypes.kanjiKana">Kanji Kana</el-checkbox>
               </el-col>
@@ -82,7 +82,7 @@
                 <el-checkbox v-model="charTypes.fullwidthSymbols">Full-width Symbols</el-checkbox>
               </el-col>
             </el-row>
-            <el-row :gutter="10" class="mt-8">
+            <el-row :gutter="10" class="mt-2">
               <el-col :span="12">
                 <el-checkbox v-model="charTypes.basicKanjiDifferentRadicals">Basic Kanji (Different Radicals)</el-checkbox>
               </el-col>
@@ -90,7 +90,7 @@
                 <el-checkbox v-model="charTypes.basicKanjiWaterRadical">Basic Kanji (Water Radical)</el-checkbox>
               </el-col>
             </el-row>
-            <el-row :gutter="10" class="mt-8">
+            <el-row :gutter="10" class="mt-2">
               <el-col :span="12">
                 <el-checkbox v-model="charTypes.additionalKanjiWaterRadical">Additional Kanji (Water Radical)</el-checkbox>
               </el-col>
@@ -98,7 +98,7 @@
                 <el-checkbox v-model="charTypes.chineseCharacters">Chinese Characters</el-checkbox>
               </el-col>
             </el-row>
-            <el-row :gutter="10" class="mt-8">
+            <el-row :gutter="10" class="mt-2">
               <el-col :span="12">
                 <el-checkbox v-model="charTypes.customUnicodeRange">Custom Unicode Range</el-checkbox>
               </el-col>
@@ -127,7 +127,7 @@
               @input="validateUnicodeRange"
             />
           </div>
-          <div v-if="unicodeRangeError" class="error-message mt-8">
+          <div v-if="unicodeRangeError" class="error-message mt-2">
             <el-text type="danger">{{ unicodeRangeError }}</el-text>
           </div>
         </el-form-item>
@@ -205,7 +205,7 @@
           placeholder="Generated text will appear here..."
           :class="{ 'no-wrap': noTextWrap }"
         />
-        <div class="output-options mt-8">
+        <div class="output-options mt-2">
           <el-checkbox v-model="noTextWrap">No text wrap</el-checkbox>
         </div>
       </div>
@@ -650,7 +650,7 @@ watch([() => unicodeRange.value.from, () => unicodeRange.value.to], validateUnic
   }
 }
 
-.mt-8 {
+.mt-2 {
   margin-top: 8px;
 }
 </style>

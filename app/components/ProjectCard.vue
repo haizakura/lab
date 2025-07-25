@@ -10,10 +10,10 @@
         >{{ $t(title as string) }}</el-text>
       </div>
     </template>
-    <div class="card-body mb-8">
+    <div class="card-body mb-2">
       <el-text line-clamp="2">{{ $t(desc as string) }}</el-text>
     </div>
-    <div class="card-bottom mt-16">
+    <div class="card-bottom">
       <el-text class="card-bottom-link" type="info" size="small" @click="goTo(path as string)">{{ currentUrl + path }}</el-text>
     </div>
   </el-card>

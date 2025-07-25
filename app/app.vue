@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app">
     <el-header class="header">
       <AppHeader />
     </el-header>
@@ -14,5 +14,5 @@
 
 <script setup lang="ts">
 import { Analytics } from '@vercel/analytics/nuxt'
-import AppHeader from '~/components/AppHeader.vue';
+import AppHeader from '@/components/AppHeader.vue';
 </script>
