@@ -1,9 +1,7 @@
 <template>
-  <el-footer>
-    <div class="footer-content">
+    <div>
       <el-text>© {{ year }} HAIZAKURA Lab. All rights reserved.</el-text>
     </div>
-  </el-footer>
 </template>
 
 <script setup lang="ts">
