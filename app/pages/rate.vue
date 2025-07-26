@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <el-text class="card-header-title" tag="b" @click="getRate">{{ $t('💰 Exchange Rate Query') }}</el-text>
+          <span class="font-2xl text-black font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
         </div>
       </template>
       <el-form size="large" label-position="left" label-width="auto">
@@ -38,13 +38,13 @@
         </el-form-item>
       </el-form>
 
-      <div class="get-rate-button">
+      <div class="flex justify-center">
         <el-button type="success" size="large" :icon="ElIconSearch" circle @click="getRate"></el-button>
       </div>
 
       <el-divider v-if="rateData"></el-divider>
 
-      <div class="div-rate" v-if="rateData">
+      <div class="text-center" v-if="rateData">
         <el-text type="danger" tag="b" class="rate-1">1</el-text>
         <el-text type="primary" tag="b" class="rate-2">&nbsp;{{ transCur }}</el-text>
         <el-text class="rate-1" style="color: #000;">&nbsp;=&nbsp;</el-text>
@@ -80,10 +80,11 @@ import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
 
 const appConfig = useAppConfig();
+const item = appConfig.itemConfig.rate;
 
 useSeoMeta({
-  title: appConfig.itemConfig.rate.title,
-  description: appConfig.itemConfig.rate.desc,
+  title: item.title,
+  description: item.desc,
 });
 
 const transCur = ref<string>('JPY');
@@ -165,25 +166,11 @@ const calcRate = () => {
   }
 }
 
-.card-header-title {
-  color: #000;
-  font-size: 1.5em;
-}
-
-.div-rate {
-  text-align: center;
-}
-
 .rate-1 {
   font-size: 2em;
 }
 
 .rate-2 {
   font-size: 1em;
-}
-
-.get-rate-button {
-  display: flex;
-  justify-content: center;
 }
 </style>

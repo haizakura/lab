@@ -2,25 +2,21 @@
   <el-card shadow="always" class="card">
     <template #header>
       <div class="card-header">
-        <el-text
-          tag="b"
-          size="large"
-          class="card-header-title"
-          @click="goTo(path as string)"
-        >{{ $t(title as string) }}</el-text>
+        <span class="font-2xl text-black font-bold" @click="goTo(path as string)">{{ icon }} {{ $t(title as string) }}</span>
       </div>
     </template>
-    <div class="card-body mb-8">
+    <div class="card-body">
       <el-text line-clamp="2">{{ $t(desc as string) }}</el-text>
     </div>
-    <div class="card-bottom mt-16">
-      <el-text class="card-bottom-link" type="info" size="small" @click="goTo(path as string)">{{ currentUrl + path }}</el-text>
+    <div class="card-bottom">
+      <el-text class="cursor-pointer" type="info" size="small" @click="goTo(path as string)">{{ currentUrl + path }}</el-text>
     </div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
 const props = defineProps({
+  icon: String,
   title: String,
   name: String,
   path: String,
@@ -35,40 +31,3 @@ const goTo = (path: string) => {
   route ? navigateTo(route) : navigateTo(path);
 };
 </script>
-
-<style lang="css" scoped>
-.card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-
-.card-header-title {
-  color: #000;
-}
-
-.card-body {
-  line-height: 1.55;
-  min-height: 3.1rem;
-  text-decoration: none;
-}
-
-.card-bottom {
-  line-height: 1em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-}
-
-.card-bottom-link {
-  cursor: pointer;
-}
-</style>

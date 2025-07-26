@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: false },
-  modules: ['@element-plus/nuxt', '@nuxtjs/i18n'],
+  modules: ['@element-plus/nuxt', '@nuxtjs/i18n', '@unocss/nuxt'],
   css: ['@/assets/style.css'],
   vite: {
     ssr: {
@@ -16,8 +16,8 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     locales: [
       { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'zh-CN', name: '简体中文', file: 'zh-CN.json' },
       { code: 'ja', name: '日本語', file: 'ja.json' },
+      { code: 'zh-CN', name: '简体中文', file: 'zh-CN.json' },
     ],
   },
   app: {
