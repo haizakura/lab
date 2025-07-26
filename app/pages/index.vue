@@ -1,14 +1,12 @@
 <template>
   <div class="project-card-group">
     <div class="project-card" v-for="item in itemConfig">
-      <ProjectCard :key="item.name" :icon="item.icon" :title="item.title" :name="item.name" :path="item.path" :desc="item.desc" />
+      <ItemsProjectCard :key="item.name" :icon="item.icon" :title="item.title" :name="item.name" :path="item.path" :desc="item.desc" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import ProjectCard from '@/components/ProjectCard.vue';
-
 const appConfig = useAppConfig();
 
 const itemConfig = appConfig.itemConfig;
