@@ -3,7 +3,7 @@
     <template #header>
       <div class="card-header">
         <span
-          class="font-2xl text-black font-bold cursor-pointer"
+          class="font-2xl text-primary font-bold cursor-pointer"
           @click="goTo(path as string)"
         >{{ icon }} {{ $t(title as string) }}</span>
       </div>

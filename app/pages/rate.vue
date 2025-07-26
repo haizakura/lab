@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <span class="font-2xl text-black font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
+          <span class="font-2xl text-primary font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
         </div>
       </template>
       <el-form size="large" label-position="left" label-width="auto">

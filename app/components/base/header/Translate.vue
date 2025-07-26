@@ -1,12 +1,15 @@
 <template>
   <el-dropdown>
-    <span>
-      <IconsTranslateRounded class="header-language-icon" />
+    <span class="header-icon">
+      <IconsTranslate />
     </span>
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item v-for="locale in availableLocales" :key="locale.code">
-          <NuxtLink :to="switchLocalePath(locale.code)" class="header-language-link">{{ locale.name }}</NuxtLink>
+          <NuxtLink
+            :to="switchLocalePath(locale.code)"
+            class="color-primary no-underline"
+          >{{ locale.name }}</NuxtLink>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
