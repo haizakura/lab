@@ -8,39 +8,49 @@
       </template>
       <el-form size="large" label-position="left" label-width="8rem">
         <el-form-item :label="$t('Trans Currency')">
-          <el-select v-model="transCur" :placeholder="$t('Pick a Transaction Currency')" filterable>
+          <el-select v-model="transCur" :placeholder="$t('Pick a Transaction Currency')" filterable :aria-label="$t('Transaction Currency')">
             <el-option
               v-for="item in transCurList"
               :key="item.value"
               :label="item.label"
               :value="item.value"
+              :aria-label="item.label"
             />
           </el-select>
         </el-form-item>
 
         <el-form-item :label="$t('Base Currency')">
-          <el-select v-model="baseCur" :placeholder="$t('Pick a Base Currency')" filterable>
+          <el-select v-model="baseCur" :placeholder="$t('Pick a Base Currency')" filterable :aria-label="$t('Base Currency')">
             <el-option
               v-for="item in baseCurList"
               :key="item.value"
               :label="item.label"
               :value="item.value"
+              :aria-label="item.label"
             />
           </el-select>
         </el-form-item>
 
         <el-form-item :label="$t('Settlement Date')">
           <el-date-picker
-            class="w-full"
+            class="!w-full"
             v-model="selectedDate"
             type="date"
             :placeholder="$t('Pick a Settlement Date')"
+            :aria-label="$t('Settlement Date')"
           />
         </el-form-item>
       </el-form>
 
       <div class="flex justify-center">
-        <el-button type="success" size="large" :icon="ElIconSearch" circle @click="getRate"></el-button>
+        <el-button
+          type="success"
+          size="large"
+          :icon="ElIconSearch"
+          circle
+          @click="getRate"
+          aria-label="Get Rate"
+        ></el-button>
       </div>
 
       <el-divider v-if="rateData"></el-divider>
@@ -57,16 +67,16 @@
 
       <el-form v-if="rateData">
         <el-form-item>
-          <el-input v-model="transNum" @input="calcRate()" clearable>
+          <el-input v-model="transNum" @input="calcRate()" clearable :aria-label="$t('Transaction Amount')">
             <template #append>
-              <span class="font-bold w-8">{{ transCur }}</span>
+              <span class="font-bold w-8 text-center">{{ transCur }}</span>
             </template>
           </el-input>
         </el-form-item>
-        <el-form-item>
-          <el-input v-model="baseNum">
+        <el-form-item class="!mb-0">
+          <el-input v-model="baseNum" :aria-label="$t('Base Amount')">
             <template #append>
-              <span class="font-bold w-8">{{ baseCur }}</span>
+              <span class="font-bold w-8 text-center">{{ baseCur }}</span>
             </template>
           </el-input>
         </el-form-item>

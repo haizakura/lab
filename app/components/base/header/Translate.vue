@@ -1,6 +1,6 @@
 <template>
   <el-dropdown>
-    <span class="header-icon">
+    <span class="header-icon" aria-label="Translate">
       <IconsTranslate />
     </span>
     <template #dropdown>
@@ -9,6 +9,7 @@
           <NuxtLink
             :to="switchLocalePath(locale.code)"
             class="color-primary no-underline"
+            :aria-label="locale.name"
           >{{ locale.name }}</NuxtLink>
         </el-dropdown-item>
       </el-dropdown-menu>
