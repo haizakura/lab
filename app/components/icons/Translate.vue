@@ -10,6 +10,6 @@
 
 <script>
 export default {
-  name: 'MaterialSymbolsTranslateRounded',
+  name: 'Translate',
 };
 </script>

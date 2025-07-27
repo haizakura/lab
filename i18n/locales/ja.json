@@ -1,7 +1,9 @@
 {
+  "Go back home": "ホームに戻る",
+
   "Exchange Rate Query": "為替レート検索",
   "Exchange rates provided on this website are from UnionPay System.": "本サイトで提供される為替レートは、銀聯システムから取得されています。",
-  "Transaction Currency": "取引通貨",
+  "Trans Currency": "取引通貨",
   "Base Currency": "基準通貨",
   "Settlement Date": "決済日",
   "Pick a Transaction Currency": "選択取引通貨",
@@ -18,6 +20,6 @@
   "Long Text Maker": "長文字列作成ツール",
   "Make long text with ease.": "長文字列を簡単に作成します。",
 
-  "Under Development": "開発中",
-  "This project is under development.": "本プロジェクトは開発中です。"
+  "Under Development": "ただいま開発中",
+  "This project is under development.": "本プロジェクトはただいま開発中です。"
 }
