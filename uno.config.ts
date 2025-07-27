@@ -4,6 +4,11 @@ export default defineConfig({
   presets: [presetWind4()],
   theme: {
     colors: {
+      brand: '#409eff',
+      success: '#67c23a',
+      warning: '#e6a23c',
+      danger: '#f56c6c',
+      info: '#909399',
       primary: '#303133',
       regular: '#606266',
       line: {
@@ -26,5 +31,7 @@ export default defineConfig({
     'card-header': 'flex justify-between items-center',
     'card-body': 'leading-[1.55rem] min-h-[3.1rem] no-underline mb-2',
     'card-bottom': 'leading-[1rem] flex justify-between items-center mt-auto',
+
+    page: 'flex justify-center items-center h-full',
   },
 });

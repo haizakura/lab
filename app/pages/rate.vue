@@ -1,13 +1,13 @@
 <template>
-  <div class="rate-container">
+  <div class="page">
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
           <span class="font-2xl text-primary font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
         </div>
       </template>
-      <el-form size="large" label-position="left" label-width="auto">
-        <el-form-item :label="$t('Transaction Currency')">
+      <el-form size="large" label-position="left" label-width="8rem">
+        <el-form-item :label="$t('Trans Currency')">
           <el-select v-model="transCur" :placeholder="$t('Pick a Transaction Currency')" filterable>
             <el-option
               v-for="item in transCurList"
@@ -31,6 +31,7 @@
 
         <el-form-item :label="$t('Settlement Date')">
           <el-date-picker
+            class="w-full"
             v-model="selectedDate"
             type="date"
             :placeholder="$t('Pick a Settlement Date')"
@@ -45,11 +46,11 @@
       <el-divider v-if="rateData"></el-divider>
 
       <div class="text-center" v-if="rateData">
-        <el-text type="danger" tag="b" class="rate-1">1</el-text>
-        <el-text type="primary" tag="b" class="rate-2">&nbsp;{{ transCur }}</el-text>
-        <el-text class="rate-1" style="color: #000;">&nbsp;=&nbsp;</el-text>
-        <el-text type="danger" tag="b" class="rate-1">{{ rateData }}</el-text>
-        <el-text type="primary" tag="b" class="rate-2">&nbsp;{{ baseCur }}</el-text>
+        <span class="text-danger font-bold text-4xl">1</span>
+        <span class="text-brand font-bold ml-2">{{ transCur }}</span>
+        <span class="text-primary font-bold text-4xl mx-2">=</span>
+        <span class="text-danger font-bold text-4xl">{{ rateData }}</span>
+        <span class="text-brand font-bold ml-2">{{ baseCur }}</span>
       </div>
 
       <el-divider v-if="rateData"></el-divider>
@@ -57,12 +58,16 @@
       <el-form v-if="rateData">
         <el-form-item>
           <el-input v-model="transNum" @input="calcRate()" clearable>
-            <template #append>{{ transCur }}</template>
+            <template #append>
+              <span class="font-bold w-8">{{ transCur }}</span>
+            </template>
           </el-input>
         </el-form-item>
         <el-form-item>
           <el-input v-model="baseNum">
-            <template #append>{{ baseCur }}</template>
+            <template #append>
+              <span class="font-bold w-8">{{ baseCur }}</span>
+            </template>
           </el-input>
         </el-form-item>
       </el-form>
@@ -148,29 +153,12 @@ const calcRate = () => {
 };
 </script>
 
-<style lang="css" scoped>
-.rate-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
+<style scoped>
 .box-card {
-  @media (min-width: 640px) {
-    width: 25em;
-    margin: auto;
-  }
-  @media (max-width: 639px) {
-    margin: auto;
-  }
-}
+  margin: auto;
 
-.rate-1 {
-  font-size: 2em;
-}
-
-.rate-2 {
-  font-size: 1em;
+  @media (min-width: 40rem) {
+    width: 25rem;
+  }
 }
 </style>

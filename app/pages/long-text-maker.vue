@@ -1,5 +1,5 @@
 <template>
-  <div class="long-text-maker-container">
+  <div class="page">
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
@@ -587,14 +587,7 @@ watch(selectedPattern, onPatternChange);
 watch([() => unicodeRange.value.from, () => unicodeRange.value.to], validateUnicodeRange);
 </script>
 
-<style lang="css" scoped>
-.long-text-maker-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
+<style scoped>
 .box-card {
   @media (min-width: 768px) {
     width: 50em;
