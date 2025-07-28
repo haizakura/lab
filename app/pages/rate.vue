@@ -1,9 +1,9 @@
 <template>
   <div class="page">
-    <el-card class="box-card">
+    <el-card class="m-auto sm:w-sm">
       <template #header>
         <div class="card-header">
-          <span class="font-2xl text-primary font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
+          <span class="text-2xl text-primary font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
         </div>
       </template>
       <el-form size="large" label-position="left" label-width="8rem">
@@ -162,13 +162,3 @@ const calcRate = () => {
   }
 };
 </script>
-
-<style scoped>
-.box-card {
-  margin: auto;
-
-  @media (min-width: 40rem) {
-    width: 25rem;
-  }
-}
-</style>
