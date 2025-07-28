@@ -6,7 +6,6 @@ const config = {
   printWidth: 120,
   semi: true,
   singleQuote: true,
-  vueIndentScriptAndStyle: true,
 };
 
 export default config;
