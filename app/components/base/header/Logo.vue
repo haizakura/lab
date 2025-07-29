@@ -1,5 +1,7 @@
 <template>
-  <span class="text-primary" @click="goBackHome" aria-label="HAIZAKURA Lab">HAIZAKURA Lab</span>
+  <span class="text-primary" @click="goBackHome" aria-label="HAIZAKURA Lab"
+    >HAIZAKURA Lab</span
+  >
 </template>
 
 <script lang="ts" setup>
