@@ -9,7 +9,8 @@
         class="font-medium hover:text-brand text-sm underline underline-offset-3 cursor-pointer"
         @click="goBackHome"
         aria-label="Go back home"
-      >{{ $t('Go back home') }}</NuxtLink>
+        >{{ $t('Go back home') }}</NuxtLink
+      >
     </div>
   </div>
 </template>

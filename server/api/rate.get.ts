@@ -39,19 +39,19 @@ export default defineEventHandler(async (event: H3Event) => {
           message: 'Input Invalid',
           errors: z.flattenError(query.error).fieldErrors,
         },
-      })
+      }),
     );
     return;
   }
 
   const response = await $fetch(
-    'https://www.unionpayintl.com/upload/jfimg/' + query.data.year + query.data.month + query.data.day + '.json'
+    'https://www.unionpayintl.com/upload/jfimg/' + query.data.year + query.data.month + query.data.day + '.json',
   )
     .then((response) => {
       const data = response as { exchangeRateJson: { transCur: string; baseCur: string; rateData: number }[] };
       const exchangeRateJson: { transCur: string; baseCur: string; rateData: number }[] = data.exchangeRateJson;
       const rate = exchangeRateJson.find(
-        (element) => element.transCur === query.data.transCur && element.baseCur === query.data.baseCur
+        (element) => element.transCur === query.data.transCur && element.baseCur === query.data.baseCur,
       );
       return {
         data: {
@@ -66,14 +66,14 @@ export default defineEventHandler(async (event: H3Event) => {
         error?.response?.status,
         error?.response?.statusText,
         '- called with query:',
-        getQuery(event)
+        getQuery(event),
       );
       sendError(
         event,
         createError({
           statusCode: error?.response?.status ?? 500,
           data: { message: error?.response?.statusText ?? 'Internal Server Error' },
-        })
+        }),
       );
       return;
     });

@@ -1,14 +1,14 @@
 <template>
   <div class="project">
-    <div class="project-card" v-for="item in itemConfig">
+    <div v-for="item in itemConfig" :key="item.name" class="project-card">
       <ItemsProjectCard
-        :key="item.name"
         :icon="item.icon"
         :title="item.title"
         :name="item.name"
         :path="item.path"
         :desc="item.desc"
-        :aria-label="item.name" />
+        :aria-label="item.name"
+      />
     </div>
   </div>
 </template>

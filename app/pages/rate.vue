@@ -8,7 +8,12 @@
       </template>
       <el-form size="large" label-position="left" label-width="8rem">
         <el-form-item :label="$t('Trans Currency')">
-          <el-select v-model="transCur" :placeholder="$t('Pick a Transaction Currency')" filterable :aria-label="$t('Transaction Currency')">
+          <el-select
+            v-model="transCur"
+            :placeholder="$t('Pick a Transaction Currency')"
+            filterable
+            :aria-label="$t('Transaction Currency')"
+          >
             <el-option
               v-for="item in transCurList"
               :key="item.value"
@@ -20,7 +25,12 @@
         </el-form-item>
 
         <el-form-item :label="$t('Base Currency')">
-          <el-select v-model="baseCur" :placeholder="$t('Pick a Base Currency')" filterable :aria-label="$t('Base Currency')">
+          <el-select
+            v-model="baseCur"
+            :placeholder="$t('Pick a Base Currency')"
+            filterable
+            :aria-label="$t('Base Currency')"
+          >
             <el-option
               v-for="item in baseCurList"
               :key="item.value"
@@ -81,7 +91,6 @@
           </el-input>
         </el-form-item>
       </el-form>
-
     </el-card>
   </div>
 </template>
