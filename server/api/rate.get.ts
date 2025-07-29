@@ -1,19 +1,22 @@
-import { getValidatedQuery, getQuery } from 'h3';
+import { getValidatedQuery } from 'h3';
 import { z } from 'zod';
-import { logger } from '../utils/logger';
 import type { H3Event } from 'h3';
 
 export default defineEventHandler(async (event: H3Event) => {
-  logger.info('Rate API', '- called with query:', getQuery(event));
-
   const today = new Date();
   const nowYear = today.getFullYear().toString();
   const nowMonth = (today.getMonth() + 1).toString().padStart(2, '0');
   const nowDay = today.getDate().toString().padStart(2, '0');
 
-  const stringYear = z.string().regex(/^\d{4}$/, 'Must be a number string (4 digits)');
-  const stringMonth = z.string().regex(/^\d{2}$/, 'Must be a number string (2 digits)');
-  const stringDay = z.string().regex(/^\d{2}$/, 'Must be a number string (2 digits)');
+  const stringYear = z
+    .string()
+    .regex(/^\d{4}$/, 'Must be a number string (4 digits)');
+  const stringMonth = z
+    .string()
+    .regex(/^\d{2}$/, 'Must be a number string (2 digits)');
+  const stringDay = z
+    .string()
+    .regex(/^\d{2}$/, 'Must be a number string (2 digits)');
   const stringCurrency = z
     .string()
     .toUpperCase()
@@ -30,7 +33,6 @@ export default defineEventHandler(async (event: H3Event) => {
   const query = await getValidatedQuery(event, querySchema.safeParse);
 
   if (!query.success) {
-    logger.error('Rate API', '- Validation failed:', z.flattenError(query.error).fieldErrors);
     sendError(
       event,
       createError({
@@ -45,13 +47,29 @@ export default defineEventHandler(async (event: H3Event) => {
   }
 
   const response = await $fetch(
-    'https://www.unionpayintl.com/upload/jfimg/' + query.data.year + query.data.month + query.data.day + '.json',
+    'https://www.unionpayintl.com/upload/jfimg/' +
+      query.data.year +
+      query.data.month +
+      query.data.day +
+      '.json',
   )
     .then((response) => {
-      const data = response as { exchangeRateJson: { transCur: string; baseCur: string; rateData: number }[] };
-      const exchangeRateJson: { transCur: string; baseCur: string; rateData: number }[] = data.exchangeRateJson;
+      const data = response as {
+        exchangeRateJson: {
+          transCur: string;
+          baseCur: string;
+          rateData: number;
+        }[];
+      };
+      const exchangeRateJson: {
+        transCur: string;
+        baseCur: string;
+        rateData: number;
+      }[] = data.exchangeRateJson;
       const rate = exchangeRateJson.find(
-        (element) => element.transCur === query.data.transCur && element.baseCur === query.data.baseCur,
+        (element) =>
+          element.transCur === query.data.transCur &&
+          element.baseCur === query.data.baseCur,
       );
       return {
         data: {
@@ -60,19 +78,13 @@ export default defineEventHandler(async (event: H3Event) => {
       };
     })
     .catch((error) => {
-      logger.error(
-        'Rate API',
-        '- External API error:',
-        error?.response?.status,
-        error?.response?.statusText,
-        '- called with query:',
-        getQuery(event),
-      );
       sendError(
         event,
         createError({
           statusCode: error?.response?.status ?? 500,
-          data: { message: error?.response?.statusText ?? 'Internal Server Error' },
+          data: {
+            message: error?.response?.statusText ?? 'Internal Server Error',
+          },
         }),
       );
       return;

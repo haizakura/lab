@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   css: ['@/assets/style.css'],
   vite: {
     ssr: {
-      noExternal: ['log4js', 'dayjs'],
+      noExternal: ['dayjs'],
     },
     optimizeDeps: {
       include: ['dayjs'],
