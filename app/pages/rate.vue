@@ -14,7 +14,7 @@
             v-model="transCur"
             :placeholder="$t('Pick a Transaction Currency')"
             filterable
-            :aria-label="$t('Transaction Currency')"
+            :aria-label="$t('Trans Currency')"
           >
             <el-option
               v-for="item in transCurList"
@@ -83,7 +83,7 @@
             v-model="transNum"
             @input="calcRate()"
             clearable
-            :aria-label="$t('Transaction Amount')"
+            aria-label="Transaction Amount"
           >
             <template #append>
               <span class="font-bold w-8 text-center">{{ transCur }}</span>
@@ -91,7 +91,7 @@
           </el-input>
         </el-form-item>
         <el-form-item class="!mb-0">
-          <el-input v-model="baseNum" :aria-label="$t('Base Amount')">
+          <el-input v-model="baseNum" aria-label="Base Amount">
             <template #append>
               <span class="font-bold w-8 text-center">{{ baseCur }}</span>
             </template>
@@ -149,7 +149,7 @@ const getRate = async () => {
   const day = selectedDate.value.getDate().toString().padStart(2, '0');
 
   try {
-    const response = await $fetch('/api/rate', {
+    await $fetch('/api/rate', {
       query: {
         transCur: transCur.value,
         baseCur: baseCur.value,
