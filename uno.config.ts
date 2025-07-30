@@ -17,7 +17,7 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    app: 'flex flex-col',
+    app: 'flex flex-col leading-[1.55rem] text-4 antialiased',
 
     header:
       'top-0 left-0 right-0 z-1000 block static border-b border-b-line-light border-solid',
