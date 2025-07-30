@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 const goBackHome = () => {
   const localeRoute = useLocaleRoute();
-  const route = localeRoute('/');
-  route ? navigateTo(route) : navigateTo('/');
+  const route = localeRoute('/') ?? '/';
+  navigateTo(route);
 };
 </script>

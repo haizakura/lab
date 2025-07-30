@@ -10,7 +10,7 @@
       <NuxtLink
         class="font-medium hover:text-brand text-sm underline underline-offset-3 cursor-pointer"
         @click="goBackHome"
-        aria-label="Go back home"
+        :aria-label="$t('Go back home')"
         >{{ $t('Go back home') }}</NuxtLink
       >
     </div>
@@ -24,7 +24,7 @@ definePageMeta({
 
 const goBackHome = () => {
   const localeRoute = useLocaleRoute();
-  const route = localeRoute('/');
-  route ? navigateTo(route) : navigateTo('/');
+  const route = localeRoute('/') ?? '/';
+  navigateTo(route);
 };
 </script>

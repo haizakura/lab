@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
+defineProps({
   icon: String,
   title: String,
   name: String,
@@ -37,7 +37,7 @@ const currentUrl = 'https://lab.nya.run';
 
 const goTo = (path: string) => {
   const localeRoute = useLocaleRoute();
-  const route = localeRoute(path);
-  route ? navigateTo(route) : navigateTo(path);
+  const route = localeRoute(path) ?? path;
+  navigateTo(route);
 };
 </script>
