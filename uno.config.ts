@@ -17,11 +17,13 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    app: 'flex flex-col',
+    app: 'flex flex-col leading-[1.55rem] text-4 antialiased',
 
-    header: 'top-0 left-0 right-0 z-1000 block static border-b border-b-line-light border-solid',
+    header:
+      'top-0 left-0 right-0 z-1000 block static border-b border-b-line-light border-solid',
     'header-container': 'flex justify-between items-center w-full',
-    'header-left': 'cursor-pointer no-underline leading-[60px] font-bold text-xl',
+    'header-left':
+      'cursor-pointer no-underline leading-[60px] font-bold text-xl',
     'header-right': 'flex items-center',
     'header-icon': 'text-2xl leading-[60px] cursor-pointer text-regular',
 

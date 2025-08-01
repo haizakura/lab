@@ -3,12 +3,19 @@
     <el-card class="m-auto sm:w-sm">
       <template #header>
         <div class="card-header">
-          <span class="text-2xl text-primary font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
+          <span class="text-2xl text-primary font-bold" @click="getRate"
+            >{{ item.icon }} {{ $t(item.title) }}</span
+          >
         </div>
       </template>
       <el-form size="large" label-position="left" label-width="8rem">
         <el-form-item :label="$t('Trans Currency')">
-          <el-select v-model="transCur" :placeholder="$t('Pick a Transaction Currency')" filterable :aria-label="$t('Transaction Currency')">
+          <el-select
+            v-model="transCur"
+            :placeholder="$t('Pick a Transaction Currency')"
+            filterable
+            :aria-label="$t('Trans Currency')"
+          >
             <el-option
               v-for="item in transCurList"
               :key="item.value"
@@ -20,7 +27,12 @@
         </el-form-item>
 
         <el-form-item :label="$t('Base Currency')">
-          <el-select v-model="baseCur" :placeholder="$t('Pick a Base Currency')" filterable :aria-label="$t('Base Currency')">
+          <el-select
+            v-model="baseCur"
+            :placeholder="$t('Pick a Base Currency')"
+            filterable
+            :aria-label="$t('Base Currency')"
+          >
             <el-option
               v-for="item in baseCurList"
               :key="item.value"
@@ -67,21 +79,25 @@
 
       <el-form v-if="rateData">
         <el-form-item>
-          <el-input v-model="transNum" @input="calcRate()" clearable :aria-label="$t('Transaction Amount')">
+          <el-input
+            v-model="transNum"
+            @input="calcRate()"
+            clearable
+            aria-label="Transaction Amount"
+          >
             <template #append>
               <span class="font-bold w-8 text-center">{{ transCur }}</span>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item class="!mb-0">
-          <el-input v-model="baseNum" :aria-label="$t('Base Amount')">
+          <el-input v-model="baseNum" aria-label="Base Amount">
             <template #append>
               <span class="font-bold w-8 text-center">{{ baseCur }}</span>
             </template>
           </el-input>
         </el-form-item>
       </el-form>
-
     </el-card>
   </div>
 </template>
@@ -133,7 +149,7 @@ const getRate = async () => {
   const day = selectedDate.value.getDate().toString().padStart(2, '0');
 
   try {
-    const response = await $fetch('/api/rate', {
+    await $fetch('/api/rate', {
       query: {
         transCur: transCur.value,
         baseCur: baseCur.value,
@@ -149,7 +165,9 @@ const getRate = async () => {
         }
       })
       .catch((error) => {
-        ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`);
+        ElMessage.error(
+          `${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`,
+        );
       });
   } catch (error) {
     ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error}`);

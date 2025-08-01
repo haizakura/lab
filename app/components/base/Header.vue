@@ -6,7 +6,7 @@
 
     <div class="header-right">
       <BaseHeaderTranslate />
-      <div class="mx-2"></div>
+      <span class="mx-2"></span>
       <BaseHeaderGithub />
     </div>
   </div>

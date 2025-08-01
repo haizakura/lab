@@ -9,11 +9,11 @@
     </el-main>
   </div>
 
-  <Analytics/>
+  <Analytics />
 </template>
 
 <script setup lang="ts">
-import { Analytics } from '@vercel/analytics/nuxt'
+import { Analytics } from '@vercel/analytics/nuxt';
 
 const { locale } = useI18n();
 useHead({

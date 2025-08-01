@@ -10,7 +10,8 @@
             :to="switchLocalePath(locale.code)"
             class="color-primary no-underline"
             :aria-label="locale.name"
-          >{{ locale.name }}</NuxtLink>
+            >{{ locale.name }}</NuxtLink
+          >
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>

@@ -3,10 +3,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: false },
   modules: ['@element-plus/nuxt', '@nuxtjs/i18n', '@unocss/nuxt'],
-  css: ['@/assets/style.css'],
   vite: {
     ssr: {
-      noExternal: ['log4js', 'dayjs'],
+      noExternal: ['dayjs'],
     },
     optimizeDeps: {
       include: ['dayjs'],

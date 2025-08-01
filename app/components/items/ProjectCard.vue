@@ -5,7 +5,8 @@
         <span
           class="font-2xl text-primary font-bold cursor-pointer"
           @click="goTo(path as string)"
-        >{{ icon }} {{ $t(title as string) }}</span>
+          >{{ icon }} {{ $t(title as string) }}</span
+        >
       </div>
     </template>
     <div class="card-body">
@@ -17,13 +18,14 @@
         type="info"
         size="small"
         @click="goTo(path as string)"
-      >{{ currentUrl + path }}</el-text>
+        >{{ currentUrl + path }}</el-text
+      >
     </div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
+defineProps({
   icon: String,
   title: String,
   name: String,
@@ -35,7 +37,7 @@ const currentUrl = 'https://lab.nya.run';
 
 const goTo = (path: string) => {
   const localeRoute = useLocaleRoute();
-  const route = localeRoute(path);
-  route ? navigateTo(route) : navigateTo(path);
+  const route = localeRoute(path) ?? path;
+  navigateTo(route);
 };
 </script>
