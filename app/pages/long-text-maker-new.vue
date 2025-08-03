@@ -10,13 +10,13 @@
       <div class="card-body">
         <!-- Candidate Characters Toggle -->
         <div
-          class="flex items-center gap-2 cursor-pointer text-sm text-primary"
+          class="flex items-center gap-2 cursor-pointer text-sm text-regular"
           @click="isCandidateCharactersExpanded = !isCandidateCharactersExpanded"
         >
           <el-icon :class="{ '-rotate-90': !isCandidateCharactersExpanded }" class="transition-transform"
             ><ElIconArrowDown
           /></el-icon>
-          <span>Candidate Characters</span>
+          <span>{{ $t('Candidate Characters') }}</span>
         </div>
 
         <!-- Candidate Characters -->
@@ -67,7 +67,7 @@
               </el-col>
               <el-col :span="2">
                 <div class="w-full flex items-center justify-center">
-                  <span class="text-primary text-sm">~</span>
+                  <el-icon class="text-regular"><ElIconSemiSelect /></el-icon>
                 </div>
               </el-col>
               <el-col :span="11">
@@ -79,58 +79,81 @@
 
         <el-form class="mt-4">
           <el-form-item>
-            <div class="flex flex-auto gap-2">
+            <div class="flex flex-auto">
+              <!-- Pattern -->
+              <el-col :span="8" class="px-1">
+                <div class="flex flex-col">
+                  <span class="text-sm text-regular">{{ $t('Pattern') }}</span>
+                  <el-select v-model="selectedPattern" placeholder="Select a pattern" class="w-full mt-2" :aria-label="$t('Pattern')">
+                    <el-option value="none" label="None" />
+                    <el-option-group label="Basic Specified Samples">
+                      <el-option v-for="item in basicPatternOptions" :key="item.value" :label="item.label" :value="item.value" />
+                    </el-option-group>
+                    <el-option-group label="Unicode Range Samples">
+                      <el-option v-for="item in unicodePatternOptions" :key="item.value" :label="item.label" :value="item.value" />
+                    </el-option-group>
+                    <el-option-group label="Custom Text Samples">
+                      <el-option v-for="item in customTextOptions" :key="item.value" :label="item.label" :value="item.value" />
+                    </el-option-group>
+                  </el-select>
+                </div>
+              </el-col>
+
               <!-- Characters Usage Method -->
-              <el-col :span="12">
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm text-primary">Use Characters</span>
-                  <el-select v-model="usageMethod" placeholder="Select Usage Method" class="w-full">
+              <el-col :span="8" class="px-1">
+                <div class="flex flex-col">
+                  <span class="text-sm text-regular">{{ $t('Use Chars') }}</span>
+                  <el-select v-model="usageMethod" placeholder="Select Usage Method" class="w-full mt-2" :aria-label="$t('Use Chars')">
                     <el-option v-for="item in usageOptions" :key="item.value" :label="item.label" :value="item.value" />
                   </el-select>
                 </div>
               </el-col>
 
               <!-- Text Length -->
-              <el-col :span="12">
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm text-primary">Text Length</span>
-                  <el-select v-model="textLength" placeholder="Select Text Length" class="w-full">
-                    <el-option
-                      v-for="item in textLengthOptions"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    />
-                  </el-select>
+              <el-col :span="8" class="px-1">
+                <div class="flex flex-col">
+                  <span class="text-sm text-regular">{{ $t('Text Length') }}</span>
+                  <el-input-number
+                    class="!w-full mt-2"
+                    v-model="textLength"
+                    controls-position="right"
+                    :min="1"
+                    :max="10000"
+                    :aria-label="$t('Text Length')"
+                  />
                 </div>
               </el-col>
             </div>
           </el-form-item>
 
           <el-form-item>
-            <div class="flex flex-auto gap-2">
+            <div class="flex flex-auto">
               <!-- Line Break -->
-              <el-col :span="12">
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm text-primary">Line Break</span>
-                  <el-select v-model="lineBreak" placeholder="Select Line Break" class="w-full">
-                    <el-option
-                      v-for="item in lineBreakOptions"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    />
+              <el-col :span="8" class="px-1">
+                <div class="flex flex-col">
+                  <span class="text-sm text-regular">{{ $t('Line Break') }}</span>
+                  <el-select v-model="lineBreak" placeholder="Select Line Break" class="w-full mt-2" :aria-label="$t('Line Break')">
+                    <el-option :value="false" label="No line break" />
+                    <el-option :value="true" label="Line break" />
                   </el-select>
                 </div>
               </el-col>
 
+              <!-- Each line -->
+              <el-col :span="8" class="px-1">
+                <div class="flex flex-col">
+                  <span class="text-sm text-regular">{{ $t('Each Line') }}</span>
+                  <el-input-number class="!w-full mt-2" v-model="eachLine" controls-position="right" :min="0" :max="10000" :disabled="!lineBreak" :aria-label="$t('Each Line')" />
+                </div>
+              </el-col>
+
               <!-- Each line sorting -->
-              <el-col :span="12">
-                <div v-show="lineBreak !== 'none'" class="flex flex-wrap gap-2">
-                  <span class="text-sm text-primary">Each Line Sorting</span>
-                  <el-select v-model="eachLine" placeholder="Select Each Line" class="w-full">
+              <el-col :span="8" class="px-1">
+                <div class="flex flex-col">
+                  <span class="text-sm text-regular">{{ $t('Sorting') }}</span>
+                  <el-select v-model="lineSorting" placeholder="Select Each Line" class="w-full mt-2" :disabled="!lineBreak" :aria-label="$t('Sorting')">
                     <el-option
-                      v-for="item in eachLineOptions"
+                      v-for="item in lineSortingOptions"
                       :key="item.value"
                       :label="item.label"
                       :value="item.value"
@@ -142,18 +165,26 @@
           </el-form-item>
         </el-form>
 
+        <!-- Selected candidate characters -->
+        <div class="ml-1">
+          <el-text type="info">{{ $t('Selected Candidate Characters') }}: 11</el-text>
+        </div>
+
         <!-- Buttons -->
-        <div class="flex justify-center gap-2">
-          <el-button type="success" aria-label="Generate" @click="generateText">Generate</el-button>
-          <el-button type="primary" aria-label="Copy" @click="copyText">Copy</el-button>
-          <el-button aria-label="Clear" @click="clearText">Clear</el-button>
+        <div class="flex justify-center gap-2 mt-4">
+          <el-button type="success" :aria-label="$t('Generate')" @click="generateText">{{ $t('Generate') }}</el-button>
+          <el-button type="primary" :aria-label="$t('Copy')" @click="copyText">{{ $t('Copy') }}</el-button>
+          <el-button :aria-label="$t('Clear')" @click="clearText">{{ $t('Clear') }}</el-button>
         </div>
 
         <!-- Generated Text -->
         <el-collapse-transition>
           <div v-show="generatedText">
             <el-divider />
-            <el-input v-model="generatedText" type="textarea" :autosize="{ minRows: 2, maxRows: 10 }" />
+            <el-input v-model="generatedText" type="textarea" :autosize="{ minRows: 2, maxRows: 10 }" :aria-label="$t('Generated Text')" />
+            <div class="mt-2">
+              <el-checkbox v-model="doNotFold" :label="$t('Do not fold')" :aria-label="$t('Do not fold')" />
+            </div>
           </div>
         </el-collapse-transition>
       </div>
@@ -234,6 +265,30 @@ const candidateCharacters = ref({
 
 const isCandidateCharactersExpanded = ref(false);
 
+// Pattern selection options
+const selectedPattern = ref('halfwidthAlphanumeric');
+
+const basicPatternOptions = [
+  { value: 'halfwidthAlphanumeric', label: 'Half-width Alphanumeric' },
+  { value: 'ascii', label: 'ASCII' },
+  { value: 'hiraganaKatakana', label: 'Hiragana・Katakana' },
+  { value: 'kanjiDifferentRadical', label: 'Kanji (Different Radicals)' },
+  { value: 'kanjiWaterRadical', label: 'Kanji (Water Radical)' },
+  { value: 'kanjiWoodRadical', label: 'Kanji (Wood Radical)' },
+];
+
+const unicodePatternOptions = [
+  { value: 'braillePatterns', label: 'Braille Patterns' },
+  { value: 'mathematicalSymbols', label: 'Mathematical Symbols' },
+  { value: 'latinExtendedA', label: 'Latin Extended-A' },
+  { value: 'unifiedCanadianAboriginal', label: 'Unified Canadian Aboriginal' },
+];
+
+const customTextOptions = [
+  { value: 'irohaPoem', label: 'Iroha Poem' },
+  { value: 'roundCharacters', label: 'Round Characters' },
+];
+
 // Candidate characters
 const charTypesList = ref<string[]>();
 
@@ -255,27 +310,17 @@ const usageOptions = [
 ];
 
 // Text length
-const textLength = ref(1000);
-const textLengthOptions = [
-  { value: 100, label: '100 characters' },
-  { value: 500, label: '500 characters' },
-  { value: 1000, label: '1000 characters' },
-  { value: 5000, label: '5000 characters' },
-  { value: 10000, label: '10000 characters' },
-];
+const textLength = ref(100);
 
 // Line break settings
-const lineBreak = ref('none');
-const lineBreakOptions = [
-  { value: 'none', label: 'No line break' },
-  { value: 'every50', label: 'Every 50 characters' },
-  { value: 'every100', label: 'Every 100 characters' },
-  { value: 'everyLine', label: 'Every line' },
-];
+const lineBreak = ref(false);
+
+// Each line break
+const eachLine = ref(0);
 
 // Each line sorting method
-const eachLine = ref('none');
-const eachLineOptions = [
+const lineSorting = ref('none');
+const lineSortingOptions = [
   { value: 'none', label: 'Do not sort' },
   { value: 'sortInUnicodeAscending', label: 'Sort in Unicode ascending order' },
   { value: 'sortInUnicodeDescending', label: 'Sort in Unicode descending order' },
@@ -286,6 +331,9 @@ const eachLineOptions = [
 
 // Generated text
 const generatedText = ref('');
+
+// Do not fold
+const doNotFold = ref(false);
 
 // Generate text
 const generateText = () => {
