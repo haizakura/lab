@@ -6,12 +6,9 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item v-for="locale in availableLocales" :key="locale.code">
-          <NuxtLink
-            :to="switchLocalePath(locale.code)"
-            class="color-primary no-underline"
-            :aria-label="locale.name"
-            >{{ locale.name }}</NuxtLink
-          >
+          <NuxtLink :to="switchLocalePath(locale.code)" class="color-primary no-underline" :aria-label="locale.name">{{
+            locale.name
+          }}</NuxtLink>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>

@@ -3,9 +3,7 @@
     <el-card class="m-auto sm:w-sm">
       <template #header>
         <div class="card-header">
-          <span class="text-2xl text-primary font-bold" @click="getRate"
-            >{{ item.icon }} {{ $t(item.title) }}</span
-          >
+          <span class="text-2xl text-primary font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
         </div>
       </template>
       <el-form size="large" label-position="left" label-width="8rem">
@@ -79,12 +77,7 @@
 
       <el-form v-if="rateData">
         <el-form-item>
-          <el-input
-            v-model="transNum"
-            @input="calcRate()"
-            clearable
-            aria-label="Transaction Amount"
-          >
+          <el-input v-model="transNum" @input="calcRate()" clearable aria-label="Transaction Amount">
             <template #append>
               <span class="font-bold w-8 text-center">{{ transCur }}</span>
             </template>
@@ -165,9 +158,7 @@ const getRate = async () => {
         }
       })
       .catch((error) => {
-        ElMessage.error(
-          `${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`,
-        );
+        ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`);
       });
   } catch (error) {
     ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error}`);
