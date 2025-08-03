@@ -1,6 +1,6 @@
 <template>
-  <div class="project">
-    <div v-for="item in itemConfig" :key="item.name" class="project-card">
+  <div class="project-list">
+    <div v-for="item in itemConfig" :key="item.name" class="project-list-item">
       <ItemsProjectCard
         :icon="item.icon"
         :title="item.title"
