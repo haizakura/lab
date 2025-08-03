@@ -19,6 +19,19 @@
 
   "Long Text Maker": "长文本生成器",
   "Make long text with ease.": "轻松生成长文本。",
+  "Candidate Characters": "候选字符",
+  "Pattern": "预设模式",
+  "Use Chars": "使用字符",
+  "Text Length": "文本长度",
+  "Line Break": "换行",
+  "Each Line": "每行",
+  "Sorting": "排序",
+  "Selected Candidate Characters": "已选候选字符",
+  "Generate": "生成",
+  "Copy": "复制",
+  "Clear": "清空",
+  "Generated Text": "已生成文本",
+  "Do not fold": "不折行",
 
   "Under Development": "正在开发中",
   "This project is under development.": "本项目正在开发中，敬请期待。"
