@@ -3,7 +3,7 @@
  * @type {import("prettier").Config}
  */
 const config = {
-  printWidth: 80,
+  printWidth: 120,
   semi: true,
   singleQuote: true,
 };
