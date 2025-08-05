@@ -1,7 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
-  devtools: { enabled: false },
+  devtools: {
+    enabled: true,
+    timeline: {
+      enabled: true,
+    },
+  },
   modules: ['@element-plus/nuxt', '@nuxtjs/i18n', '@unocss/nuxt'],
   vite: {
     ssr: {
@@ -14,9 +19,9 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'en',
     locales: [
-      { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'ja', name: '日本語', file: 'ja.json' },
-      { code: 'zh-CN', name: '简体中文', file: 'zh-CN.json' },
+      { code: 'en', name: 'English', file: 'en.json', language: 'en' },
+      { code: 'ja', name: '日本語', file: 'ja.json', language: 'ja' },
+      { code: 'zh-CN', name: '简体中文', file: 'zh-CN.json', language: 'zh' },
     ],
   },
   app: {
