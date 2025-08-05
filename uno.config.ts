@@ -37,6 +37,6 @@ export default defineConfig({
       'p-2 flex-[0_0_100%] max-w-full sm:shrink-0 md:flex-[0_0_1/2] md:max-w-1/2 lg:flex-[0_0_1/3] lg:max-w-1/3 xl:flex-[0_0_1/3] xl:max-w-1/3 2xl:flex-[0_0_1/4] 2xl:max-w-1/4',
 
     page: 'flex justify-center items-center h-full',
-    'card-header': 'flex justify-between items-center',
+    'page-card-header': 'flex justify-between items-center',
   },
 });

@@ -2,7 +2,7 @@
   <div class="page">
     <el-card class="m-auto sm:w-sm">
       <template #header>
-        <div class="card-header">
+        <div class="page-card-header">
           <span class="text-2xl text-primary font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
         </div>
       </template>
