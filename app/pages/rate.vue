@@ -140,29 +140,24 @@ const getRate = async () => {
   const year = selectedDate.value.getFullYear().toString();
   const month = (selectedDate.value.getMonth() + 1).toString().padStart(2, '0');
   const day = selectedDate.value.getDate().toString().padStart(2, '0');
+  const query = {
+    transCur: transCur.value,
+    baseCur: baseCur.value,
+    year: year,
+    month: month,
+    day: day,
+  };
 
-  try {
-    await $fetch('/api/rate', {
-      query: {
-        transCur: transCur.value,
-        baseCur: baseCur.value,
-        year: year,
-        month: month,
-        day: day,
-      },
+  await $fetch('/api/rate', { query: query })
+    .then((response) => {
+      if (response?.data?.rate?.rateData) {
+        rateData.value = response.data.rate.rateData;
+        calcRate();
+      }
     })
-      .then((response) => {
-        if (response?.data?.rate?.rateData) {
-          rateData.value = response.data.rate.rateData;
-          calcRate();
-        }
-      })
-      .catch((error) => {
-        ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`);
-      });
-  } catch (error) {
-    ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error}`);
-  }
+    .catch((error) => {
+      ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`);
+    });
 };
 
 const calcRate = () => {
