@@ -84,16 +84,36 @@
               <el-col :span="8" class="px-1">
                 <div class="flex flex-col">
                   <span class="text-sm text-regular">{{ $t('Pattern') }}</span>
-                  <el-select v-model="selectedPattern" placeholder="Select a pattern" class="w-full mt-2" :aria-label="$t('Pattern')">
+                  <el-select
+                    v-model="selectedPattern"
+                    placeholder="Select a pattern"
+                    class="w-full mt-2"
+                    :aria-label="$t('Pattern')"
+                  >
                     <el-option value="none" label="None" />
                     <el-option-group label="Basic Specified Samples">
-                      <el-option v-for="item in basicPatternOptions" :key="item.value" :label="item.label" :value="item.value" />
+                      <el-option
+                        v-for="item in basicPatternOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
                     </el-option-group>
                     <el-option-group label="Unicode Range Samples">
-                      <el-option v-for="item in unicodePatternOptions" :key="item.value" :label="item.label" :value="item.value" />
+                      <el-option
+                        v-for="item in unicodePatternOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
                     </el-option-group>
                     <el-option-group label="Custom Text Samples">
-                      <el-option v-for="item in customTextOptions" :key="item.value" :label="item.label" :value="item.value" />
+                      <el-option
+                        v-for="item in customTextOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
                     </el-option-group>
                   </el-select>
                 </div>
@@ -103,7 +123,12 @@
               <el-col :span="8" class="px-1">
                 <div class="flex flex-col">
                   <span class="text-sm text-regular">{{ $t('Use Chars') }}</span>
-                  <el-select v-model="usageMethod" placeholder="Select Usage Method" class="w-full mt-2" :aria-label="$t('Use Chars')">
+                  <el-select
+                    v-model="usageMethod"
+                    placeholder="Select Usage Method"
+                    class="w-full mt-2"
+                    :aria-label="$t('Use Chars')"
+                  >
                     <el-option v-for="item in usageOptions" :key="item.value" :label="item.label" :value="item.value" />
                   </el-select>
                 </div>
@@ -132,7 +157,12 @@
               <el-col :span="8" class="px-1">
                 <div class="flex flex-col">
                   <span class="text-sm text-regular">{{ $t('Line Break') }}</span>
-                  <el-select v-model="lineBreak" placeholder="Select Line Break" class="w-full mt-2" :aria-label="$t('Line Break')">
+                  <el-select
+                    v-model="lineBreak"
+                    placeholder="Select Line Break"
+                    class="w-full mt-2"
+                    :aria-label="$t('Line Break')"
+                  >
                     <el-option :value="false" label="No line break" />
                     <el-option :value="true" label="Line break" />
                   </el-select>
@@ -143,7 +173,15 @@
               <el-col :span="8" class="px-1">
                 <div class="flex flex-col">
                   <span class="text-sm text-regular">{{ $t('Each Line') }}</span>
-                  <el-input-number class="!w-full mt-2" v-model="eachLine" controls-position="right" :min="0" :max="10000" :disabled="!lineBreak" :aria-label="$t('Each Line')" />
+                  <el-input-number
+                    class="!w-full mt-2"
+                    v-model="eachLine"
+                    controls-position="right"
+                    :min="0"
+                    :max="10000"
+                    :disabled="!lineBreak"
+                    :aria-label="$t('Each Line')"
+                  />
                 </div>
               </el-col>
 
@@ -151,7 +189,13 @@
               <el-col :span="8" class="px-1">
                 <div class="flex flex-col">
                   <span class="text-sm text-regular">{{ $t('Sorting') }}</span>
-                  <el-select v-model="lineSorting" placeholder="Select Each Line" class="w-full mt-2" :disabled="!lineBreak" :aria-label="$t('Sorting')">
+                  <el-select
+                    v-model="lineSorting"
+                    placeholder="Select Each Line"
+                    class="w-full mt-2"
+                    :disabled="!lineBreak"
+                    :aria-label="$t('Sorting')"
+                  >
                     <el-option
                       v-for="item in lineSortingOptions"
                       :key="item.value"
@@ -181,7 +225,12 @@
         <el-collapse-transition>
           <div v-show="generatedText">
             <el-divider />
-            <el-input v-model="generatedText" type="textarea" :autosize="{ minRows: 2, maxRows: 10 }" :aria-label="$t('Generated Text')" />
+            <el-input
+              v-model="generatedText"
+              type="textarea"
+              :autosize="{ minRows: 2, maxRows: 10 }"
+              :aria-label="$t('Generated Text')"
+            />
             <div class="mt-2">
               <el-checkbox v-model="doNotFold" :label="$t('Do not fold')" :aria-label="$t('Do not fold')" />
             </div>
