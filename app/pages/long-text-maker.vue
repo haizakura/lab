@@ -3,9 +3,10 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <el-text class="card-header-title" tag="b"
-            >🔤 Long Text Maker</el-text
-          >
+          <div class="card-header-title">
+            <Icon name="mdi:text-long" />
+            <span>Long Text Maker</span>
+          </div>
         </div>
       </template>
 
@@ -35,20 +36,10 @@
               />
             </el-option-group>
             <el-option-group label="Custom Text Samples">
-              <el-option
-                v-for="item in customTextOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
+              <el-option v-for="item in customTextOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-option-group>
             <el-option-group label="Input Check Samples">
-              <el-option
-                v-for="item in inputCheckOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
+              <el-option v-for="item in inputCheckOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-option-group>
           </el-select>
         </el-form-item>
@@ -58,26 +49,18 @@
           <div class="checkbox-grid">
             <el-row :gutter="10">
               <el-col :span="8">
-                <el-checkbox v-model="charTypes.halfwidthNumbers"
-                  >Half-width Numbers</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.halfwidthNumbers">Half-width Numbers</el-checkbox>
               </el-col>
               <el-col :span="8">
-                <el-checkbox v-model="charTypes.halfwidthUppercase"
-                  >Half-width Letters (Upper)</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.halfwidthUppercase">Half-width Letters (Upper)</el-checkbox>
               </el-col>
               <el-col :span="8">
-                <el-checkbox v-model="charTypes.halfwidthLowercase"
-                  >Half-width Letters (Lower)</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.halfwidthLowercase">Half-width Letters (Lower)</el-checkbox>
               </el-col>
             </el-row>
             <el-row :gutter="10" class="mt-2">
               <el-col :span="8">
-                <el-checkbox v-model="charTypes.halfwidthSymbols"
-                  >Half-width Symbols</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.halfwidthSymbols">Half-width Symbols</el-checkbox>
               </el-col>
               <el-col :span="8">
                 <el-checkbox v-model="charTypes.hiragana">Hiragana</el-checkbox>
@@ -88,19 +71,13 @@
             </el-row>
             <el-row :gutter="10" class="mt-2">
               <el-col :span="8">
-                <el-checkbox v-model="charTypes.kanjiKana"
-                  >Kanji Kana</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.kanjiKana">Kanji Kana</el-checkbox>
               </el-col>
               <el-col :span="8">
-                <el-checkbox v-model="charTypes.fullwidthAlphanumeric"
-                  >Full-width Alphanumeric</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.fullwidthAlphanumeric">Full-width Alphanumeric</el-checkbox>
               </el-col>
               <el-col :span="8">
-                <el-checkbox v-model="charTypes.fullwidthSymbols"
-                  >Full-width Symbols</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.fullwidthSymbols">Full-width Symbols</el-checkbox>
               </el-col>
             </el-row>
             <el-row :gutter="10" class="mt-2">
@@ -110,9 +87,7 @@
                 >
               </el-col>
               <el-col :span="12">
-                <el-checkbox v-model="charTypes.basicKanjiWaterRadical"
-                  >Basic Kanji (Water Radical)</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.basicKanjiWaterRadical">Basic Kanji (Water Radical)</el-checkbox>
               </el-col>
             </el-row>
             <el-row :gutter="10" class="mt-2">
@@ -122,21 +97,15 @@
                 >
               </el-col>
               <el-col :span="12">
-                <el-checkbox v-model="charTypes.chineseCharacters"
-                  >Chinese Characters</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.chineseCharacters">Chinese Characters</el-checkbox>
               </el-col>
             </el-row>
             <el-row :gutter="10" class="mt-2">
               <el-col :span="12">
-                <el-checkbox v-model="charTypes.customUnicodeRange"
-                  >Custom Unicode Range</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.customUnicodeRange">Custom Unicode Range</el-checkbox>
               </el-col>
               <el-col :span="12">
-                <el-checkbox v-model="charTypes.customCharacters"
-                  >Custom Characters</el-checkbox
-                >
+                <el-checkbox v-model="charTypes.customCharacters">Custom Characters</el-checkbox>
               </el-col>
             </el-row>
           </div>
@@ -153,12 +122,7 @@
               @input="validateUnicodeRange"
             />
             <span>～ U+</span>
-            <el-input
-              v-model="unicodeRange.to"
-              placeholder="22FF"
-              style="width: 120px"
-              @input="validateUnicodeRange"
-            />
+            <el-input v-model="unicodeRange.to" placeholder="22FF" style="width: 120px" @input="validateUnicodeRange" />
           </div>
           <div v-if="unicodeRangeError" class="error-message mt-2">
             <el-text type="danger">{{ unicodeRangeError }}</el-text>
@@ -166,10 +130,7 @@
         </el-form-item>
 
         <!-- Custom Characters Input -->
-        <el-form-item
-          v-if="charTypes.customCharacters"
-          label="Custom Characters"
-        >
+        <el-form-item v-if="charTypes.customCharacters" label="Custom Characters">
           <el-input
             v-model="customCharactersText"
             type="textarea"
@@ -183,17 +144,9 @@
           <div style="display: flex; align-items: center; gap: 10px">
             <span>Use the above candidate characters</span>
             <el-select v-model="usageMethod" style="width: 200px">
-              <el-option
-                v-for="item in usageOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
+              <el-option v-for="item in usageOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
-            <span
-              >Selected candidate characters:
-              {{ selectedCharCount }} characters</span
-            >
+            <span>Selected candidate characters: {{ selectedCharCount }} characters</span>
           </div>
         </el-form-item>
 
@@ -202,17 +155,8 @@
           <div style="display: flex; align-items: center; gap: 10px">
             <el-input type="number" v-model="textLength" style="width: 120px" />
             <span>characters (preset values</span>
-            <el-select
-              v-model="textLengthPreset"
-              @change="onPresetChange"
-              style="width: 150px"
-            >
-              <el-option
-                v-for="item in textLengthOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
+            <el-select v-model="textLengthPreset" @change="onPresetChange" style="width: 150px">
+              <el-option v-for="item in textLengthOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
             <span>)</span>
           </div>
@@ -221,21 +165,14 @@
         <!-- Line Break Settings -->
         <el-form-item label="Line Break">
           <el-select v-model="lineBreakOption" style="width: 200px">
-            <el-option
-              v-for="item in lineBreakOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
+            <el-option v-for="item in lineBreakOptions" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
       </el-form>
 
       <!-- Action Buttons -->
       <div class="action-buttons">
-        <el-button type="primary" size="large" @click="generateText"
-          >Generate Text</el-button
-        >
+        <el-button type="primary" size="large" @click="generateText">Generate Text</el-button>
         <el-button size="large" @click="clearAll">Clear</el-button>
       </div>
 
@@ -377,12 +314,9 @@ const characterSets = {
   halfwidthUppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   halfwidthLowercase: 'abcdefghijklmnopqrstuvwxyz',
   halfwidthSymbols: '!@#$%^&*()_+-=[]{}|;:,.<>?',
-  hiragana:
-    'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん',
-  katakana:
-    'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン',
-  kanjiKana:
-    '一二三四五六七八九十百千万円年月日時分秒人本大小中上下左右前後内外東西南北',
+  hiragana: 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん',
+  katakana: 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン',
+  kanjiKana: '一二三四五六七八九十百千万円年月日時分秒人本大小中上下左右前後内外東西南北',
   fullwidthAlphanumeric:
     '０１２３４５６７８９ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ',
   fullwidthSymbols: '！＠＃＄％＾＆＊（）＿＋－＝［］｛｝｜；：，．＜＞？',
@@ -395,8 +329,7 @@ const characterSets = {
 
 // Predefined text samples
 const textSamples = {
-  irohaPoem:
-    'いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす',
+  irohaPoem: 'いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす',
   roundCharacters: '。◯○●◦◉◎⚪⚫🔘🔵🔴⭕⭐💫⭐🌟✨💥💢💫💤💦💧💨',
 };
 
@@ -415,11 +348,7 @@ const selectedCharCount = computed(() => {
   }
 
   // Add unicode range count (approximate)
-  if (
-    charTypes.value.customUnicodeRange &&
-    unicodeRange.value.from &&
-    unicodeRange.value.to
-  ) {
+  if (charTypes.value.customUnicodeRange && unicodeRange.value.from && unicodeRange.value.to) {
     const fromCode = parseInt(unicodeRange.value.from, 16);
     const toCode = parseInt(unicodeRange.value.to, 16);
     if (!isNaN(fromCode) && !isNaN(toCode) && toCode >= fromCode) {
@@ -531,17 +460,12 @@ const validateUnicodeRange = () => {
     }
 
     if (!/^[0-9A-Fa-f]+$/.test(unicodeRange.value.from)) {
-      unicodeRangeError.value =
-        'From field must contain only hexadecimal characters';
+      unicodeRangeError.value = 'From field must contain only hexadecimal characters';
       return;
     }
 
-    if (
-      unicodeRange.value.to &&
-      !/^[0-9A-Fa-f]+$/.test(unicodeRange.value.to)
-    ) {
-      unicodeRangeError.value =
-        'To field must contain only hexadecimal characters';
+    if (unicodeRange.value.to && !/^[0-9A-Fa-f]+$/.test(unicodeRange.value.to)) {
+      unicodeRangeError.value = 'To field must contain only hexadecimal characters';
       return;
     }
 
@@ -582,11 +506,7 @@ const generateText = () => {
   }
 
   // Add unicode range characters
-  if (
-    charTypes.value.customUnicodeRange &&
-    unicodeRange.value.from &&
-    unicodeRange.value.to
-  ) {
+  if (charTypes.value.customUnicodeRange && unicodeRange.value.from && unicodeRange.value.to) {
     const fromCode = parseInt(unicodeRange.value.from, 16);
     const toCode = parseInt(unicodeRange.value.to, 16);
 
@@ -636,9 +556,7 @@ const generateText = () => {
   }
 
   generatedText.value = result;
-  ElMessage.success(
-    `Generated ${textLength.value} character text successfully.`,
-  );
+  ElMessage.success(`Generated ${textLength.value} character text successfully.`);
 };
 
 const clearAll = () => {
@@ -661,10 +579,7 @@ const clearAll = () => {
 watch(selectedPattern, onPatternChange);
 
 // Watch for unicode range changes
-watch(
-  [() => unicodeRange.value.from, () => unicodeRange.value.to],
-  validateUnicodeRange,
-);
+watch([() => unicodeRange.value.from, () => unicodeRange.value.to], validateUnicodeRange);
 </script>
 
 <style scoped>

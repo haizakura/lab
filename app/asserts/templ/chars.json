@@ -1,0 +1,11 @@
+{
+  "halfwidthNumbers": "0123456789",
+  "halfwidthUppercase": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "halfwidthLowercase": "abcdefghijklmnopqrstuvwxyz",
+  "halfwidthSymbols": "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",
+  "hiragana": "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん",
+  "katakana": "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン",
+  "kanjikana": "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ",
+  "fullwidthAlphanumeric": "０１２３４５６７８９",
+  "fullwidthSymbols": "！＂＃＄％＆＇（）＊＋，－．／：；＜＝＞？＠［＼］＾＿｀｛｜｝～"
+}

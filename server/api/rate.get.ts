@@ -8,15 +8,9 @@ export default defineEventHandler(async (event: H3Event) => {
   const nowMonth = (today.getMonth() + 1).toString().padStart(2, '0');
   const nowDay = today.getDate().toString().padStart(2, '0');
 
-  const stringYear = z
-    .string()
-    .regex(/^\d{4}$/, 'Must be a number string (4 digits)');
-  const stringMonth = z
-    .string()
-    .regex(/^\d{2}$/, 'Must be a number string (2 digits)');
-  const stringDay = z
-    .string()
-    .regex(/^\d{2}$/, 'Must be a number string (2 digits)');
+  const stringYear = z.string().regex(/^\d{4}$/, 'Must be a number string (4 digits)');
+  const stringMonth = z.string().regex(/^\d{2}$/, 'Must be a number string (2 digits)');
+  const stringDay = z.string().regex(/^\d{2}$/, 'Must be a number string (2 digits)');
   const stringCurrency = z
     .string()
     .toUpperCase()
@@ -47,11 +41,7 @@ export default defineEventHandler(async (event: H3Event) => {
   }
 
   const response = await $fetch(
-    'https://www.unionpayintl.com/upload/jfimg/' +
-      query.data.year +
-      query.data.month +
-      query.data.day +
-      '.json',
+    'https://www.unionpayintl.com/upload/jfimg/' + query.data.year + query.data.month + query.data.day + '.json',
   )
     .then((response) => {
       const data = response as {
@@ -67,9 +57,7 @@ export default defineEventHandler(async (event: H3Event) => {
         rateData: number;
       }[] = data.exchangeRateJson;
       const rate = exchangeRateJson.find(
-        (element) =>
-          element.transCur === query.data.transCur &&
-          element.baseCur === query.data.baseCur,
+        (element) => element.transCur === query.data.transCur && element.baseCur === query.data.baseCur,
       );
       return {
         data: {

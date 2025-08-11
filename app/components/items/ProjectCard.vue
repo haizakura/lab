@@ -1,25 +1,20 @@
 <template>
-  <el-card shadow="always" class="card">
+  <el-card shadow="always" class="project-card">
     <template #header>
       <div class="card-header">
-        <span
-          class="font-2xl text-primary font-bold cursor-pointer"
-          @click="goTo(path as string)"
-          >{{ icon }} {{ $t(title as string) }}</span
-        >
+        <div class="card-header-title cursor-pointer" @click="goTo(path as string)">
+          <Icon :name="icon as string" />
+          <span>{{ $t(title as string) }}</span>
+        </div>
       </div>
     </template>
-    <div class="card-body">
+    <div class="project-card-body">
       <el-text line-clamp="2">{{ $t(desc as string) }}</el-text>
     </div>
-    <div class="card-bottom">
-      <el-text
-        class="cursor-pointer"
-        type="info"
-        size="small"
-        @click="goTo(path as string)"
-        >{{ currentUrl + path }}</el-text
-      >
+    <div class="project-card-bottom">
+      <el-text class="cursor-pointer" type="info" size="small" @click="goTo(path as string)">{{
+        currentUrl + path
+      }}</el-text>
     </div>
   </el-card>
 </template>

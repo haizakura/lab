@@ -3,11 +3,13 @@
     <el-card class="m-auto sm:w-sm">
       <template #header>
         <div class="card-header">
-          <span class="text-2xl text-primary font-bold" @click="getRate"
-            >{{ item.icon }} {{ $t(item.title) }}</span
-          >
+          <div class="card-header-title">
+            <Icon :name="item.icon" />
+            <span>{{ $t(item.title) }}</span>
+          </div>
         </div>
       </template>
+
       <el-form size="large" label-position="left" label-width="8rem">
         <el-form-item :label="$t('Trans Currency')">
           <el-select
@@ -79,12 +81,7 @@
 
       <el-form v-if="rateData">
         <el-form-item>
-          <el-input
-            v-model="transNum"
-            @input="calcRate()"
-            clearable
-            aria-label="Transaction Amount"
-          >
+          <el-input v-model="transNum" @input="calcRate()" clearable aria-label="Transaction Amount">
             <template #append>
               <span class="font-bold w-8 text-center">{{ transCur }}</span>
             </template>
@@ -147,31 +144,24 @@ const getRate = async () => {
   const year = selectedDate.value.getFullYear().toString();
   const month = (selectedDate.value.getMonth() + 1).toString().padStart(2, '0');
   const day = selectedDate.value.getDate().toString().padStart(2, '0');
+  const query = {
+    transCur: transCur.value,
+    baseCur: baseCur.value,
+    year: year,
+    month: month,
+    day: day,
+  };
 
-  try {
-    await $fetch('/api/rate', {
-      query: {
-        transCur: transCur.value,
-        baseCur: baseCur.value,
-        year: year,
-        month: month,
-        day: day,
-      },
+  await $fetch('/api/rate', { query: query })
+    .then((response) => {
+      if (response?.data?.rate?.rateData) {
+        rateData.value = response.data.rate.rateData;
+        calcRate();
+      }
     })
-      .then((response) => {
-        if (response?.data?.rate?.rateData) {
-          rateData.value = response.data.rate.rateData;
-          calcRate();
-        }
-      })
-      .catch((error) => {
-        ElMessage.error(
-          `${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`,
-        );
-      });
-  } catch (error) {
-    ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error}`);
-  }
+    .catch((error) => {
+      ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`);
+    });
 };
 
 const calcRate = () => {
