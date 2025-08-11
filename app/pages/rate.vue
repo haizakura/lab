@@ -2,10 +2,14 @@
   <div class="page">
     <el-card class="m-auto sm:w-sm">
       <template #header>
-        <div class="page-card-header">
-          <span class="text-2xl text-primary font-bold" @click="getRate">{{ item.icon }} {{ $t(item.title) }}</span>
+        <div class="card-header">
+          <div class="card-header-title">
+            <Icon :name="item.icon" />
+            <span>{{ $t(item.title) }}</span>
+          </div>
         </div>
       </template>
+
       <el-form size="large" label-position="left" label-width="8rem">
         <el-form-item :label="$t('Trans Currency')">
           <el-select

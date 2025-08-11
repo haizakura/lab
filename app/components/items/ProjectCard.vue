@@ -1,10 +1,11 @@
 <template>
   <el-card shadow="always" class="project-card">
     <template #header>
-      <div class="project-card-header">
-        <span class="font-2xl text-primary font-bold cursor-pointer" @click="goTo(path as string)"
-          >{{ icon }} {{ $t(title as string) }}</span
-        >
+      <div class="card-header">
+        <div class="card-header-title cursor-pointer" @click="goTo(path as string)">
+          <Icon :name="icon as string" />
+          <span>{{ $t(title as string) }}</span>
+        </div>
       </div>
     </template>
     <div class="project-card-body">

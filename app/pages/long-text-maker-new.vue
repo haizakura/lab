@@ -2,8 +2,11 @@
   <div class="page">
     <el-card class="m-auto w-[90dvw] sm:w-xl md:w-2xl lg:w-3xl">
       <template #header>
-        <div class="page-card-header">
-          <span class="text-2xl text-primary font-bold">{{ item.icon }} {{ $t(item.title) }}</span>
+        <div class="card-header">
+          <div class="card-header-title">
+            <Icon :name="item.icon" />
+            <span>{{ $t(item.title) }}</span>
+          </div>
         </div>
       </template>
 

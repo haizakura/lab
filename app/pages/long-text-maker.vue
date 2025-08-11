@@ -3,7 +3,10 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <el-text class="card-header-title" tag="b">🔤 Long Text Maker</el-text>
+          <div class="card-header-title">
+            <Icon name="mdi:text-long" />
+            <span>Long Text Maker</span>
+          </div>
         </div>
       </template>
 
