@@ -1,7 +1,7 @@
 <template>
   <el-dropdown>
     <span class="header-icon" aria-label="Translate">
-      <IconsTranslate />
+      <Icon name="mdi:translate" />
     </span>
     <template #dropdown>
       <el-dropdown-menu>

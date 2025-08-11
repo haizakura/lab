@@ -1,7 +1,7 @@
 <template>
   <div class="page flex-col">
     <h1 class="font-semibold text-8xl text-primary my-4">
-      <IconsTools />
+      <Icon name="mdi:tools" />
     </h1>
     <h2 class="font-semibold text-3xl text-primary mb-4">
       {{ $t('Under Development') }}

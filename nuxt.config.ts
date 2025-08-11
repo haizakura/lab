@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-  modules: ['@element-plus/nuxt', '@nuxtjs/i18n', '@unocss/nuxt'],
+  modules: ['@element-plus/nuxt', '@nuxtjs/i18n', '@unocss/nuxt', '@nuxt/icon'],
   vite: {
     ssr: {
       noExternal: ['dayjs'],
