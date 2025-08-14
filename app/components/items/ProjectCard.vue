@@ -1,38 +1,51 @@
 <template>
-  <el-card shadow="always" class="project-card">
+  <el-card shadow="always" class="card">
     <template #header>
-      <div class="card-header">
-        <div class="card-header-title cursor-pointer" @click="goTo(path as string)">
-          <Icon :name="icon as string" />
-          <span>{{ $t(title as string) }}</span>
+      <div class="card-header cursor-pointer" @click="goTo(name)">
+        <div class="card-header-title text-primary">
+          <Icon :name="icon" />
+          <span>{{ $t(title) }}</span>
         </div>
       </div>
     </template>
-    <div class="project-card-body">
-      <el-text line-clamp="2">{{ $t(desc as string) }}</el-text>
+    <div class="card-body">
+      <el-text line-clamp="2">{{ $t(desc) }}</el-text>
     </div>
-    <div class="project-card-bottom">
-      <el-text class="cursor-pointer" type="info" size="small" @click="goTo(path as string)">{{
-        currentUrl + path
-      }}</el-text>
+    <div class="card-bottom">
+      <el-text class="cursor-pointer" type="info" size="small" @click="goTo(name)">{{ baseUrl }}{{ path }}</el-text>
     </div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
 defineProps({
-  icon: String,
-  title: String,
-  name: String,
-  path: String,
-  desc: String,
+  icon: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  path: {
+    type: String,
+    required: true,
+  },
+  desc: {
+    type: String,
+    required: true,
+  },
 });
 
-const currentUrl = 'https://lab.nya.run';
+const baseUrl = useAppConfig().baseUrl;
 
-const goTo = (path: string) => {
+const goTo = (name: string) => {
   const localeRoute = useLocaleRoute();
-  const route = localeRoute(path) ?? path;
+  const route = localeRoute({ name: name });
   navigateTo(route);
 };
 </script>

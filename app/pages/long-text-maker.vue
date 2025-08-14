@@ -10,7 +10,7 @@
         </div>
       </template>
 
-      <div class="card-body">
+      <div>
         <!-- Candidate Characters Toggle -->
         <div
           class="flex items-center gap-2 cursor-pointer text-sm text-regular"
