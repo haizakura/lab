@@ -1,4 +1,5 @@
 export default defineAppConfig({
+  baseUrl: 'https://lab.nya.run',
   itemConfig: {
     rate: {
       icon: 'mdi:currency-usd-circle-outline',

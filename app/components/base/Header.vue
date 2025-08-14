@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <div class="header-left">
+    <div class="header-left" @click="goBackHome">
       <BaseHeaderLogo />
     </div>
 
@@ -11,3 +11,11 @@
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+const goBackHome = () => {
+  const localeRoute = useLocaleRoute();
+  const route = localeRoute({ name: 'home' });
+  navigateTo(route);
+};
+</script>

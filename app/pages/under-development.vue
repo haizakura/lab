@@ -24,7 +24,7 @@ definePageMeta({
 
 const goBackHome = () => {
   const localeRoute = useLocaleRoute();
-  const route = localeRoute('/') ?? '/';
+  const route = localeRoute({ name: 'home' });
   navigateTo(route);
 };
 </script>
