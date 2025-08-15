@@ -24,7 +24,7 @@
             </el-col>
             <el-col :span="3" class="px-1">
               <div class="flex flex-col">
-                <el-button type="primary" @click="generate(item.type as IdTypeKey, index)"
+                <el-button type="success" @click="generate(item.type as IdTypeKey, index)"
                   ><Icon name="mdi:reload" class="text-lg"
                 /></el-button>
               </div>
