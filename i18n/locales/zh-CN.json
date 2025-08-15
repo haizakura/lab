@@ -1,6 +1,8 @@
 {
   "Go back home": "返回首页",
 
+  "Copy": "复制",
+  "Clear": "清空",
   "Copied to clipboard": "已复制到剪贴板",
   "Failed to copy text": "复制失败",
 
@@ -64,8 +66,6 @@
   "End of Line": "换行符",
   "Generate": "生成",
 
-  "Copy": "复制",
-  "Clear": "清空",
   "Generated Text": "已生成文本",
   "No Wrap": "不换行",
   "Please select character types first": "请先选择候选字符",
@@ -78,6 +78,23 @@
   "Generate a random ID. Supports UUID v4, CUID, and UUID v1.": "生成一个随机 ID。支持 UUID v4、CUID 和 UUID v1。",
   "Failed to generate": "生成失败",
   "No item found": "未找到项目",
+
+  "Encode & Decode String": "编码 & 解码字符串",
+  "Encode and decode string with ease. base64, MD5, URL, etc.": "轻松编码和解码字符串。base64、MD5、URL 等。",
+  "Input something here...": "在此输入一些内容...",
+  "Base64 Encode": "Base64 编码",
+  "Base64 Decode": "Base64 解码",
+  "MD5 Encode": "MD5 编码",
+  "SHA-1 Hash": "SHA-1 哈希",
+  "SHA-256 Hash": "SHA-256 哈希",
+  "SHA-384 Hash": "SHA-384 哈希",
+  "SHA-512 Hash": "SHA-512 哈希",
+  "Encode URI": "编码 URI",
+  "Decode URI": "解码 URI",
+  "Encode URI Component": "编码 URI 组件",
+  "Decode URI Component": "解码 URI 组件",
+  "Failed to encode text": "编码失败",
+  "Failed to decode text": "解码失败",
 
   "Under Development": "正在开发中",
   "This project is under development.": "本项目正在开发中，敬请期待。"

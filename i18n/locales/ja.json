@@ -1,6 +1,8 @@
 {
   "Go back home": "ホームに戻る",
 
+  "Copy": "コピー",
+  "Clear": "クリア",
   "Copied to clipboard": "クリップボードにコピーしました",
   "Failed to copy text": "コピーに失敗しました",
 
@@ -63,8 +65,6 @@
   "Selected Candidate Characters": "選択候補文字",
   "End of Line": "改行コード",
   "Generate": "生成",
-  "Copy": "コピー",
-  "Clear": "クリア",
   "Generated Text": "生成されたテキスト",
   "No Wrap": "折り返さない",
   "Please select character types first": "候補文字を先に選択してください",
@@ -77,6 +77,23 @@
   "Generate a random ID. Supports UUID v4, CUID, and UUID v1.": "ランダムIDを生成します。UUID v4, CUID, UUID v1 をサポートします。",
   "Failed to generate": "生成に失敗しました",
   "No item found": "アイテムが見つかりません",
+
+  "Encode & Decode String": "文字列エンコード・デコード",
+  "Encode and decode string with ease. base64, MD5, URL, etc.": "文字列を簡単にエンコード・デコードします。base64、MD5、URL など。",
+  "Input something here...": "ここに何か入力してください...",
+  "Base64 Encode": "Base64 エンコード",
+  "Base64 Decode": "Base64 デコード",
+  "MD5 Encode": "MD5 エンコード",
+  "SHA-1 Hash": "SHA-1 ハッシュ",
+  "SHA-256 Hash": "SHA-256 ハッシュ",
+  "SHA-384 Hash": "SHA-384 ハッシュ",
+  "SHA-512 Hash": "SHA-512 ハッシュ",
+  "Encode URI": "URI エンコード",
+  "Decode URI": "URI デコード",
+  "Encode URI Component": "URI コンポーネント エンコード",
+  "Decode URI Component": "URI コンポーネント デコード",
+  "Failed to encode text": "テキストのエンコードに失敗しました",
+  "Failed to decode text": "テキストのデコードに失敗しました",
 
   "Under Development": "ただいま開発中",
   "This project is under development.": "本プロジェクトはただいま開発中です。"
