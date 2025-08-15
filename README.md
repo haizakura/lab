@@ -13,7 +13,11 @@ Developed with:
 - Exchange Rate Query
   - Exchange rates provided on this website are from UnionPay System.
 - Long Text Maker
-  - Make long text with ease. Support Japanese Hiragana, Katakana, Kanji, Full-width, Chinese Characters.
+  - Make long text with ease.
+  - Support Japanese Hiragana, Katakana, Kanji, Full-width, Chinese Characters.
+- Random ID Generator
+  - Generate a random ID.
+  - Supports UUID v4, CUID, and UUID v1.
 - ...
 
 ## Minimal Starter
