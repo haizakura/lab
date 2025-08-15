@@ -14,7 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-const appConfig = useAppConfig();
+definePageMeta({
+  name: 'home',
+});
 
-const itemConfig = appConfig.itemConfig;
+const itemConfig = useAppConfig().itemConfig;
 </script>

@@ -1,6 +1,9 @@
 {
   "Go back home": "Go back home",
 
+  "Copied to clipboard": "Copied to clipboard",
+  "Failed to copy text": "Failed to copy text",
+
   "Exchange Rate Query": "Exchange Rate Query",
   "Exchange rates provided on this website are from UnionPay System.": "Exchange rates provided on this website are from UnionPay System.",
   "Trans Currency": "Trans Currency",
@@ -65,11 +68,15 @@
   "Generated Text": "Generated Text",
   "No Wrap": "No Wrap",
   "Please select character types first": "Please select character types first",
-  "Copied to clipboard": "Copied to clipboard",
   "Failed to load character data": "Failed to load character data",
   "Please enter a valid hexadecimal value (0-9, A-F)": "Please enter a valid hexadecimal value (0-9, A-F)",
   "Unicode value exceeds maximum (10FFFF)": "Unicode value exceeds maximum (10FFFF)",
   "Start value must be less than or equal to end value": "Start value must be less than or equal to end value",
+
+  "Random ID Generator": "Random ID Generator",
+  "Generate a random ID. Supports UUID v4, CUID, and UUID v1.": "Generate a random ID. Supports UUID v4, CUID, and UUID v1.",
+  "Failed to generate": "Failed to generate",
+  "No item found": "No item found",
 
   "Under Development": "Under Development",
   "This project is under development.": "This project is under development, please wait."
