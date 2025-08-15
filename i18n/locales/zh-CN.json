@@ -1,6 +1,9 @@
 {
   "Go back home": "返回首页",
 
+  "Copied to clipboard": "已复制到剪贴板",
+  "Failed to copy text": "复制失败",
+
   "Exchange Rate Query": "汇率查询",
   "Exchange rates provided on this website are from UnionPay System.": "本网站提供的国际货币汇率数据来源于银联国际系统。",
   "Trans Currency": "交易币种",
@@ -60,16 +63,21 @@
   "Selected Candidate Characters": "已选候选字符",
   "End of Line": "换行符",
   "Generate": "生成",
+
   "Copy": "复制",
   "Clear": "清空",
   "Generated Text": "已生成文本",
   "No Wrap": "不换行",
   "Please select character types first": "请先选择候选字符",
-  "Copied to clipboard": "已复制到剪贴板",
   "Failed to load character data": "加载字符数据失败",
   "Please enter a valid hexadecimal value (0-9, A-F)": "请输入有效的十六进制值 (0-9, A-F)",
   "Unicode value exceeds maximum (10FFFF)": "Unicode 值超出最大值 (10FFFF)",
   "Start value must be less than or equal to end value": "起始值必须小于或等于结束值",
+
+  "Random ID Generator": "随机 ID 生成器",
+  "Generate a random ID. Supports UUID v4, CUID, and UUID v1.": "生成一个随机 ID。支持 UUID v4、CUID 和 UUID v1。",
+  "Failed to generate": "生成失败",
+  "No item found": "未找到项目",
 
   "Under Development": "正在开发中",
   "This project is under development.": "本项目正在开发中，敬请期待。"
