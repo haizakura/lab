@@ -12,6 +12,7 @@ export default defineConfig({
       primary: '#303133',
       regular: '#606266',
       line: {
+        base: '#dcdfe6',
         light: '#e4e7ed',
       },
     },
