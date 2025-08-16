@@ -49,9 +49,7 @@ const filteredItemConfig = computed(() => {
   if (search.value && searchType.value === 'normal') {
     const keyword = search.value.toLowerCase();
     return Object.values(itemConfig).filter((item) => {
-      return (
-        item.title.toLowerCase().includes(keyword) || item.desc.toLowerCase().includes(keyword)
-      );
+      return item.title.toLowerCase().includes(keyword) || item.desc.toLowerCase().includes(keyword);
     });
   }
   if (searchType.value === 'shuffle') {
