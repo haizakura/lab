@@ -2,29 +2,29 @@ import md5 from 'md5';
 import CryptoJS from 'crypto-js';
 
 /**
- * String utilities
- * @description String utilities for encoding, decoding, and hashing
+ * Crypto utilities
+ * @description Crypto utilities for encoding, decoding, and hashing
  * @description Supports base64, md5, sha1, sha256, sha384, sha512, uri, uri-component
  */
-class StringUtils {
+class CryptoUtils {
   /**
    * String to encode/decode/hash
    */
   private readonly str: string;
 
   /**
-   * Type of encoding/decoding/hashing
+   * Operation of encoding/decoding/hashing
    */
-  private readonly type: string;
+  private readonly operation: string;
 
   /**
    * Constructor
    * @param str - String to encode/decode/hash
-   * @param type - Type of encoding/decoding/hashing
+   * @param operation - Operation of encoding/decoding/hashing
    */
-  constructor(str: string, type: string) {
+  constructor(str: string, operation: string) {
     this.str = str;
-    this.type = type;
+    this.operation = operation;
   }
 
   /**
@@ -32,7 +32,7 @@ class StringUtils {
    * @returns Encoded/Hashed string
    */
   public encode(): string {
-    switch (this.type) {
+    switch (this.operation) {
       case 'base64':
         return this.encodeBase64();
       case 'md5':
@@ -59,7 +59,7 @@ class StringUtils {
    * @returns Decoded string
    */
   public decode(): string {
-    switch (this.type) {
+    switch (this.operation) {
       case 'base64':
         return this.decodeBase64();
       case 'uri':
@@ -80,7 +80,7 @@ class StringUtils {
       const res = btoa(this.str);
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -93,7 +93,7 @@ class StringUtils {
       const res = atob(this.str);
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -106,7 +106,7 @@ class StringUtils {
       const res = md5(this.str);
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -119,7 +119,7 @@ class StringUtils {
       const res = CryptoJS.SHA1(this.str).toString();
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -132,7 +132,7 @@ class StringUtils {
       const res = CryptoJS.SHA256(this.str).toString();
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -145,7 +145,7 @@ class StringUtils {
       const res = CryptoJS.SHA384(this.str).toString();
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -158,7 +158,7 @@ class StringUtils {
       const res = CryptoJS.SHA512(this.str).toString();
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -171,7 +171,7 @@ class StringUtils {
       const res = encodeURI(this.str);
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -197,7 +197,7 @@ class StringUtils {
       const res = encodeURIComponent(this.str);
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 
@@ -210,9 +210,9 @@ class StringUtils {
       const res = decodeURIComponent(this.str);
       return res;
     } catch (error) {
-      throw new Error(error as string);
+      throw new Error(String(error));
     }
   }
 }
 
-export { StringUtils };
+export { CryptoUtils };
