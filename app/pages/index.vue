@@ -9,10 +9,13 @@
       autofocus
     >
       <template #prefix>
-        <Icon name="mdi:search" />
+        <Icon name="mdi:search" class="text-lg w-6" />
       </template>
     </el-input>
-    <el-button type="primary" @click="shuffle">{{ $t('Shuffle') }}</el-button>
+
+    <el-button class="w-36" type="primary" @click="shuffle">
+      {{ $t('Shuffle') }}
+    </el-button>
   </div>
 
   <div class="project-list">
