@@ -11,6 +11,7 @@
       </template>
 
       <div class="flex flex-col">
+        <!-- Input Component -->
         <div class="flex flex-col">
           <el-input
             v-model="inputString"
@@ -22,14 +23,18 @@
           />
         </div>
 
+        <!-- Copy and Clear Buttons -->
         <div class="mt-4 flex flex-row gap-4 justify-center">
           <el-button type="primary" class="!ml-0" @click="copy">{{ $t('Copy') }}</el-button>
           <el-button class="!ml-0" @click="clear">{{ $t('Clear') }}</el-button>
         </div>
 
+        <!-- Divider -->
         <hr class="my-4 text-line-base w-full" />
 
+        <!-- Crypto Operations -->
         <div class="flex flex-col gap-2">
+          <!-- Base64, MD5 Operations -->
           <div class="flex flex-wrap gap-2">
             <el-button type="primary" class="!ml-0" @click="cryptoOperation('base64', 'encode')">{{
               $t('Base64 Encode')
@@ -42,6 +47,7 @@
             }}</el-button>
           </div>
 
+          <!-- SHA-1, SHA-256, SHA-384, SHA-512 Operations -->
           <div class="flex flex-wrap gap-2">
             <el-button type="success" class="!ml-0" @click="cryptoOperation('sha1', 'encode')">{{
               $t('SHA-1 Hash')
@@ -57,6 +63,7 @@
             }}</el-button>
           </div>
 
+          <!-- URI, URI Component Operations -->
           <div class="flex flex-wrap gap-2">
             <el-button type="warning" class="!ml-0" @click="cryptoOperation('uri', 'encode')">{{
               $t('Encode URI')
