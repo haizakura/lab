@@ -31,21 +31,39 @@
 
         <div class="flex flex-col gap-2">
           <div class="flex flex-wrap gap-2">
-            <el-button type="primary" class="!ml-0" @click="cryptoOperation('base64', 'encode')">{{ $t('Base64 Encode') }}</el-button>
-            <el-button type="primary" class="!ml-0" @click="cryptoOperation('base64', 'decode')">{{ $t('Base64 Decode') }}</el-button>
-            <el-button type="primary" class="!ml-0" @click="cryptoOperation('md5', 'encode')">{{ $t('MD5 Encode') }}</el-button>
+            <el-button type="primary" class="!ml-0" @click="cryptoOperation('base64', 'encode')">{{
+              $t('Base64 Encode')
+            }}</el-button>
+            <el-button type="primary" class="!ml-0" @click="cryptoOperation('base64', 'decode')">{{
+              $t('Base64 Decode')
+            }}</el-button>
+            <el-button type="primary" class="!ml-0" @click="cryptoOperation('md5', 'encode')">{{
+              $t('MD5 Encode')
+            }}</el-button>
           </div>
 
           <div class="flex flex-wrap gap-2">
-            <el-button type="success" class="!ml-0" @click="cryptoOperation('sha1', 'encode')">{{ $t('SHA-1 Hash') }}</el-button>
-            <el-button type="success" class="!ml-0" @click="cryptoOperation('sha256', 'encode')">{{ $t('SHA-256 Hash') }}</el-button>
-            <el-button type="success" class="!ml-0" @click="cryptoOperation('sha384', 'encode')">{{ $t('SHA-384 Hash') }}</el-button>
-            <el-button type="success" class="!ml-0" @click="cryptoOperation('sha512', 'encode')">{{ $t('SHA-512 Hash') }}</el-button>
+            <el-button type="success" class="!ml-0" @click="cryptoOperation('sha1', 'encode')">{{
+              $t('SHA-1 Hash')
+            }}</el-button>
+            <el-button type="success" class="!ml-0" @click="cryptoOperation('sha256', 'encode')">{{
+              $t('SHA-256 Hash')
+            }}</el-button>
+            <el-button type="success" class="!ml-0" @click="cryptoOperation('sha384', 'encode')">{{
+              $t('SHA-384 Hash')
+            }}</el-button>
+            <el-button type="success" class="!ml-0" @click="cryptoOperation('sha512', 'encode')">{{
+              $t('SHA-512 Hash')
+            }}</el-button>
           </div>
 
           <div class="flex flex-wrap gap-2">
-            <el-button type="warning" class="!ml-0" @click="cryptoOperation('uri', 'encode')">{{ $t('Encode URI') }}</el-button>
-            <el-button type="warning" class="!ml-0" @click="cryptoOperation('uri', 'decode')">{{ $t('Decode URI') }}</el-button>
+            <el-button type="warning" class="!ml-0" @click="cryptoOperation('uri', 'encode')">{{
+              $t('Encode URI')
+            }}</el-button>
+            <el-button type="warning" class="!ml-0" @click="cryptoOperation('uri', 'decode')">{{
+              $t('Decode URI')
+            }}</el-button>
             <el-button type="warning" class="!ml-0" @click="cryptoOperation('uri-component', 'encode')">{{
               $t('Encode URI Component')
             }}</el-button>
