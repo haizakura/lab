@@ -47,7 +47,12 @@ const shuffleTrigger = ref<number>(0);
 // Filter project list by search or shuffle
 const filteredItemConfig = computed(() => {
   if (search.value && searchType.value === 'normal') {
-    return Object.values(itemConfig).filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()));
+    const keyword = search.value.toLowerCase();
+    return Object.values(itemConfig).filter((item) => {
+      return (
+        item.title.toLowerCase().includes(keyword) || item.desc.toLowerCase().includes(keyword)
+      );
+    });
   }
   if (searchType.value === 'shuffle') {
     shuffleTrigger.value;

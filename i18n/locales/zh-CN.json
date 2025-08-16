@@ -99,6 +99,9 @@
   "Failed to encode string": "字符串编码失败",
   "Failed to decode string": "字符串解码失败",
 
+  "QRCode Reader": "二维码读取器",
+  "Read QRCode from image in browser with ease.": "在浏览器中轻松读取二维码。",
+
   "Under Development": "正在开发中",
-  "This project is under development.": "本项目正在开发中，敬请期待。"
+  "This project is under development, please wait.": "本项目正在开发中，敬请期待。"
 }

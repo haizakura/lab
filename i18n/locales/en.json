@@ -99,6 +99,9 @@
   "Failed to encode string": "Failed to encode string",
   "Failed to decode string": "Failed to decode string",
 
+  "QRCode Reader": "QRCode Reader",
+  "Read QRCode from image in browser with ease.": "Read QRCode from image in browser with ease.",
+
   "Under Development": "Under Development",
-  "This project is under development.": "This project is under development, please wait."
+  "This project is under development, please wait.": "This project is under development, please wait."
 }
