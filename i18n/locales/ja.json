@@ -78,7 +78,7 @@
   "Unicode value exceeds maximum (10FFFF)": "Unicode 値が最大値を超えています (10FFFF)",
   "Start value must be less than or equal to end value": "開始値は終了値以下でなければなりません",
 
-  "Random ID Generator": "ランダムID生成ツール",
+  "Random ID Generator": "ランダム ID 生成ツール",
   "Generate a random ID. Supports UUID v4, CUID, and UUID v1.": "ランダムIDを生成します。UUID v4, CUID, UUID v1 をサポートします。",
   "Failed to generate": "生成に失敗しました",
   "No item found": "アイテムが見つかりません",
@@ -101,6 +101,8 @@
 
   "QRCode Reader": "QRCode 読み取り",
   "Read QRCode from image in browser with ease.": "QRCode をブラウザで簡単に読み取ります。",
+  "Drop images files here or click to upload": "画像ファイルをここにドロップするか、クリックしてアップロードしてください。",
+  "Attach as many files as you like. The QRCode Parsing only happens in your browser.": "任意の数の画像ファイルをアップロードできます。QRCode の読み取りはブラウザでのみ行われます。",
 
   "Under Development": "ただいま開発中",
   "This project is under development, please wait.": "本プロジェクトはただいま開発中です、お待ちください。"

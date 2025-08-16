@@ -101,6 +101,8 @@
 
   "QRCode Reader": "QRCode Reader",
   "Read QRCode from image in browser with ease.": "Read QRCode from image in browser with ease.",
+  "Drop images files here or click to upload": "Drop images files here or click to upload",
+  "Attach as many files as you like. The QRCode Parsing only happens in your browser.": "Attach as many files as you like. The QRCode Parsing only happens in your browser.",
 
   "Under Development": "Under Development",
   "This project is under development, please wait.": "This project is under development, please wait."

@@ -15,6 +15,9 @@ export default defineConfig({
         base: '#dcdfe6',
         light: '#e4e7ed',
       },
+      fill: {
+        base: '#f0f2f5',
+      },
     },
   },
   shortcuts: {

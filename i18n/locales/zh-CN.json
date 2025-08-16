@@ -101,6 +101,8 @@
 
   "QRCode Reader": "二维码读取器",
   "Read QRCode from image in browser with ease.": "在浏览器中轻松读取二维码。",
+  "Drop images files here or click to upload": "将图片文件拖拽到这里或点击上传",
+  "Attach as many files as you like. The QRCode Parsing only happens in your browser.": "可以上传任意数量的图片文件。二维码解析仅在浏览器中进行。",
 
   "Under Development": "正在开发中",
   "This project is under development, please wait.": "本项目正在开发中，敬请期待。"
