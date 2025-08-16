@@ -1,13 +1,29 @@
 <template>
+  <div class="project-search">
+    <el-input
+      class="w-full"
+      v-model="search"
+      :placeholder="$t('Search')"
+      @input="searchType = 'normal'"
+      clearable
+      autofocus
+    >
+      <template #prefix>
+        <Icon name="mdi:search" />
+      </template>
+    </el-input>
+    <el-button type="primary" @click="shuffle">{{ $t('Shuffle') }}</el-button>
+  </div>
+
   <div class="project-list">
-    <div v-for="item in itemConfig" :key="item.name" class="project-list-item">
+    <div v-for="(item, index) in filteredItemConfig" :key="index">
       <ItemsProjectCard
         :icon="item.icon"
         :title="item.title"
         :name="item.name"
         :path="item.path"
         :desc="item.desc"
-        :aria-label="item.name"
+        :aria-label="$t(item.title)"
       />
     </div>
   </div>
@@ -19,4 +35,28 @@ definePageMeta({
 });
 
 const itemConfig = useAppConfig().itemConfig;
+
+// Variables for search and shuffle
+const search = ref<string>('');
+const searchType = ref<'normal' | 'shuffle'>('normal');
+const shuffleTrigger = ref<number>(0);
+
+// Filter project list by search or shuffle
+const filteredItemConfig = computed(() => {
+  if (search.value && searchType.value === 'normal') {
+    return Object.values(itemConfig).filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()));
+  }
+  if (searchType.value === 'shuffle') {
+    shuffleTrigger.value;
+    return Object.values(itemConfig).sort(() => Math.random() - 0.5);
+  }
+  return Object.values(itemConfig);
+});
+
+// Shuffle project list
+const shuffle = (): void => {
+  searchType.value = 'shuffle';
+  search.value = '';
+  shuffleTrigger.value++;
+};
 </script>
