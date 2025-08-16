@@ -101,8 +101,9 @@ const generate = (type: IdTypeKey, index: number): void => {
   try {
     const generator = new IdGenerator(type);
     item.value = generator.generate();
-  } catch (error) {
-    ElMessage.error($t('Failed to generate') + `: ${type}`);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : $t('Unknown error');
+    ElMessage.error($t('Failed to generate') + `: ${errorMessage}`);
     item.value = '';
   }
 };
@@ -112,8 +113,9 @@ const copy = async (index: number): Promise<void> => {
   try {
     await navigator.clipboard.writeText(idTypeList.value[index]?.value ?? '');
     ElMessage.success($t('Copied to clipboard'));
-  } catch (error) {
-    ElMessage.error($t('Failed to copy text') + `: ${error}`);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : $t('Unknown error');
+    ElMessage.error($t('Failed to copy text') + `: ${errorMessage}`);
   }
 };
 
