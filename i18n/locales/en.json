@@ -1,10 +1,14 @@
 {
   "Go back home": "Go back home",
 
+  "Generate": "Generate",
   "Copy": "Copy",
   "Clear": "Clear",
   "Copied to clipboard": "Copied to clipboard",
   "Failed to copy text": "Failed to copy text",
+  "Input something here...": "Input something here...",
+  "Invalid operation": "Invalid operation",
+  "Unknown error": "Unknown error",
 
   "Exchange Rate Query": "Exchange Rate Query",
   "Exchange rates provided on this website are from UnionPay System.": "Exchange rates provided on this website are from UnionPay System.",
@@ -64,7 +68,6 @@
   "Sorting": "Sorting",
   "Selected Candidate Characters": "Selected Candidate Characters",
   "End of Line": "End of Line",
-  "Generate": "Generate",
   "Generated Text": "Generated Text",
   "No Wrap": "No Wrap",
   "Please select character types first": "Please select character types first",
@@ -80,7 +83,6 @@
 
   "Encode & Decode String": "Encode & Decode String",
   "Encode and decode string with ease. base64, MD5, URL, etc.": "Encode and decode string with ease. base64, MD5, URL, etc.",
-  "Input something here...": "Input something here...",
   "Base64 Encode": "Base64 Encode",
   "Base64 Decode": "Base64 Decode",
   "MD5 Encode": "MD5 Encode",
@@ -92,8 +94,8 @@
   "Decode URI": "Decode URI",
   "Encode URI Component": "Encode URI Component",
   "Decode URI Component": "Decode URI Component",
-  "Failed to encode text": "Failed to encode text",
-  "Failed to decode text": "Failed to decode text",
+  "Failed to encode string": "Failed to encode string",
+  "Failed to decode string": "Failed to decode string",
 
   "Under Development": "Under Development",
   "This project is under development.": "This project is under development, please wait."
