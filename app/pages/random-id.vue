@@ -11,17 +11,21 @@
       </template>
 
       <div class="flex flex-col">
+        <!-- ID Type List -->
         <div class="flex flex-col" v-for="(item, index) in idTypeList" :key="item.type" :index="index">
           <div class="flex flex-row items-center mb-2">
             <span class="text-base">{{ item.label }}</span>
           </div>
 
           <div class="flex flex-row items-center">
+            <!-- Input Component -->
             <el-col :span="18" class="pr-1">
               <div class="flex flex-col">
                 <el-input v-model="item.value" :placeholder="item.label" />
               </div>
             </el-col>
+
+            <!-- Generate Button -->
             <el-col :span="3" class="px-1">
               <div class="flex flex-col">
                 <el-button type="success" @click="generate(item.type as IdTypeKey, index)"
@@ -29,6 +33,8 @@
                 /></el-button>
               </div>
             </el-col>
+
+            <!-- Copy Button -->
             <el-col :span="3" class="pl-1">
               <div class="flex flex-col">
                 <el-button type="primary" @click="copy(index)"
@@ -38,6 +44,7 @@
             </el-col>
           </div>
 
+          <!-- Divider -->
           <el-divider v-if="index !== idTypeList.length - 1" />
         </div>
       </div>
@@ -101,8 +108,9 @@ const generate = (type: IdTypeKey, index: number): void => {
   try {
     const generator = new IdGenerator(type);
     item.value = generator.generate();
-  } catch (error) {
-    ElMessage.error($t('Failed to generate') + `: ${type}`);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : $t('Unknown error');
+    ElMessage.error($t('Failed to generate') + `: ${errorMessage}`);
     item.value = '';
   }
 };
@@ -112,8 +120,9 @@ const copy = async (index: number): Promise<void> => {
   try {
     await navigator.clipboard.writeText(idTypeList.value[index]?.value ?? '');
     ElMessage.success($t('Copied to clipboard'));
-  } catch (error) {
-    ElMessage.error($t('Failed to copy text') + `: ${error}`);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : $t('Unknown error');
+    ElMessage.error($t('Failed to copy text') + `: ${errorMessage}`);
   }
 };
 

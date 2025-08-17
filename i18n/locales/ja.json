@@ -1,8 +1,16 @@
 {
   "Go back home": "ホームに戻る",
 
+  "Search": "検索",
+  "Shuffle": "シャッフル",
+  "Generate": "生成",
+  "Copy": "コピー",
+  "Clear": "クリア",
   "Copied to clipboard": "クリップボードにコピーしました",
   "Failed to copy text": "コピーに失敗しました",
+  "Input something here...": "ここに何か入力してください...",
+  "Invalid operation": "無効な操作",
+  "Unknown error": "不明なエラー",
 
   "Exchange Rate Query": "為替レート検索",
   "Exchange rates provided on this website are from UnionPay System.": "本サイトで提供される為替レートは、銀聯システムから取得されています。",
@@ -62,9 +70,6 @@
   "Sorting": "並び替え",
   "Selected Candidate Characters": "選択候補文字",
   "End of Line": "改行コード",
-  "Generate": "生成",
-  "Copy": "コピー",
-  "Clear": "クリア",
   "Generated Text": "生成されたテキスト",
   "No Wrap": "折り返さない",
   "Please select character types first": "候補文字を先に選択してください",
@@ -73,11 +78,32 @@
   "Unicode value exceeds maximum (10FFFF)": "Unicode 値が最大値を超えています (10FFFF)",
   "Start value must be less than or equal to end value": "開始値は終了値以下でなければなりません",
 
-  "Random ID Generator": "ランダムID生成ツール",
+  "Random ID Generator": "ランダム ID 生成ツール",
   "Generate a random ID. Supports UUID v4, CUID, and UUID v1.": "ランダムIDを生成します。UUID v4, CUID, UUID v1 をサポートします。",
   "Failed to generate": "生成に失敗しました",
   "No item found": "アイテムが見つかりません",
 
+  "Encode & Decode String": "文字列エンコード・デコード",
+  "Encode and decode string with ease. base64, MD5, URL, etc.": "文字列を簡単にエンコード・デコードします。base64、MD5、URL など。",
+  "Base64 Encode": "Base64 エンコード",
+  "Base64 Decode": "Base64 デコード",
+  "MD5 Encode": "MD5 エンコード",
+  "SHA-1 Hash": "SHA-1 ハッシュ",
+  "SHA-256 Hash": "SHA-256 ハッシュ",
+  "SHA-384 Hash": "SHA-384 ハッシュ",
+  "SHA-512 Hash": "SHA-512 ハッシュ",
+  "Encode URI": "URI エンコード",
+  "Decode URI": "URI デコード",
+  "Encode URI Component": "URI コンポーネント エンコード",
+  "Decode URI Component": "URI コンポーネント デコード",
+  "Failed to encode string": "文字列のエンコードに失敗しました",
+  "Failed to decode string": "文字列のデコードに失敗しました",
+
+  "QRCode Reader": "QRCode 読み取り",
+  "Read QRCode from image in browser with ease.": "QRCode をブラウザで簡単に読み取ります。",
+  "Drop images files here or click to upload": "画像ファイルをここにドロップするか、クリックしてアップロードしてください。",
+  "Attach as many files as you like. The QRCode Parsing only happens in your browser.": "任意の数の画像ファイルをアップロードできます。QRCode の読み取りはブラウザでのみ行われます。",
+
   "Under Development": "ただいま開発中",
-  "This project is under development.": "本プロジェクトはただいま開発中です。"
+  "This project is under development, please wait.": "本プロジェクトはただいま開発中です、お待ちください。"
 }

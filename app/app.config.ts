@@ -22,19 +22,40 @@ export default defineAppConfig({
       path: '/random-id',
       desc: 'Generate a random ID. Supports UUID v4, CUID, and UUID v1.',
     },
-    item02: {
-      icon: 'mdi:tools',
-      title: 'Under Development',
-      name: 'underDevelopment',
-      path: '/under-development',
-      desc: 'This project is under development.',
+    encode: {
+      icon: 'mdi:code-json',
+      title: 'Encode & Decode String',
+      name: 'encode',
+      path: '/encode',
+      desc: 'Encode and decode string with ease. base64, MD5, URL, etc.',
     },
-    item03: {
+    qrcodeReader: {
+      icon: 'mdi:qrcode-scan',
+      title: 'QRCode Reader',
+      name: 'qrcodeReader',
+      path: '/qrcode-reader',
+      desc: 'Read QRCode from image in browser with ease.',
+    },
+    itemX: {
       icon: 'mdi:tools',
       title: 'Under Development',
       name: 'underDevelopment',
       path: '/under-development',
-      desc: 'This project is under development.',
+      desc: 'This project is under development, please wait.',
+    },
+    itemY: {
+      icon: 'mdi:tools',
+      title: 'Under Development',
+      name: 'underDevelopment',
+      path: '/under-development',
+      desc: 'This project is under development, please wait.',
+    },
+    itemZ: {
+      icon: 'mdi:tools',
+      title: 'Under Development',
+      name: 'underDevelopment',
+      path: '/under-development',
+      desc: 'This project is under development, please wait.',
     },
   },
 });

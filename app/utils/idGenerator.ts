@@ -1,3 +1,5 @@
+import { v4 as uuidv4, v1 as uuidv1 } from 'uuid';
+
 /**
  * ID Generator
  * @description Generate a random ID. Supports UUID v4, CUID, and UUID v1.
@@ -70,21 +72,8 @@ class IdGenerator {
    * @returns UUID v4 String
    */
   private generateUuidv4() {
-    if (typeof window !== 'undefined' && window.crypto && window.crypto.randomUUID) {
-      return window.crypto.randomUUID();
-    }
-
-    // Fallback: Generate UUID v4 manually
-    const hex = this.getRandomBytes(16);
-    const uuid = [
-      hex.substring(0, 8),
-      hex.substring(8, 12),
-      '4' + hex.substring(13, 16),
-      ((parseInt(hex.substring(16, 17), 16) & 0x3) | 0x8).toString(16) + hex.substring(17, 20),
-      hex.substring(20, 32),
-    ].join('-');
-
-    return uuid;
+    const res = uuidv4();
+    return res;
   }
 
   /**
@@ -110,19 +99,8 @@ class IdGenerator {
    * @returns UUID v1 String
    */
   private generateUuidv1() {
-    const now = Date.now();
-    const timeHex = now.toString(16).padStart(12, '0');
-
-    // Extract parts from timestamp
-    const timeLow = timeHex.slice(-8);
-    const timeMid = timeHex.slice(-12, -8);
-    const timeHi = '1' + timeHex.slice(-15, -12).padStart(3, '0'); // Version 1
-
-    // Generate clock sequence (14 bits) and node (48 bits)
-    const clockSeq = this.getRandomBytes(2);
-    const node = this.getRandomBytes(6);
-
-    return `${timeLow}-${timeMid}-${timeHi}-${clockSeq}-${node}`;
+    const res = uuidv1();
+    return res;
   }
 
   /**

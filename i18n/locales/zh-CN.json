@@ -1,8 +1,16 @@
 {
   "Go back home": "返回首页",
 
+  "Search": "搜索",
+  "Shuffle": "随机",
+  "Generate": "生成",
+  "Copy": "复制",
+  "Clear": "清空",
   "Copied to clipboard": "已复制到剪贴板",
   "Failed to copy text": "复制失败",
+  "Input something here...": "在此输入一些内容...",
+  "Invalid operation": "无效操作",
+  "Unknown error": "未知错误",
 
   "Exchange Rate Query": "汇率查询",
   "Exchange rates provided on this website are from UnionPay System.": "本网站提供的国际货币汇率数据来源于银联国际系统。",
@@ -62,10 +70,6 @@
   "Sorting": "排序",
   "Selected Candidate Characters": "已选候选字符",
   "End of Line": "换行符",
-  "Generate": "生成",
-
-  "Copy": "复制",
-  "Clear": "清空",
   "Generated Text": "已生成文本",
   "No Wrap": "不换行",
   "Please select character types first": "请先选择候选字符",
@@ -79,6 +83,27 @@
   "Failed to generate": "生成失败",
   "No item found": "未找到项目",
 
+  "Encode & Decode String": "编码 & 解码字符串",
+  "Encode and decode string with ease. base64, MD5, URL, etc.": "轻松编码和解码字符串。base64、MD5、URL 等。",
+  "Base64 Encode": "Base64 编码",
+  "Base64 Decode": "Base64 解码",
+  "MD5 Encode": "MD5 编码",
+  "SHA-1 Hash": "SHA-1 哈希",
+  "SHA-256 Hash": "SHA-256 哈希",
+  "SHA-384 Hash": "SHA-384 哈希",
+  "SHA-512 Hash": "SHA-512 哈希",
+  "Encode URI": "编码 URI",
+  "Decode URI": "解码 URI",
+  "Encode URI Component": "编码 URI 组件",
+  "Decode URI Component": "解码 URI 组件",
+  "Failed to encode string": "字符串编码失败",
+  "Failed to decode string": "字符串解码失败",
+
+  "QRCode Reader": "二维码读取器",
+  "Read QRCode from image in browser with ease.": "在浏览器中轻松读取二维码。",
+  "Drop images files here or click to upload": "将图片文件拖拽到这里或点击上传",
+  "Attach as many files as you like. The QRCode Parsing only happens in your browser.": "可以上传任意数量的图片文件。二维码解析仅在浏览器中进行。",
+
   "Under Development": "正在开发中",
-  "This project is under development.": "本项目正在开发中，敬请期待。"
+  "This project is under development, please wait.": "本项目正在开发中，敬请期待。"
 }
