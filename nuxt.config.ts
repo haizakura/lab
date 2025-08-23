@@ -8,6 +8,12 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@element-plus/nuxt', '@nuxtjs/i18n', '@unocss/nuxt', '@nuxt/icon'],
+  nitro: {
+    compressPublicAssets: {
+      brotli: true,
+      gzip: true,
+    },
+  },
   vite: {
     ssr: {
       noExternal: ['dayjs'],
