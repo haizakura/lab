@@ -7,6 +7,9 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+  devServer: {
+    port: 30000,
+  },
   modules: ['@element-plus/nuxt', '@nuxtjs/i18n', '@unocss/nuxt', '@nuxt/icon'],
   nitro: {
     compressPublicAssets: {
