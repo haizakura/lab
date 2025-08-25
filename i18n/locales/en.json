@@ -99,6 +99,9 @@
   "Failed to encode string": "Failed to encode string",
   "Failed to decode string": "Failed to decode string",
 
+  "QRCode Generator": "QRCode Generator",
+  "Generate QRCode with ease. Supports text, URL, and more.": "Generate QRCode with ease. Supports text, URL, and more.",
+
   "QRCode Reader": "QRCode Reader",
   "Read QRCode from image in browser with ease.": "Read QRCode from image in browser with ease.",
   "Drop images files here or click to upload": "Drop images files here or click to upload",

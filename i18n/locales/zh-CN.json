@@ -99,6 +99,9 @@
   "Failed to encode string": "字符串编码失败",
   "Failed to decode string": "字符串解码失败",
 
+  "QRCode Generator": "二维码生成器",
+  "Generate QRCode with ease. Supports text, URL, and more.": "轻松生成二维码。支持文本、URL 等。",
+
   "QRCode Reader": "二维码读取器",
   "Read QRCode from image in browser with ease.": "在浏览器中轻松读取二维码。",
   "Drop images files here or click to upload": "将图片文件拖拽到这里或点击上传",

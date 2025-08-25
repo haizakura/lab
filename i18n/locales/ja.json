@@ -99,6 +99,9 @@
   "Failed to encode string": "文字列のエンコードに失敗しました",
   "Failed to decode string": "文字列のデコードに失敗しました",
 
+  "QRCode Generator": "QRCode 生成",
+  "Generate QRCode with ease. Supports text, URL, and more.": "QRCode を簡単に生成します。テキスト、URL などをサポートします。",
+
   "QRCode Reader": "QRCode 読み取り",
   "Read QRCode from image in browser with ease.": "QRCode をブラウザで簡単に読み取ります。",
   "Drop images files here or click to upload": "画像ファイルをここにドロップするか、クリックしてアップロードしてください。",
