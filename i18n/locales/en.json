@@ -11,6 +11,9 @@
   "Input something here...": "Input something here...",
   "Invalid operation": "Invalid operation",
   "Unknown error": "Unknown error",
+  "Download": "Download",
+  "Text": "Text",
+  "Size": "Size",
 
   "Exchange Rate Query": "Exchange Rate Query",
   "Exchange rates provided on this website are from UnionPay System.": "Exchange rates provided on this website are from UnionPay System.",

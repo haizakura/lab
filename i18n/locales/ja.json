@@ -11,6 +11,9 @@
   "Input something here...": "ここに何か入力してください...",
   "Invalid operation": "無効な操作",
   "Unknown error": "不明なエラー",
+  "Download": "ダウンロード",
+  "Text": "テキスト",
+  "Size": "サイズ",
 
   "Exchange Rate Query": "為替レート検索",
   "Exchange rates provided on this website are from UnionPay System.": "本サイトで提供される為替レートは、銀聯システムから取得されています。",
