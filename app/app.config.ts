@@ -43,21 +43,7 @@ export default defineAppConfig({
       path: '/qrcode-reader',
       desc: 'Read QRCode from image in browser with ease.',
     },
-    itemX: {
-      icon: 'mdi:tools',
-      title: 'Under Development',
-      name: 'underDevelopment',
-      path: '/under-development',
-      desc: 'This project is under development, please wait.',
-    },
-    itemY: {
-      icon: 'mdi:tools',
-      title: 'Under Development',
-      name: 'underDevelopment',
-      path: '/under-development',
-      desc: 'This project is under development, please wait.',
-    },
-    itemZ: {
+    underDevelopment: {
       icon: 'mdi:tools',
       title: 'Under Development',
       name: 'underDevelopment',
