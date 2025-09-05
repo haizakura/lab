@@ -7,6 +7,10 @@
     <el-main class="main" role="main">
       <NuxtPage />
     </el-main>
+
+    <el-footer class="footer" role="contentinfo">
+      <BaseFooter />
+    </el-footer>
   </div>
 
   <Analytics />
