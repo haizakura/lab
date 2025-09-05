@@ -7,6 +7,8 @@
     <div class="header-right">
       <BaseHeaderTranslate />
       <span class="mx-2"></span>
+      <BaseHeaderBlog />
+      <span class="mx-2"></span>
       <BaseHeaderGithub />
     </div>
   </div>
