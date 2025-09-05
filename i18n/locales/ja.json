@@ -13,7 +13,7 @@
   "Unknown error": "不明なエラー",
   "Download": "ダウンロード",
   "Text": "テキスト",
-  "Size": "サイズ",
+  "Scale": "スケール",
 
   "Exchange Rate Query": "為替レート検索",
   "Exchange rates provided on this website are from UnionPay System.": "本サイトで提供される為替レートは、銀聯システムから取得されています。",
@@ -104,6 +104,9 @@
 
   "QRCode Generator": "QRCode 生成",
   "Generate QRCode with ease. Supports text, URL, and more.": "QRCode を簡単に生成します。テキスト、URL などをサポートします。",
+  "Please enter text to generate QR code": "QRCode を生成するにはテキストを入力してください",
+  "Failed to generate QR code": "QRCode の生成に失敗しました",
+  "Failed to download QR code": "QRCode のダウンロードに失敗しました",
 
   "QRCode Reader": "QRCode 読み取り",
   "Read QRCode from image in browser with ease.": "QRCode をブラウザで簡単に読み取ります。",

@@ -13,7 +13,7 @@
   "Unknown error": "Unknown error",
   "Download": "Download",
   "Text": "Text",
-  "Size": "Size",
+  "Scale": "Scale",
 
   "Exchange Rate Query": "Exchange Rate Query",
   "Exchange rates provided on this website are from UnionPay System.": "Exchange rates provided on this website are from UnionPay System.",
@@ -104,6 +104,9 @@
 
   "QRCode Generator": "QRCode Generator",
   "Generate QRCode with ease. Supports text, URL, and more.": "Generate QRCode with ease. Supports text, URL, and more.",
+  "Please enter text to generate QR code": "Please enter text to generate QR code",
+  "Failed to generate QR code": "Failed to generate QR code",
+  "Failed to download QR code": "Failed to download QR code",
 
   "QRCode Reader": "QRCode Reader",
   "Read QRCode from image in browser with ease.": "Read QRCode from image in browser with ease.",

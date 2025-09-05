@@ -24,11 +24,8 @@
             />
           </el-form-item>
 
-          <el-form-item :label="$t('Size')">
-            <el-input-number class="!w-full" v-model="form.size" :min="48" :max="512" controls-position="right">
-              <template #suffix>
-                <span>px</span>
-              </template>
+          <el-form-item :label="$t('Scale')">
+            <el-input-number class="!w-full" v-model="form.scale" :min="2" :max="48" controls-position="right">
             </el-input-number>
           </el-form-item>
         </el-form>
@@ -62,22 +59,62 @@ useSeoMeta({
 
 const form = reactive({
   text: '',
-  size: 256,
+  scale: 10,
 });
 
 const qrcode = ref('');
 
-const generateQrcode = () => {
-  qrcode.value = `https://www.west.cn/web/tool/codepayimg?uuid=${form.text}`;
+const generateQrcode = async () => {
+  if (!form.text.trim()) {
+    ElMessage.warning($t('Please enter text to generate QR code'));
+    return;
+  }
+
+  try {
+    const response = await $fetch('/api/qrcode', {
+      method: 'POST',
+      body: { text: form.text, scale: form.scale },
+      responseType: 'arrayBuffer',
+    });
+
+    const blob = new Blob([response as unknown as ArrayBuffer], { type: 'image/gif' });
+    const imageUrl = URL.createObjectURL(blob);
+    qrcode.value = imageUrl;
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : $t('Failed to generate QR code');
+    ElMessage.error(errorMessage);
+  }
 };
 
-const downloadQrcode = () => {
-  window.open(qrcode.value, '_blank');
+const downloadQrcode = async () => {
+  if (!qrcode.value) return;
+
+  try {
+    const link = document.createElement('a');
+    link.href = qrcode.value;
+    link.download = `qrcode-${Date.now()}.gif`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : $t('Failed to download QR code');
+    ElMessage.error(errorMessage);
+  }
 };
 
 const clear = () => {
+  if (qrcode.value && qrcode.value.startsWith('blob:')) {
+    URL.revokeObjectURL(qrcode.value);
+  }
+
   form.text = '';
-  form.size = 256;
+  form.scale = 10;
   qrcode.value = '';
 };
+
+onBeforeUnmount(() => {
+  if (qrcode.value && qrcode.value.startsWith('blob:')) {
+    URL.revokeObjectURL(qrcode.value);
+  }
+});
 </script>
