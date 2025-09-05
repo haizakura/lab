@@ -2,10 +2,10 @@ import { z } from 'zod';
 
 export default defineEventHandler(async (event) => {
   const textString = z.string().min(1);
-  const scaleInteger = z.int32().min(2).max(48);
+  const scaleInteger = z.int32().min(2).max(64);
   const schema = z.object({
     text: textString,
-    scale: scaleInteger.optional().default(10),
+    scale: scaleInteger.optional().default(8),
   });
 
   const result = await readValidatedBody(event, schema.safeParse);
