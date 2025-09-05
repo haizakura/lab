@@ -1,47 +1,40 @@
 <template>
-  <div class="page">
-    <el-card class="m-auto sm:w-md">
-      <template #header>
-        <div class="card-header">
-          <div class="card-header-title">
-            <Icon :name="item.icon" />
-            <span>{{ $t(item.title) }}</span>
-          </div>
-        </div>
-      </template>
+  <BasePageContainer :icon="item.icon" :title="item.title" size="medium">
+    <el-form :model="form" label-width="auto" label-position="top">
+      <el-form-item :label="$t('Text')">
+        <el-input
+          v-model="form.text"
+          type="textarea"
+          :placeholder="$t('Input something here...')"
+          :aria-label="$t('Input something here...')"
+          :autosize="{ minRows: 2, maxRows: 10 }"
+          :autofocus="true"
+          clearable
+        />
+      </el-form-item>
 
-      <div class="flex flex-col">
-        <el-form :model="form" label-width="auto" label-position="top">
-          <el-form-item :label="$t('Text')">
-            <el-input
-              v-model="form.text"
-              type="textarea"
-              :placeholder="$t('Input something here...')"
-              :aria-label="$t('Input something here...')"
-              :autosize="{ minRows: 2, maxRows: 10 }"
-              :autofocus="true"
-              clearable
-            />
-          </el-form-item>
+      <el-form-item :label="$t('Scale')">
+        <el-radio-group v-model="form.scale">
+          <el-radio :value=8>8x</el-radio>
+          <el-radio :value=16>16x</el-radio>
+          <el-radio :value=24>24x</el-radio>
+          <el-radio :value=32>32x</el-radio>
+          <el-radio :value=48>48x</el-radio>
+        </el-radio-group>
+      </el-form-item>
+    </el-form>
 
-          <el-form-item :label="$t('Scale')">
-            <el-input-number class="!w-full" v-model="form.scale" :min="2" :max="48" controls-position="right">
-            </el-input-number>
-          </el-form-item>
-        </el-form>
-        <div class="flex flex-row gap-4 justify-center">
-          <el-button type="primary" @click="generateQrcode">{{ $t('Generate') }}</el-button>
-          <el-button class="!ml-0" @click="clear">{{ $t('Clear') }}</el-button>
-        </div>
+    <div class="flex flex-row gap-4 justify-center">
+      <el-button type="primary" @click="generateQrcode">{{ $t('Generate') }}</el-button>
+      <el-button class="!ml-0" @click="clear">{{ $t('Clear') }}</el-button>
+    </div>
 
-        <div v-if="qrcode" class="w-full h-full flex flex-col items-center justify-center gap-4">
-          <hr class="mt-4 text-line-base w-full" />
-          <el-image :src="qrcode" class="max-w-full" />
-          <el-button type="primary" @click="downloadQrcode">{{ $t('Download') }}</el-button>
-        </div>
-      </div>
-    </el-card>
-  </div>
+    <div v-if="qrcode" class="w-full h-full flex flex-col items-center justify-center gap-4">
+      <hr class="mt-4 text-line-base w-full" />
+      <el-image :src="qrcode" class="max-w-full" />
+      <el-button type="primary" @click="downloadQrcode">{{ $t('Download') }}</el-button>
+    </div>
+  </BasePageContainer>
 </template>
 
 <script setup lang="ts">
@@ -59,13 +52,13 @@ useSeoMeta({
 
 const form = reactive({
   text: '',
-  scale: 10,
+  scale: 8,
 });
 
 const qrcode = ref('');
 
 const generateQrcode = async () => {
-  if (!form.text.trim()) {
+  if (!form.text) {
     ElMessage.warning($t('Please enter text to generate QR code'));
     return;
   }
@@ -97,7 +90,7 @@ const downloadQrcode = async () => {
     link.click();
     document.body.removeChild(link);
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : $t('Failed to download QR code');
+    const errorMessage = error instanceof Error ? error : $t('Failed to download QR code');
     ElMessage.error(errorMessage);
   }
 };
@@ -108,7 +101,7 @@ const clear = () => {
   }
 
   form.text = '';
-  form.scale = 10;
+  form.scale = 8;
   qrcode.value = '';
 };
 
