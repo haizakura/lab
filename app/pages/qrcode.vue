@@ -15,18 +15,18 @@
 
       <el-form-item :label="$t('Scale')">
         <el-radio-group v-model="form.scale">
-          <el-radio :value=8>8x</el-radio>
-          <el-radio :value=16>16x</el-radio>
-          <el-radio :value=24>24x</el-radio>
-          <el-radio :value=32>32x</el-radio>
-          <el-radio :value=48>48x</el-radio>
+          <el-radio :value="8">8x</el-radio>
+          <el-radio :value="16">16x</el-radio>
+          <el-radio :value="24">24x</el-radio>
+          <el-radio :value="32">32x</el-radio>
+          <el-radio :value="48">48x</el-radio>
         </el-radio-group>
       </el-form-item>
     </el-form>
 
     <div class="flex flex-row gap-4 justify-center">
       <el-button type="primary" @click="generateQrcode">{{ $t('Generate') }}</el-button>
-      <el-button class="!ml-0" @click="clear">{{ $t('Clear') }}</el-button>
+      <el-button @click="clear">{{ $t('Clear') }}</el-button>
     </div>
 
     <div v-if="qrcode" class="w-full h-full flex flex-col items-center justify-center gap-4">
