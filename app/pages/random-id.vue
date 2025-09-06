@@ -1,55 +1,40 @@
 <template>
-  <div class="page">
-    <el-card class="m-auto w-[90dvw] sm:w-md md:w-lg lg:w-xl">
-      <template #header>
-        <div class="card-header">
-          <div class="card-header-title">
-            <Icon :name="item.icon" />
-            <span>{{ $t(item.title) }}</span>
-          </div>
-        </div>
-      </template>
-
-      <div class="flex flex-col">
-        <!-- ID Type List -->
-        <div class="flex flex-col" v-for="(item, index) in idTypeList" :key="item.type" :index="index">
-          <div class="flex flex-row items-center mb-2">
-            <span class="text-base">{{ item.label }}</span>
-          </div>
-
-          <div class="flex flex-row items-center">
-            <!-- Input Component -->
-            <el-col :span="18" class="pr-1">
-              <div class="flex flex-col">
-                <el-input v-model="item.value" :placeholder="item.label" />
-              </div>
-            </el-col>
-
-            <!-- Generate Button -->
-            <el-col :span="3" class="px-1">
-              <div class="flex flex-col">
-                <el-button type="success" @click="generate(item.type as IdTypeKey, index)"
-                  ><Icon name="mdi:reload" class="text-lg"
-                /></el-button>
-              </div>
-            </el-col>
-
-            <!-- Copy Button -->
-            <el-col :span="3" class="pl-1">
-              <div class="flex flex-col">
-                <el-button type="primary" @click="copy(index)"
-                  ><Icon name="mdi:content-copy" class="text-lg"
-                /></el-button>
-              </div>
-            </el-col>
-          </div>
-
-          <!-- Divider -->
-          <el-divider v-if="index !== idTypeList.length - 1" />
-        </div>
+  <BasePageContainer :icon="item.icon" :title="item.title" size="medium">
+    <!-- ID Type List -->
+    <div class="flex flex-col" v-for="(item, index) in idTypeList" :key="item.type" :index="index">
+      <div class="flex flex-row items-center mb-2">
+        <span class="text-base">{{ item.label }}</span>
       </div>
-    </el-card>
-  </div>
+
+      <div class="flex flex-row items-center">
+        <!-- Input Component -->
+        <el-col :span="18" class="pr-1">
+          <div class="flex flex-col">
+            <el-input v-model="item.value" :placeholder="item.label" />
+          </div>
+        </el-col>
+
+        <!-- Generate Button -->
+        <el-col :span="3" class="px-1">
+          <div class="flex flex-col">
+            <el-button type="success" @click="generate(item.type as IdTypeKey, index)"
+              ><Icon name="mdi:reload" class="text-lg"
+            /></el-button>
+          </div>
+        </el-col>
+
+        <!-- Copy Button -->
+        <el-col :span="3" class="pl-1">
+          <div class="flex flex-col">
+            <el-button type="primary" @click="copy(index)"><Icon name="mdi:content-copy" class="text-lg" /></el-button>
+          </div>
+        </el-col>
+      </div>
+
+      <!-- Divider -->
+      <el-divider v-if="index !== idTypeList.length - 1" />
+    </div>
+  </BasePageContainer>
 </template>
 
 <script setup lang="ts">

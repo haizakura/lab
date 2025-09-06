@@ -11,6 +11,9 @@
   "Input something here...": "在此输入一些内容...",
   "Invalid operation": "无效操作",
   "Unknown error": "未知错误",
+  "Download": "下载",
+  "Text": "文本",
+  "Scale": "缩放",
 
   "Exchange Rate Query": "汇率查询",
   "Exchange rates provided on this website are from UnionPay System.": "本网站提供的国际货币汇率数据来源于银联国际系统。",
@@ -83,7 +86,7 @@
   "Failed to generate": "生成失败",
   "No item found": "未找到项目",
 
-  "Encode & Decode String": "编码 & 解码字符串",
+  "Encode/Decode String": "编码/解码字符串",
   "Encode and decode string with ease. base64, MD5, URL, etc.": "轻松编码和解码字符串。base64、MD5、URL 等。",
   "Base64 Encode": "Base64 编码",
   "Base64 Decode": "Base64 解码",
@@ -98,6 +101,12 @@
   "Decode URI Component": "解码 URI 组件",
   "Failed to encode string": "字符串编码失败",
   "Failed to decode string": "字符串解码失败",
+
+  "QRCode Generator": "二维码生成器",
+  "Generate QRCode with ease. Supports text, URL, and more.": "轻松生成二维码。支持文本、URL 等。",
+  "Please enter text to generate QR code": "请输入文本以生成二维码",
+  "Failed to generate QR code": "生成二维码失败",
+  "Failed to download QR code": "下载二维码失败",
 
   "QRCode Reader": "二维码读取器",
   "Read QRCode from image in browser with ease.": "在浏览器中轻松读取二维码。",

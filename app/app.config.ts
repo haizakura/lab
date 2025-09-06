@@ -24,10 +24,17 @@ export default defineAppConfig({
     },
     encode: {
       icon: 'mdi:code-json',
-      title: 'Encode & Decode String',
+      title: 'Encode/Decode String',
       name: 'encode',
       path: '/encode',
       desc: 'Encode and decode string with ease. base64, MD5, URL, etc.',
+    },
+    qrcode: {
+      icon: 'mdi:qrcode-edit',
+      title: 'QRCode Generator',
+      name: 'qrcode',
+      path: '/qrcode',
+      desc: 'Generate QRCode with ease. Supports text, URL, and more.',
     },
     qrcodeReader: {
       icon: 'mdi:qrcode-scan',
@@ -36,21 +43,7 @@ export default defineAppConfig({
       path: '/qrcode-reader',
       desc: 'Read QRCode from image in browser with ease.',
     },
-    itemX: {
-      icon: 'mdi:tools',
-      title: 'Under Development',
-      name: 'underDevelopment',
-      path: '/under-development',
-      desc: 'This project is under development, please wait.',
-    },
-    itemY: {
-      icon: 'mdi:tools',
-      title: 'Under Development',
-      name: 'underDevelopment',
-      path: '/under-development',
-      desc: 'This project is under development, please wait.',
-    },
-    itemZ: {
+    underDevelopment: {
       icon: 'mdi:tools',
       title: 'Under Development',
       name: 'underDevelopment',

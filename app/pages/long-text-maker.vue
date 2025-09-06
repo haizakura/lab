@@ -1,266 +1,248 @@
 <template>
-  <div class="page">
-    <el-card class="m-auto w-[90dvw] sm:w-xl md:w-2xl lg:w-3xl">
-      <template #header>
-        <div class="card-header">
-          <div class="card-header-title">
-            <Icon :name="item.icon" />
-            <span>{{ $t(item.title) }}</span>
-          </div>
-        </div>
-      </template>
+  <BasePageContainer :icon="item.icon" :title="item.title" size="x-large">
+    <!-- Candidate Characters Toggle -->
+    <div
+      class="flex items-center gap-2 cursor-pointer text-sm text-regular"
+      @click="isCandidateCharactersExpanded = !isCandidateCharactersExpanded"
+    >
+      <el-icon :class="{ '-rotate-90': !isCandidateCharactersExpanded }" class="transition-transform"
+        ><ElIconArrowDown
+      /></el-icon>
+      <span>{{ $t('Candidate Characters') }}</span>
+    </div>
 
-      <div>
-        <!-- Candidate Characters Toggle -->
-        <div
-          class="flex items-center gap-2 cursor-pointer text-sm text-regular"
-          @click="isCandidateCharactersExpanded = !isCandidateCharactersExpanded"
-        >
-          <el-icon :class="{ '-rotate-90': !isCandidateCharactersExpanded }" class="transition-transform"
-            ><ElIconArrowDown
-          /></el-icon>
-          <span>{{ $t('Candidate Characters') }}</span>
-        </div>
-
-        <!-- Candidate Characters -->
-        <el-collapse-transition>
-          <div v-show="isCandidateCharactersExpanded" class="mt-2 p-2 rounded-sm border border-line-light w-full">
-            <el-checkbox-group v-model="charTypesList" class="flex flex-wrap gap-2">
-              <el-checkbox
-                v-for="character in candidateCharacters"
-                :key="character.value"
-                :label="character.label"
-                :value="character.value"
-              />
-            </el-checkbox-group>
-          </div>
-        </el-collapse-transition>
-
-        <!-- Custom Characters Input -->
-        <el-collapse-transition>
-          <el-form
-            v-show="charTypesList?.includes('customCharacters')"
-            label-width="auto"
-            label-position="top"
-            class="mt-4"
-          >
-            <el-form-item :label="$t('Custom Characters')">
-              <el-input
-                v-model="customCharactersText"
-                type="textarea"
-                placeholder="Enter custom characters here..."
-                :show-word-limit="true"
-                :autosize="{ minRows: 2, maxRows: 10 }"
-              />
-            </el-form-item>
-          </el-form>
-        </el-collapse-transition>
-
-        <!-- Custom Unicode Range Input -->
-        <el-collapse-transition>
-          <el-form
-            ref="unicodeFormRef"
-            v-show="charTypesList?.includes('unicodeRange')"
-            :model="unicodeRangeForm"
-            :rules="unicodeFormRules"
-            label-width="auto"
-            label-position="left"
-            class="mt-4"
-          >
-            <el-form-item :label="$t('Unicode Range')" class="mb-2">
-              <el-col :span="11">
-                <el-form-item prop="from" class="mb-0">
-                  <el-input
-                    :model-value="unicodeRangeForm.from"
-                    @input="(value: string) => handleUnicodeInputChange(value, 'from')"
-                    placeholder="[0-9A-Fa-f]{1,6}"
-                    class="w-full"
-                    maxlength="6"
-                  />
-                </el-form-item>
-              </el-col>
-              <el-col :span="2">
-                <div class="w-full flex items-center justify-center">
-                  <el-icon class="text-regular"><ElIconSemiSelect /></el-icon>
-                </div>
-              </el-col>
-              <el-col :span="11">
-                <el-form-item prop="to" class="mb-0">
-                  <el-input
-                    :model-value="unicodeRangeForm.to"
-                    @input="(value: string) => handleUnicodeInputChange(value, 'to')"
-                    placeholder="[0-9A-Fa-f]{1,6}"
-                    class="w-full"
-                    maxlength="6"
-                  />
-                </el-form-item>
-              </el-col>
-            </el-form-item>
-          </el-form>
-        </el-collapse-transition>
-
-        <el-form class="mt-4">
-          <el-form-item>
-            <div class="flex flex-auto">
-              <!-- Pattern -->
-              <el-col :span="8" class="px-1">
-                <div class="flex flex-col">
-                  <span class="text-sm text-regular">{{ $t('Pattern') }}</span>
-                  <el-select
-                    v-model="selectedPattern"
-                    placeholder="Select a pattern"
-                    class="w-full mt-2"
-                    :aria-label="$t('Pattern')"
-                    @change="onPatternChange"
-                  >
-                    <el-option value="none" :label="$t('No pattern')" />
-                    <el-option-group :label="$t('Basic Specified Samples')">
-                      <el-option
-                        v-for="item in basicPatternOptions"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      />
-                    </el-option-group>
-                    <el-option-group :label="$t('Unicode Range Samples')">
-                      <el-option
-                        v-for="item in unicodePatternOptions"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      />
-                    </el-option-group>
-                    <el-option-group :label="$t('Custom Text Samples')">
-                      <el-option
-                        v-for="item in customTextOptions"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      />
-                    </el-option-group>
-                  </el-select>
-                </div>
-              </el-col>
-
-              <!-- Characters Usage Method -->
-              <el-col :span="8" class="px-1">
-                <div class="flex flex-col">
-                  <span class="text-sm text-regular">{{ $t('Use Chars') }}</span>
-                  <el-select
-                    v-model="usageMethod"
-                    placeholder="Select Usage Method"
-                    class="w-full mt-2"
-                    :aria-label="$t('Use Chars')"
-                  >
-                    <el-option v-for="item in usageOptions" :key="item.value" :label="item.label" :value="item.value" />
-                  </el-select>
-                </div>
-              </el-col>
-
-              <!-- Text Length -->
-              <el-col :span="8" class="px-1">
-                <div class="flex flex-col">
-                  <span class="text-sm text-regular">{{ $t('Text Length') }}</span>
-                  <el-input-number
-                    class="!w-full mt-2"
-                    v-model="textLength"
-                    controls-position="right"
-                    :min="1"
-                    :max="10000"
-                    :aria-label="$t('Text Length')"
-                  />
-                </div>
-              </el-col>
-            </div>
-          </el-form-item>
-
-          <el-form-item>
-            <div class="flex flex-auto">
-              <!-- Line Break -->
-              <el-col :span="8" class="px-1">
-                <div class="flex flex-col">
-                  <span class="text-sm text-regular">{{ $t('Line Break') }}</span>
-                  <el-select
-                    v-model="lineBreak"
-                    placeholder="Select Line Break"
-                    class="w-full mt-2"
-                    :aria-label="$t('Line Break')"
-                  >
-                    <el-option :value="false" :label="$t('No line break')" />
-                    <el-option :value="true" :label="$t('Line break')" />
-                  </el-select>
-                </div>
-              </el-col>
-
-              <!-- Each line -->
-              <el-col :span="8" class="px-1">
-                <div class="flex flex-col">
-                  <span class="text-sm text-regular">{{ $t('Each Line') }}</span>
-                  <el-input-number
-                    class="!w-full mt-2"
-                    v-model="eachLine"
-                    controls-position="right"
-                    :min="0"
-                    :max="10000"
-                    :disabled="!lineBreak"
-                    :aria-label="$t('Each Line')"
-                  />
-                </div>
-              </el-col>
-
-              <!-- End of Line -->
-              <el-col :span="8" class="px-1">
-                <div class="flex flex-col">
-                  <span class="text-sm text-regular">{{ $t('End of Line') }}</span>
-                  <el-select
-                    v-model="endOfLine"
-                    placeholder="Select End of Line"
-                    class="!w-full mt-2"
-                    :disabled="!lineBreak"
-                    :aria-label="$t('End of Line')"
-                  >
-                    <el-option
-                      v-for="item in endOfLineOptions"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    />
-                  </el-select>
-                </div>
-              </el-col>
-            </div>
-          </el-form-item>
-        </el-form>
-
-        <!-- Selected candidate characters -->
-        <div class="ml-1">
-          <el-text type="info">{{ $t('Selected Candidate Characters') }}: {{ selectedCharCount }}</el-text>
-        </div>
-
-        <!-- Buttons -->
-        <div class="flex justify-center gap-2 mt-4">
-          <el-button type="success" :aria-label="$t('Generate')" @click="generateText">{{ $t('Generate') }}</el-button>
-          <el-button type="primary" :aria-label="$t('Copy')" @click="copyText">{{ $t('Copy') }}</el-button>
-          <el-button :aria-label="$t('Clear')" @click="clearText">{{ $t('Clear') }}</el-button>
-        </div>
-
-        <!-- Generated Text -->
-        <el-collapse-transition>
-          <div v-show="generatedText" class="flex flex-col">
-            <el-divider />
-            <el-input
-              v-model="generatedText"
-              type="textarea"
-              :autosize="{ minRows: 2, maxRows: 10 }"
-              :aria-label="$t('Generated Text')"
-              :wrap="noWrap ? 'off' : 'soft'"
-            />
-            <el-checkbox v-model="noWrap" class="mt-2" :label="$t('No Wrap')" />
-          </div>
-        </el-collapse-transition>
+    <!-- Candidate Characters -->
+    <el-collapse-transition>
+      <div v-show="isCandidateCharactersExpanded" class="mt-2 p-2 rounded-sm border border-line-light w-full">
+        <el-checkbox-group v-model="charTypesList" class="flex flex-wrap gap-2">
+          <el-checkbox
+            v-for="character in candidateCharacters"
+            :key="character.value"
+            :label="character.label"
+            :value="character.value"
+          />
+        </el-checkbox-group>
       </div>
-    </el-card>
-  </div>
+    </el-collapse-transition>
+
+    <!-- Custom Characters Input -->
+    <el-collapse-transition>
+      <el-form
+        v-show="charTypesList?.includes('customCharacters')"
+        label-width="auto"
+        label-position="top"
+        class="mt-4"
+      >
+        <el-form-item :label="$t('Custom Characters')">
+          <el-input
+            v-model="customCharactersText"
+            type="textarea"
+            placeholder="Enter custom characters here..."
+            :show-word-limit="true"
+            :autosize="{ minRows: 2, maxRows: 10 }"
+          />
+        </el-form-item>
+      </el-form>
+    </el-collapse-transition>
+
+    <!-- Custom Unicode Range Input -->
+    <el-collapse-transition>
+      <el-form
+        ref="unicodeFormRef"
+        v-show="charTypesList?.includes('unicodeRange')"
+        :model="unicodeRangeForm"
+        :rules="unicodeFormRules"
+        label-width="auto"
+        label-position="left"
+        class="mt-4"
+      >
+        <el-form-item :label="$t('Unicode Range')" class="mb-2">
+          <el-col :span="11">
+            <el-form-item prop="from" class="mb-0">
+              <el-input
+                :model-value="unicodeRangeForm.from"
+                @input="(value: string) => handleUnicodeInputChange(value, 'from')"
+                placeholder="[0-9A-Fa-f]{1,6}"
+                class="w-full"
+                maxlength="6"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="2">
+            <div class="w-full flex items-center justify-center">
+              <el-icon class="text-regular"><ElIconSemiSelect /></el-icon>
+            </div>
+          </el-col>
+          <el-col :span="11">
+            <el-form-item prop="to" class="mb-0">
+              <el-input
+                :model-value="unicodeRangeForm.to"
+                @input="(value: string) => handleUnicodeInputChange(value, 'to')"
+                placeholder="[0-9A-Fa-f]{1,6}"
+                class="w-full"
+                maxlength="6"
+              />
+            </el-form-item>
+          </el-col>
+        </el-form-item>
+      </el-form>
+    </el-collapse-transition>
+
+    <el-form class="mt-4">
+      <el-form-item>
+        <div class="flex flex-auto">
+          <!-- Pattern -->
+          <el-col :span="8" class="px-1">
+            <div class="flex flex-col">
+              <span class="text-sm text-regular">{{ $t('Pattern') }}</span>
+              <el-select
+                v-model="selectedPattern"
+                placeholder="Select a pattern"
+                class="w-full mt-2"
+                :aria-label="$t('Pattern')"
+                @change="onPatternChange"
+              >
+                <el-option value="none" :label="$t('No pattern')" />
+                <el-option-group :label="$t('Basic Specified Samples')">
+                  <el-option
+                    v-for="item in basicPatternOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-option-group>
+                <el-option-group :label="$t('Unicode Range Samples')">
+                  <el-option
+                    v-for="item in unicodePatternOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-option-group>
+                <el-option-group :label="$t('Custom Text Samples')">
+                  <el-option
+                    v-for="item in customTextOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-option-group>
+              </el-select>
+            </div>
+          </el-col>
+
+          <!-- Characters Usage Method -->
+          <el-col :span="8" class="px-1">
+            <div class="flex flex-col">
+              <span class="text-sm text-regular">{{ $t('Use Chars') }}</span>
+              <el-select
+                v-model="usageMethod"
+                placeholder="Select Usage Method"
+                class="w-full mt-2"
+                :aria-label="$t('Use Chars')"
+              >
+                <el-option v-for="item in usageOptions" :key="item.value" :label="item.label" :value="item.value" />
+              </el-select>
+            </div>
+          </el-col>
+
+          <!-- Text Length -->
+          <el-col :span="8" class="px-1">
+            <div class="flex flex-col">
+              <span class="text-sm text-regular">{{ $t('Text Length') }}</span>
+              <el-input-number
+                class="!w-full mt-2"
+                v-model="textLength"
+                controls-position="right"
+                :min="1"
+                :max="10000"
+                :aria-label="$t('Text Length')"
+              />
+            </div>
+          </el-col>
+        </div>
+      </el-form-item>
+
+      <el-form-item>
+        <div class="flex flex-auto">
+          <!-- Line Break -->
+          <el-col :span="8" class="px-1">
+            <div class="flex flex-col">
+              <span class="text-sm text-regular">{{ $t('Line Break') }}</span>
+              <el-select
+                v-model="lineBreak"
+                placeholder="Select Line Break"
+                class="w-full mt-2"
+                :aria-label="$t('Line Break')"
+              >
+                <el-option :value="false" :label="$t('No line break')" />
+                <el-option :value="true" :label="$t('Line break')" />
+              </el-select>
+            </div>
+          </el-col>
+
+          <!-- Each line -->
+          <el-col :span="8" class="px-1">
+            <div class="flex flex-col">
+              <span class="text-sm text-regular">{{ $t('Each Line') }}</span>
+              <el-input-number
+                class="!w-full mt-2"
+                v-model="eachLine"
+                controls-position="right"
+                :min="0"
+                :max="10000"
+                :disabled="!lineBreak"
+                :aria-label="$t('Each Line')"
+              />
+            </div>
+          </el-col>
+
+          <!-- End of Line -->
+          <el-col :span="8" class="px-1">
+            <div class="flex flex-col">
+              <span class="text-sm text-regular">{{ $t('End of Line') }}</span>
+              <el-select
+                v-model="endOfLine"
+                placeholder="Select End of Line"
+                class="!w-full mt-2"
+                :disabled="!lineBreak"
+                :aria-label="$t('End of Line')"
+              >
+                <el-option v-for="item in endOfLineOptions" :key="item.value" :label="item.label" :value="item.value" />
+              </el-select>
+            </div>
+          </el-col>
+        </div>
+      </el-form-item>
+    </el-form>
+
+    <!-- Selected candidate characters -->
+    <div class="ml-1">
+      <el-text type="info">{{ $t('Selected Candidate Characters') }}: {{ selectedCharCount }}</el-text>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-center gap-2 mt-4">
+      <el-button type="success" :aria-label="$t('Generate')" @click="generateText">{{ $t('Generate') }}</el-button>
+      <el-button type="primary" :aria-label="$t('Copy')" @click="copyText">{{ $t('Copy') }}</el-button>
+      <el-button :aria-label="$t('Clear')" @click="clearText">{{ $t('Clear') }}</el-button>
+    </div>
+
+    <!-- Generated Text -->
+    <el-collapse-transition>
+      <div v-show="generatedText" class="flex flex-col">
+        <el-divider />
+        <el-input
+          v-model="generatedText"
+          type="textarea"
+          :autosize="{ minRows: 2, maxRows: 10 }"
+          :aria-label="$t('Generated Text')"
+          :wrap="noWrap ? 'off' : 'soft'"
+        />
+        <el-checkbox v-model="noWrap" class="mt-2" :label="$t('No Wrap')" />
+      </div>
+    </el-collapse-transition>
+  </BasePageContainer>
 </template>
 
 <script setup lang="ts">

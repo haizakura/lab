@@ -1,104 +1,91 @@
 <template>
-  <div class="page">
-    <el-card class="m-auto sm:w-sm">
-      <template #header>
-        <div class="card-header">
-          <div class="card-header-title">
-            <Icon :name="item.icon" />
-            <span>{{ $t(item.title) }}</span>
-          </div>
-        </div>
-      </template>
+  <BasePageContainer :icon="item.icon" :title="item.title" size="small">
+    <el-form size="large" label-position="left" label-width="auto">
+      <el-form-item :label="$t('Trans Currency')">
+        <el-select
+          v-model="transCur"
+          :placeholder="$t('Pick a Transaction Currency')"
+          filterable
+          :aria-label="$t('Trans Currency')"
+        >
+          <el-option
+            v-for="item in transCurList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+            :aria-label="item.label"
+          />
+        </el-select>
+      </el-form-item>
 
-      <div>
-        <el-form size="large" label-position="left" label-width="auto">
-          <el-form-item :label="$t('Trans Currency')">
-            <el-select
-              v-model="transCur"
-              :placeholder="$t('Pick a Transaction Currency')"
-              filterable
-              :aria-label="$t('Trans Currency')"
-            >
-              <el-option
-                v-for="item in transCurList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-                :aria-label="item.label"
-              />
-            </el-select>
-          </el-form-item>
+      <el-form-item :label="$t('Base Currency')">
+        <el-select
+          v-model="baseCur"
+          :placeholder="$t('Pick a Base Currency')"
+          filterable
+          :aria-label="$t('Base Currency')"
+        >
+          <el-option
+            v-for="item in baseCurList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+            :aria-label="item.label"
+          />
+        </el-select>
+      </el-form-item>
 
-          <el-form-item :label="$t('Base Currency')">
-            <el-select
-              v-model="baseCur"
-              :placeholder="$t('Pick a Base Currency')"
-              filterable
-              :aria-label="$t('Base Currency')"
-            >
-              <el-option
-                v-for="item in baseCurList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-                :aria-label="item.label"
-              />
-            </el-select>
-          </el-form-item>
+      <el-form-item :label="$t('Settlement Date')">
+        <el-date-picker
+          class="!w-full"
+          v-model="selectedDate"
+          type="date"
+          :placeholder="$t('Pick a Settlement Date')"
+          :aria-label="$t('Settlement Date')"
+        />
+      </el-form-item>
+    </el-form>
 
-          <el-form-item :label="$t('Settlement Date')">
-            <el-date-picker
-              class="!w-full"
-              v-model="selectedDate"
-              type="date"
-              :placeholder="$t('Pick a Settlement Date')"
-              :aria-label="$t('Settlement Date')"
-            />
-          </el-form-item>
-        </el-form>
+    <div class="flex justify-center">
+      <el-button
+        type="success"
+        size="large"
+        :icon="ElIconSearch"
+        circle
+        @click="getRate"
+        aria-label="Get Rate"
+      ></el-button>
+    </div>
 
-        <div class="flex justify-center">
-          <el-button
-            type="success"
-            size="large"
-            :icon="ElIconSearch"
-            circle
-            @click="getRate"
-            aria-label="Get Rate"
-          ></el-button>
-        </div>
+    <el-divider v-if="rateData"></el-divider>
 
-        <el-divider v-if="rateData"></el-divider>
+    <div class="text-center" v-if="rateData">
+      <span class="text-danger font-bold text-4xl">1</span>
+      <span class="text-brand font-bold ml-2">{{ transCur }}</span>
+      <span class="text-primary font-bold text-4xl mx-2">=</span>
+      <span class="text-danger font-bold text-4xl">{{ rateData }}</span>
+      <span class="text-brand font-bold ml-2">{{ baseCur }}</span>
+    </div>
 
-        <div class="text-center" v-if="rateData">
-          <span class="text-danger font-bold text-4xl">1</span>
-          <span class="text-brand font-bold ml-2">{{ transCur }}</span>
-          <span class="text-primary font-bold text-4xl mx-2">=</span>
-          <span class="text-danger font-bold text-4xl">{{ rateData }}</span>
-          <span class="text-brand font-bold ml-2">{{ baseCur }}</span>
-        </div>
+    <el-divider v-if="rateData"></el-divider>
 
-        <el-divider v-if="rateData"></el-divider>
-
-        <el-form v-if="rateData">
-          <el-form-item>
-            <el-input v-model="transNum" @input="calcRate()" clearable aria-label="Transaction Amount">
-              <template #append>
-                <span class="font-bold w-8 text-center">{{ transCur }}</span>
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item class="!mb-0">
-            <el-input v-model="baseNum" aria-label="Base Amount">
-              <template #append>
-                <span class="font-bold w-8 text-center">{{ baseCur }}</span>
-              </template>
-            </el-input>
-          </el-form-item>
-        </el-form>
-      </div>
-    </el-card>
-  </div>
+    <el-form v-if="rateData">
+      <el-form-item>
+        <el-input v-model="transNum" @input="calcRate()" clearable aria-label="Transaction Amount">
+          <template #append>
+            <span class="font-bold w-8 text-center">{{ transCur }}</span>
+          </template>
+        </el-input>
+      </el-form-item>
+      <el-form-item class="!mb-0">
+        <el-input v-model="baseNum" aria-label="Base Amount">
+          <template #append>
+            <span class="font-bold w-8 text-center">{{ baseCur }}</span>
+          </template>
+        </el-input>
+      </el-form-item>
+    </el-form>
+  </BasePageContainer>
 </template>
 
 <script lang="ts" setup>

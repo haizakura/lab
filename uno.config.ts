@@ -31,6 +31,8 @@ export default defineConfig({
 
     main: 'block pt-4 px-4 pb-8 w-full max-w-[82.5rem] ml-auto mr-auto',
 
+    footer: 'flex items-center justify-center',
+
     card: 'h-full flex flex-col',
     'card-header': 'flex justify-between items-center',
     'card-header-title': 'flex items-center gap-2 text-xl font-bold',

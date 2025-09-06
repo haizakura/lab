@@ -1,8 +1,6 @@
-import { getValidatedQuery } from 'h3';
 import { z } from 'zod';
-import type { H3Event } from 'h3';
 
-export default defineEventHandler(async (event: H3Event) => {
+export default defineEventHandler(async (event) => {
   const today = new Date();
   const nowYear = today.getFullYear().toString();
   const nowMonth = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -27,7 +25,7 @@ export default defineEventHandler(async (event: H3Event) => {
   const query = await getValidatedQuery(event, querySchema.safeParse);
 
   if (!query.success) {
-    sendError(
+    return sendError(
       event,
       createError({
         statusCode: 400,
@@ -37,46 +35,47 @@ export default defineEventHandler(async (event: H3Event) => {
         },
       }),
     );
-    return;
   }
 
-  const response = await $fetch(
-    'https://www.unionpayintl.com/upload/jfimg/' + query.data.year + query.data.month + query.data.day + '.json',
-  )
-    .then((response) => {
-      const data = response as {
-        exchangeRateJson: {
-          transCur: string;
-          baseCur: string;
-          rateData: number;
-        }[];
-      };
-      const exchangeRateJson: {
+  try {
+    const response = await $fetch(
+      `https://www.unionpayintl.com/upload/jfimg/${query.data.year}${query.data.month}${query.data.day}.json`,
+    );
+
+    const data = response as {
+      exchangeRateJson: {
         transCur: string;
         baseCur: string;
         rateData: number;
-      }[] = data.exchangeRateJson;
-      const rate = exchangeRateJson.find(
-        (element) => element.transCur === query.data.transCur && element.baseCur === query.data.baseCur,
-      );
-      return {
-        data: {
-          rate: rate,
-        },
-      };
-    })
-    .catch((error) => {
-      sendError(
-        event,
-        createError({
-          statusCode: error?.response?.status ?? 500,
-          data: {
-            message: error?.response?.statusText ?? 'Internal Server Error',
-          },
-        }),
-      );
-      return;
-    });
+      }[];
+    };
 
-  return response;
+    const exchangeRateJson: {
+      transCur: string;
+      baseCur: string;
+      rateData: number;
+    }[] = data.exchangeRateJson;
+
+    const rate = exchangeRateJson.find(
+      (element) => element.transCur === query.data.transCur && element.baseCur === query.data.baseCur,
+    );
+
+    return {
+      data: {
+        rate: rate,
+      },
+    };
+  } catch (error) {
+    const errorDetails = ErrorUtils.getErrorDetails(error);
+
+    return sendError(
+      event,
+      createError({
+        statusCode: errorDetails.status,
+        data: {
+          message: errorDetails.statusText,
+        },
+      }),
+    );
+  }
 });

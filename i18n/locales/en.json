@@ -11,6 +11,9 @@
   "Input something here...": "Input something here...",
   "Invalid operation": "Invalid operation",
   "Unknown error": "Unknown error",
+  "Download": "Download",
+  "Text": "Text",
+  "Scale": "Scale",
 
   "Exchange Rate Query": "Exchange Rate Query",
   "Exchange rates provided on this website are from UnionPay System.": "Exchange rates provided on this website are from UnionPay System.",
@@ -83,7 +86,7 @@
   "Failed to generate": "Failed to generate",
   "No item found": "No item found",
 
-  "Encode & Decode String": "Encode & Decode String",
+  "Encode/Decode String": "Encode/Decode String",
   "Encode and decode string with ease. base64, MD5, URL, etc.": "Encode and decode string with ease. base64, MD5, URL, etc.",
   "Base64 Encode": "Base64 Encode",
   "Base64 Decode": "Base64 Decode",
@@ -98,6 +101,12 @@
   "Decode URI Component": "Decode URI Component",
   "Failed to encode string": "Failed to encode string",
   "Failed to decode string": "Failed to decode string",
+
+  "QRCode Generator": "QRCode Generator",
+  "Generate QRCode with ease. Supports text, URL, and more.": "Generate QRCode with ease. Supports text, URL, and more.",
+  "Please enter text to generate QR code": "Please enter text to generate QR code",
+  "Failed to generate QR code": "Failed to generate QR code",
+  "Failed to download QR code": "Failed to download QR code",
 
   "QRCode Reader": "QRCode Reader",
   "Read QRCode from image in browser with ease.": "Read QRCode from image in browser with ease.",

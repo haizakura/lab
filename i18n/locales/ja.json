@@ -11,6 +11,9 @@
   "Input something here...": "ここに何か入力してください...",
   "Invalid operation": "無効な操作",
   "Unknown error": "不明なエラー",
+  "Download": "ダウンロード",
+  "Text": "テキスト",
+  "Scale": "スケール",
 
   "Exchange Rate Query": "為替レート検索",
   "Exchange rates provided on this website are from UnionPay System.": "本サイトで提供される為替レートは、銀聯システムから取得されています。",
@@ -83,7 +86,7 @@
   "Failed to generate": "生成に失敗しました",
   "No item found": "アイテムが見つかりません",
 
-  "Encode & Decode String": "文字列エンコード・デコード",
+  "Encode/Decode String": "文字列エンコード・デコード",
   "Encode and decode string with ease. base64, MD5, URL, etc.": "文字列を簡単にエンコード・デコードします。base64、MD5、URL など。",
   "Base64 Encode": "Base64 エンコード",
   "Base64 Decode": "Base64 デコード",
@@ -98,6 +101,12 @@
   "Decode URI Component": "URI コンポーネント デコード",
   "Failed to encode string": "文字列のエンコードに失敗しました",
   "Failed to decode string": "文字列のデコードに失敗しました",
+
+  "QRCode Generator": "QRCode 生成",
+  "Generate QRCode with ease. Supports text, URL, and more.": "QRCode を簡単に生成します。テキスト、URL などをサポートします。",
+  "Please enter text to generate QR code": "QRCode を生成するにはテキストを入力してください",
+  "Failed to generate QR code": "QRCode の生成に失敗しました",
+  "Failed to download QR code": "QRCode のダウンロードに失敗しました",
 
   "QRCode Reader": "QRCode 読み取り",
   "Read QRCode from image in browser with ease.": "QRCode をブラウザで簡単に読み取ります。",
