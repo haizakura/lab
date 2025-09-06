@@ -86,7 +86,7 @@
   "Failed to generate": "生成に失敗しました",
   "No item found": "アイテムが見つかりません",
 
-  "Encode & Decode String": "文字列エンコード・デコード",
+  "Encode/Decode String": "文字列エンコード・デコード",
   "Encode and decode string with ease. base64, MD5, URL, etc.": "文字列を簡単にエンコード・デコードします。base64、MD5、URL など。",
   "Base64 Encode": "Base64 エンコード",
   "Base64 Decode": "Base64 デコード",

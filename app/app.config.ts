@@ -24,7 +24,7 @@ export default defineAppConfig({
     },
     encode: {
       icon: 'mdi:code-json',
-      title: 'Encode & Decode String',
+      title: 'Encode/Decode String',
       name: 'encode',
       path: '/encode',
       desc: 'Encode and decode string with ease. base64, MD5, URL, etc.',

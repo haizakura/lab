@@ -86,7 +86,7 @@
   "Failed to generate": "Failed to generate",
   "No item found": "No item found",
 
-  "Encode & Decode String": "Encode & Decode String",
+  "Encode/Decode String": "Encode/Decode String",
   "Encode and decode string with ease. base64, MD5, URL, etc.": "Encode and decode string with ease. base64, MD5, URL, etc.",
   "Base64 Encode": "Base64 Encode",
   "Base64 Decode": "Base64 Decode",

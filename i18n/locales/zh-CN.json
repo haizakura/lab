@@ -86,7 +86,7 @@
   "Failed to generate": "生成失败",
   "No item found": "未找到项目",
 
-  "Encode & Decode String": "编码 & 解码字符串",
+  "Encode/Decode String": "编码/解码字符串",
   "Encode and decode string with ease. base64, MD5, URL, etc.": "轻松编码和解码字符串。base64、MD5、URL 等。",
   "Base64 Encode": "Base64 编码",
   "Base64 Decode": "Base64 解码",
