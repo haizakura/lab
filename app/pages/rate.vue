@@ -60,10 +60,10 @@
     <el-divider v-if="rateData"></el-divider>
 
     <div class="text-center" v-if="rateData">
-      <span class="text-danger font-bold text-4xl">1</span>
+      <span class="text-danger font-bold text-3xl">1</span>
       <span class="text-brand font-bold ml-2">{{ transCur }}</span>
-      <span class="text-primary font-bold text-4xl mx-2">=</span>
-      <span class="text-danger font-bold text-4xl">{{ rateData }}</span>
+      <span class="text-primary font-bold text-3xl mx-2">=</span>
+      <span class="text-danger font-bold text-3xl">{{ rateData }}</span>
       <span class="text-brand font-bold ml-2">{{ baseCur }}</span>
     </div>
 

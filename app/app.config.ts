@@ -13,7 +13,7 @@ export default defineAppConfig({
       title: 'Long Text Maker',
       name: 'longTextMaker',
       path: '/long-text-maker',
-      desc: 'Make long text with ease.',
+      desc: 'Make long text with ease. Also support Chinese, Japanese, etc...',
     },
     randomId: {
       icon: 'mdi:code-tags',

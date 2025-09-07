@@ -36,10 +36,10 @@ export default defineConfig({
     card: 'h-full flex flex-col',
     'card-header': 'flex justify-between items-center',
     'card-header-title': 'flex items-center gap-2 text-xl font-bold',
-    'card-body': 'leading-[1.55rem] min-h-[3.1rem] no-underline mb-2',
+    'card-body': 'leading-[1.55rem] min-h-[3.1rem] no-underline',
     'card-bottom': 'leading-[1rem] flex justify-between items-center mt-auto',
 
-    'project-search': 'w-full flex flex-row gap-2 justify-between mb-4',
+    'project-search': 'w-full flex flex-row gap-2 justify-between',
     'project-list': 'w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4',
 
     page: 'flex justify-center items-center h-full',

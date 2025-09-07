@@ -18,7 +18,7 @@
     </el-button>
   </div>
 
-  <div class="project-list">
+  <div class="project-list mt-4">
     <div v-for="(item, index) in filteredItemConfig" :key="index">
       <ItemsProjectCard
         :icon="item.icon"

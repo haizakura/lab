@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="always" class="card">
+  <el-card shadow="hover" class="card">
     <template #header>
       <div class="card-header cursor-pointer" @click="goTo(name)">
         <div class="card-header-title text-primary">
@@ -11,6 +11,7 @@
     <div class="card-body">
       <el-text line-clamp="2">{{ $t(desc) }}</el-text>
     </div>
+    <div class="my-1"></div>
     <div class="card-bottom">
       <el-text class="cursor-pointer" type="info" size="small" @click="goTo(name)">{{ baseUrl }}{{ path }}</el-text>
     </div>
