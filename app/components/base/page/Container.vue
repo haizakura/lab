@@ -25,15 +25,21 @@ const props = defineProps<{
 }>();
 
 const cardClass = computed(() => {
+  let classNames = 'm-auto w-[90dvw]';
   switch (props.size || 'medium') {
     case 'small':
-      return 'm-auto sm:w-sm md:w-md lg:w-lg';
+      classNames += ' sm:w-sm md:w-md lg:w-lg';
+      break;
     case 'medium':
-      return 'm-auto sm:w-md md:w-lg lg:w-xl';
+      classNames += ' sm:w-md md:w-lg lg:w-xl';
+      break;
     case 'large':
-      return 'm-auto w-[90dvw] sm:w-lg md:w-xl lg:w-2xl';
+      classNames += ' sm:w-lg md:w-xl lg:w-2xl';
+      break;
     case 'x-large':
-      return 'm-auto w-[90dvw] sm:w-xl md:w-2xl lg:w-3xl';
+      classNames += ' sm:w-xl md:w-2xl lg:w-3xl';
+      break;
   }
+  return classNames;
 });
 </script>
