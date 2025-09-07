@@ -1,6 +1,7 @@
 <template>
   <BasePageContainer :icon="item.icon" :title="item.title" size="medium">
-    <el-form :model="form" label-width="auto" label-position="top">
+    <!-- Form -->
+    <el-form size="large" :model="form" label-width="auto" label-position="left">
       <el-form-item :label="$t('Text')">
         <el-input
           v-model="form.text"
@@ -14,21 +15,19 @@
       </el-form-item>
 
       <el-form-item :label="$t('Scale')">
-        <el-radio-group v-model="form.scale">
-          <el-radio :value="8">8x</el-radio>
-          <el-radio :value="16">16x</el-radio>
-          <el-radio :value="24">24x</el-radio>
-          <el-radio :value="32">32x</el-radio>
-          <el-radio :value="48">48x</el-radio>
-        </el-radio-group>
+        <el-select v-model="form.scale" placeholder="Select Scale">
+          <el-option v-for="item in scaleList" :key="item.value" :label="item.label" :value="item.value" />
+        </el-select>
       </el-form-item>
     </el-form>
 
+    <!-- Buttons -->
     <div class="flex flex-row gap-4 justify-center">
       <el-button type="primary" @click="generateQrcode">{{ $t('Generate') }}</el-button>
       <el-button @click="clear">{{ $t('Clear') }}</el-button>
     </div>
 
+    <!-- QRCode Image -->
     <div v-if="qrcode" class="w-full h-full flex flex-col items-center justify-center gap-4">
       <hr class="mt-4 text-line-base w-full" />
       <el-image :src="qrcode" class="max-w-full" />
@@ -52,8 +51,19 @@ useSeoMeta({
 
 const form = reactive({
   text: '',
-  scale: 8,
+  scale: 2,
 });
+
+const scaleList = [
+  { value: 2, label: '2x' },
+  { value: 4, label: '4x' },
+  { value: 8, label: '8x' },
+  { value: 16, label: '16x' },
+  { value: 24, label: '24x' },
+  { value: 32, label: '32x' },
+  { value: 48, label: '48x' },
+  { value: 64, label: '64x' },
+];
 
 const qrcode = ref('');
 
@@ -101,7 +111,7 @@ const clear = () => {
   }
 
   form.text = '';
-  form.scale = 8;
+  form.scale = 2;
   qrcode.value = '';
 };
 

@@ -29,9 +29,8 @@ export default defineEventHandler(async (event) => {
     const qrcode = await QrcodeUtils.decode(result.data);
 
     return qrcode;
-  } catch (error) {
-    const errorDetails = ErrorUtils.getErrorDetails(error);
-
+  } catch (err) {
+    const errorDetails = ErrorUtils.getErrorDetails(err);
     return sendError(
       event,
       createError({

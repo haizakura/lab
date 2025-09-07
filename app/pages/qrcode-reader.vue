@@ -51,6 +51,11 @@
           <span v-else class="text-danger font-bold">{{ result.error }}</span>
         </div>
       </div>
+
+      <!-- Clear Button -->
+      <div class="flex flex-col justify-center items-center">
+        <el-button @click="clear">{{ $t('Clear') }}</el-button>
+      </div>
     </div>
   </BasePageContainer>
 </template>
@@ -58,7 +63,6 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus';
 import type { UploadUserFile } from 'element-plus';
-import { QrcodeUtils } from '@/utils/qrcodeUtils';
 
 type DecodeResult = {
   filename: string;
@@ -87,6 +91,44 @@ const parseQrcode = (file: File) => {
   return false;
 };
 
+const convertFileToImageData = async (file: File): Promise<ImageData> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const imageDataUrl = event.target?.result as string;
+      const img = new Image();
+
+      img.onload = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          if (!ctx) {
+            reject(new Error('Failed to get canvas context'));
+            return;
+          }
+
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          resolve(imageData);
+        } catch (error) {
+          reject(new Error(`Failed to process image: ${error instanceof Error ? error.message : 'Unknown error'}`));
+        }
+      };
+
+      img.onerror = () => reject(new Error('Failed to load image'));
+      img.src = imageDataUrl;
+    };
+
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.readAsDataURL(file);
+  });
+};
+
 const processQRCode = async (file: File | UploadUserFile) => {
   try {
     let actualFile: File;
@@ -96,19 +138,31 @@ const processQRCode = async (file: File | UploadUserFile) => {
     } else if (file.raw instanceof File) {
       actualFile = file.raw;
     } else {
-      throw new Error(`Invalid file object: no raw File found`);
+      throw new Error('Invalid file object');
     }
 
-    const decodeResult = await QrcodeUtils.decode(actualFile);
+    const imageData = await convertFileToImageData(actualFile);
+
+    const imageForDecode = {
+      width: imageData.width,
+      height: imageData.height,
+      data: Array.from(imageData.data),
+    };
+
+    const response = await $fetch('/api/qrcode/decode', {
+      method: 'POST',
+      body: imageForDecode,
+      responseType: 'json',
+    });
 
     results.value.push({
       filename: actualFile.name,
       success: true,
-      text: decodeResult.data,
+      text: response.data,
     });
-  } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : $t('Unknown error');
-    const fileName = file.name || 'unknown';
+  } catch (error: any) {
+    const errorMessage = error instanceof Error ? error.message : error?.data?.message || $t('Unknown error');
+    const fileName = (file as UploadUserFile).name || 'unknown';
 
     results.value.push({
       filename: fileName,
@@ -118,7 +172,6 @@ const processQRCode = async (file: File | UploadUserFile) => {
   }
 };
 
-// Copy text to clipboard
 const copyText = async (text: string) => {
   try {
     await navigator.clipboard.writeText(text);
@@ -129,7 +182,6 @@ const copyText = async (text: string) => {
   }
 };
 
-// Watch for file list changes to handle multiple files
 watch(qrcodeList, (newList) => {
   newList.forEach((file) => {
     const fileName = file.name || 'unknown';
@@ -140,7 +192,6 @@ watch(qrcodeList, (newList) => {
   });
 });
 
-// Clear results and file list
 const clear = (): void => {
   qrcodeList.value = [] as UploadUserFile[];
   results.value = [] as DecodeResult[];
