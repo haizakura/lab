@@ -32,7 +32,7 @@
   "Failed to fetch exchange rate": "获取汇率失败",
 
   "Long Text Maker": "长文本生成器",
-  "Make long text with ease.": "轻松生成自定义内容的长文本。",
+  "Make long text with ease. Also support Chinese, Japanese, etc...": "轻松生成自定义内容的长文本。支持中文、日文等。",
   "Candidate Characters": "候选字符",
   "Numbers": "数字",
   "Letters (Upper)": "半角字母（大）",
