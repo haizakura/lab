@@ -1,10 +1,10 @@
 <template>
   <div class="header-container">
-    <div class="header-left" @click="goBackHome">
+    <div class="header-container-item" @click="goBackHome">
       <BaseHeaderLogo />
     </div>
 
-    <div class="header-right">
+    <div class="header-container-item">
       <BaseHeaderTranslate />
       <span class="mx-2"></span>
       <BaseHeaderBlog />

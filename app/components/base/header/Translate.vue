@@ -1,6 +1,6 @@
 <template>
   <el-dropdown>
-    <span class="header-icon text-regular" aria-label="Translate">
+    <span class="header-icon" aria-label="Translate">
       <Icon name="mdi:translate" />
     </span>
     <template #dropdown>
