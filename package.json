@@ -11,9 +11,8 @@
   },
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.14.0",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "scripts": {
     "build": "nuxt build",
@@ -25,25 +24,25 @@
   "dependencies": {
     "@types/crypto-js": "^4.2.2",
     "@types/md5": "^2.3.6",
-    "@vercel/analytics": "^1.5.0",
+    "@vercel/analytics": "^1.6.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.19",
     "md5": "^2.3.0",
     "nuxt": "^4.2.1",
-    "qr": "^0.5.2",
+    "qr": "^0.5.3",
     "uuid": "^11.1.0",
-    "vue": "^3.5.24",
+    "vue": "^3.5.25",
     "vue-router": "^4.6.3",
-    "zod": "^4.1.12"
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.1.4",
     "@iconify-json/mdi": "^1.2.3",
     "@nuxt/icon": "1.15.0",
-    "@nuxtjs/i18n": "^10.2.0",
-    "@unocss/nuxt": "^66.5.6",
-    "element-plus": "^2.11.7",
+    "@nuxtjs/i18n": "^10.2.1",
+    "@unocss/nuxt": "^66.5.10",
+    "element-plus": "^2.12.0",
     "prettier": "3.6.2",
-    "unocss": "^66.5.6"
+    "unocss": "^66.5.10"
   }
 }
