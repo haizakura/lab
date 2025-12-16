@@ -26,7 +26,7 @@ export default defineConfig({
     header: 'top-0 left-0 right-0 z-1000 block static border-b border-b-line-light border-solid',
     'header-container': 'flex justify-between items-center w-full h-[60px]',
     'header-container-item': 'flex items-center justify-center',
-    'header-logo': 'cursor-pointer font-bold text-2xl/[60px] text-primary"',
+    'header-logo': 'cursor-pointer font-bold text-2xl/[60px] text-primary',
     'header-icon': 'cursor-pointer text-2xl/[60px] text-regular',
 
     main: 'block pt-4 px-4 pb-8 w-full max-w-[82.5rem] ml-auto mr-auto',

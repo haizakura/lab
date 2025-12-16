@@ -102,17 +102,6 @@
   "Failed to encode string": "文字列のエンコードに失敗しました",
   "Failed to decode string": "文字列のデコードに失敗しました",
 
-  "QRCode Generator": "QRCode 生成",
-  "Generate QRCode with ease. Supports text, URL, and more.": "QRCode を簡単に生成します。テキスト、URL などをサポートします。",
-  "Please enter text to generate QR code": "QRCode を生成するにはテキストを入力してください",
-  "Failed to generate QR code": "QRCode の生成に失敗しました",
-  "Failed to download QR code": "QRCode のダウンロードに失敗しました",
-
-  "QRCode Reader": "QRCode 読み取り",
-  "Read QRCode from image in browser with ease.": "QRCode をブラウザで簡単に読み取ります。",
-  "Drop images files here or click to upload": "画像ファイルをここにドロップするか、クリックしてアップロードしてください。",
-  "Attach as many files as you like. The QRCode Parsing only happens in your browser.": "任意の数の画像ファイルをアップロードできます。QRCode の読み取りはブラウザでのみ行われます。",
-
   "Under Development": "ただいま開発中",
   "This project is under development, please wait.": "本プロジェクトはただいま開発中です、お待ちください。"
 }
