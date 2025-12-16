@@ -29,20 +29,6 @@ export default defineAppConfig({
       path: '/encode',
       desc: 'Encode and decode string with ease. base64, MD5, URL, etc.',
     },
-    qrcode: {
-      icon: 'mdi:qrcode-edit',
-      title: 'QRCode Generator',
-      name: 'qrcode',
-      path: '/qrcode',
-      desc: 'Generate QRCode with ease. Supports text, URL, and more.',
-    },
-    qrcodeReader: {
-      icon: 'mdi:qrcode-scan',
-      title: 'QRCode Reader',
-      name: 'qrcodeReader',
-      path: '/qrcode-reader',
-      desc: 'Read QRCode from image in browser with ease.',
-    },
     underDevelopment: {
       icon: 'mdi:tools',
       title: 'Under Development',

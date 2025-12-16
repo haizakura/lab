@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
+  compatibilityDate: '2025-07-15',
   devtools: {
     enabled: true,
     timeline: {
@@ -15,14 +15,6 @@ export default defineNuxtConfig({
     compressPublicAssets: {
       brotli: true,
       gzip: true,
-    },
-  },
-  vite: {
-    ssr: {
-      noExternal: ['dayjs'],
-    },
-    optimizeDeps: {
-      include: ['dayjs'],
     },
   },
   i18n: {
