@@ -18,6 +18,9 @@ Developed with:
 - Random ID Generator
   - Generate a random ID.
   - Supports UUID v4, CUID, and UUID v1.
+- Encode/Decode String
+  - Encode and decode string with ease.
+  - Supports base64, MD5, URL, etc.
 - ...
 
 ## Minimal Starter
