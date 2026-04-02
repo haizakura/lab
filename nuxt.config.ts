@@ -17,6 +17,11 @@ export default defineNuxtConfig({
       gzip: true,
     },
   },
+  vite: {
+    optimizeDeps: {
+      include: ['dayjs', 'dayjs/plugin/*.js', 'lodash-unified'],
+    },
+  },
   i18n: {
     defaultLocale: 'en',
     locales: [

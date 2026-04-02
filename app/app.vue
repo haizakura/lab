@@ -12,13 +12,9 @@
       <BaseFooter />
     </el-footer>
   </div>
-
-  <Analytics />
 </template>
 
 <script setup lang="ts">
-import { Analytics } from '@vercel/analytics/nuxt';
-
 const { locale } = useI18n();
 useHead({
   htmlAttrs: {
