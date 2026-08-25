@@ -102,6 +102,11 @@
   "Failed to encode string": "字符串编码失败",
   "Failed to decode string": "字符串解码失败",
 
+  "Theme": "主题",
+  "System": "跟随系统",
+  "Light": "浅色",
+  "Dark": "深色",
+
   "Under Development": "正在开发中",
   "This project is under development, please wait.": "本项目正在开发中，敬请期待。"
 }

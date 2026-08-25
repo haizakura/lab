@@ -1,4 +1,21 @@
 export default defineAppConfig({
+  ui: {
+    colors: {
+      primary: 'brand',
+      success: 'success',
+      warning: 'warning',
+      error: 'danger',
+      info: 'info',
+      neutral: 'slate',
+    },
+    card: {
+      slots: {
+        root: 'overflow-hidden',
+        header: 'p-4 sm:px-5',
+        body: 'p-4 sm:p-5',
+      },
+    },
+  },
   baseUrl: 'https://lab.nya.run',
   itemConfig: {
     rate: {

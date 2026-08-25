@@ -102,6 +102,11 @@
   "Failed to encode string": "Failed to encode string",
   "Failed to decode string": "Failed to decode string",
 
+  "Theme": "Theme",
+  "System": "System",
+  "Light": "Light",
+  "Dark": "Dark",
+
   "Under Development": "Under Development",
   "This project is under development, please wait.": "This project is under development, please wait."
 }

@@ -8,38 +8,47 @@
 
       <div class="flex flex-row items-center">
         <!-- Input Component -->
-        <el-col :span="18" class="pr-1">
+        <div class="w-3/4 pr-1">
           <div class="flex flex-col">
-            <el-input v-model="item.value" :placeholder="item.label" />
+            <UInput v-model="item.value" :placeholder="item.label" />
           </div>
-        </el-col>
+        </div>
 
         <!-- Generate Button -->
-        <el-col :span="3" class="px-1">
+        <div class="w-1/8 px-1">
           <div class="flex flex-col">
-            <el-button type="success" @click="generate(item.type as IdTypeKey, index)"
-              ><Icon name="mdi:reload" class="text-lg"
-            /></el-button>
+            <UButton
+              color="success"
+              icon="mdi:reload"
+              class="justify-center text-lg"
+              :aria-label="$t('Generate')"
+              @click="generate(item.type as IdTypeKey, index)"
+            />
           </div>
-        </el-col>
+        </div>
 
         <!-- Copy Button -->
-        <el-col :span="3" class="pl-1">
+        <div class="w-1/8 pl-1">
           <div class="flex flex-col">
-            <el-button type="primary" @click="copy(index)"><Icon name="mdi:content-copy" class="text-lg" /></el-button>
+            <UButton
+              color="primary"
+              icon="mdi:content-copy"
+              class="justify-center text-lg"
+              :aria-label="$t('Copy')"
+              @click="copy(index)"
+            />
           </div>
-        </el-col>
+        </div>
       </div>
 
       <!-- Divider -->
-      <el-divider v-if="index !== idTypeList.length - 1" />
+      <USeparator v-if="index !== idTypeList.length - 1" class="my-6" />
     </div>
   </BasePageContainer>
 </template>
 
 <script setup lang="ts">
 import type { Ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { IdGenerator } from '@/utils/idGenerator';
 
 definePageMeta({
@@ -48,6 +57,7 @@ definePageMeta({
 
 const appConfig = useAppConfig();
 const item = appConfig.itemConfig.randomId;
+const toast = useToast();
 
 useSeoMeta({
   title: item.title,
@@ -86,7 +96,7 @@ const idTypeList: Ref<IdTypeItem[]> = ref([...ID_TYPES]);
 const generate = (type: IdTypeKey, index: number): void => {
   const item = idTypeList.value[index];
   if (!item) {
-    ElMessage.error($t('No item found'));
+    toast.add({ title: $t('No item found'), color: 'error' });
     return;
   }
 
@@ -95,7 +105,7 @@ const generate = (type: IdTypeKey, index: number): void => {
     item.value = generator.generate();
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : $t('Unknown error');
-    ElMessage.error($t('Failed to generate') + `: ${errorMessage}`);
+    toast.add({ title: $t('Failed to generate') + `: ${errorMessage}`, color: 'error' });
     item.value = '';
   }
 };
@@ -104,10 +114,10 @@ const generate = (type: IdTypeKey, index: number): void => {
 const copy = async (index: number): Promise<void> => {
   try {
     await navigator.clipboard.writeText(idTypeList.value[index]?.value ?? '');
-    ElMessage.success($t('Copied to clipboard'));
+    toast.add({ title: $t('Copied to clipboard'), color: 'success' });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : $t('Unknown error');
-    ElMessage.error($t('Failed to copy text') + `: ${errorMessage}`);
+    toast.add({ title: $t('Failed to copy text') + `: ${errorMessage}`, color: 'error' });
   }
 };
 

@@ -1,17 +1,19 @@
 <template>
-  <div class="app">
-    <el-header class="header" role="banner">
-      <BaseHeader />
-    </el-header>
+  <UApp>
+    <div class="app">
+      <header class="header" role="banner">
+        <BaseHeader />
+      </header>
 
-    <el-main class="main" role="main">
-      <NuxtPage />
-    </el-main>
+      <main class="main" role="main">
+        <NuxtPage />
+      </main>
 
-    <el-footer class="footer" role="contentinfo">
-      <BaseFooter />
-    </el-footer>
-  </div>
+      <footer class="footer" role="contentinfo">
+        <BaseFooter />
+      </footer>
+    </div>
+  </UApp>
 </template>
 
 <script setup lang="ts">

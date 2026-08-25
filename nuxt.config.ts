@@ -10,16 +10,20 @@ export default defineNuxtConfig({
   devServer: {
     port: 30000,
   },
-  modules: ['@element-plus/nuxt', '@nuxtjs/i18n', '@unocss/nuxt', '@nuxt/icon'],
+  modules: ['@nuxt/ui', '@nuxtjs/i18n'],
+  ui: {
+    fonts: false,
+  },
+  colorMode: {
+    preference: 'system',
+    fallback: 'light',
+    storageKey: 'haizakura-lab-color-mode',
+  },
+  css: ['~/assets/css/main.css'],
   nitro: {
     compressPublicAssets: {
       brotli: true,
       gzip: true,
-    },
-  },
-  vite: {
-    optimizeDeps: {
-      include: ['dayjs', 'dayjs/plugin/*.js', 'lodash-unified'],
     },
   },
   i18n: {
