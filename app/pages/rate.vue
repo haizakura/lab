@@ -1,90 +1,92 @@
 <template>
   <BasePageContainer :icon="item.icon" :title="item.title" size="small">
-    <el-form size="large" label-position="left" label-width="auto">
-      <el-form-item :label="$t('Trans Currency')">
-        <el-select
+    <div class="space-y-4">
+      <UFormField
+        :label="$t('Trans Currency')"
+        orientation="horizontal"
+        size="lg"
+        class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4"
+        :ui="{ container: 'w-full' }"
+      >
+        <USelectMenu
           v-model="transCur"
+          :items="transCurList"
+          value-key="value"
           :placeholder="$t('Pick a Transaction Currency')"
-          filterable
           :aria-label="$t('Trans Currency')"
-        >
-          <el-option
-            v-for="item in transCurList"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-            :aria-label="item.label"
-          />
-        </el-select>
-      </el-form-item>
+          class="w-full"
+        />
+      </UFormField>
 
-      <el-form-item :label="$t('Base Currency')">
-        <el-select
+      <UFormField
+        :label="$t('Base Currency')"
+        orientation="horizontal"
+        size="lg"
+        class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4"
+        :ui="{ container: 'w-full' }"
+      >
+        <USelectMenu
           v-model="baseCur"
+          :items="baseCurList"
+          value-key="value"
           :placeholder="$t('Pick a Base Currency')"
-          filterable
           :aria-label="$t('Base Currency')"
-        >
-          <el-option
-            v-for="item in baseCurList"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-            :aria-label="item.label"
-          />
-        </el-select>
-      </el-form-item>
+          class="w-full"
+        />
+      </UFormField>
 
-      <el-form-item :label="$t('Settlement Date')">
-        <el-date-picker
-          class="!w-full"
+      <UFormField
+        :label="$t('Settlement Date')"
+        orientation="horizontal"
+        size="lg"
+        class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4"
+        :ui="{ container: 'w-full' }"
+      >
+        <UInput
           v-model="selectedDate"
           type="date"
           :placeholder="$t('Pick a Settlement Date')"
           :aria-label="$t('Settlement Date')"
+          class="w-full"
         />
-      </el-form-item>
-    </el-form>
-
-    <div class="flex justify-center">
-      <el-button
-        type="success"
-        size="large"
-        :icon="ElIconSearch"
-        circle
-        @click="getRate"
-        aria-label="Get Rate"
-      ></el-button>
+      </UFormField>
     </div>
 
-    <el-divider v-if="rateData"></el-divider>
+    <div class="mt-5 flex justify-center">
+      <UButton
+        color="success"
+        size="xl"
+        icon="mdi:magnify"
+        class="rounded-full"
+        @click="getRate"
+        aria-label="Get Rate"
+      />
+    </div>
+
+    <USeparator v-if="rateData" class="my-6" />
 
     <div class="text-center" v-if="rateData">
       <span class="text-danger font-bold text-3xl">1</span>
       <span class="text-brand font-bold ml-2">{{ transCur }}</span>
-      <span class="text-primary font-bold text-3xl mx-2">=</span>
+      <span class="mx-2 text-3xl font-bold text-content-primary">=</span>
       <span class="text-danger font-bold text-3xl">{{ rateData }}</span>
       <span class="text-brand font-bold ml-2">{{ baseCur }}</span>
     </div>
 
-    <el-divider v-if="rateData"></el-divider>
+    <USeparator v-if="rateData" class="my-6" />
 
-    <el-form v-if="rateData">
-      <el-form-item>
-        <el-input v-model="transNum" @input="calcRate()" clearable aria-label="Transaction Amount">
-          <template #append>
-            <span class="font-bold w-8 text-center">{{ transCur }}</span>
-          </template>
-        </el-input>
-      </el-form-item>
-      <el-form-item class="!mb-0">
-        <el-input v-model="baseNum" aria-label="Base Amount">
-          <template #append>
-            <span class="font-bold w-8 text-center">{{ baseCur }}</span>
-          </template>
-        </el-input>
-      </el-form-item>
-    </el-form>
+    <div v-if="rateData" class="space-y-4">
+      <UInput v-model.number="transNum" type="number" class="w-full" @input="calcRate" aria-label="Transaction Amount">
+        <template #trailing>
+          <span class="font-bold w-8 text-center">{{ transCur }}</span>
+        </template>
+      </UInput>
+      <UInput v-model.number="baseNum" type="number" class="w-full" aria-label="Base Amount">
+        <template #trailing>
+          <span class="font-bold w-8 text-center">{{ baseCur }}</span>
+        </template>
+      </UInput>
+    </div>
   </BasePageContainer>
 </template>
 
@@ -93,11 +95,9 @@ definePageMeta({
   name: 'rate',
 });
 
-import { ref } from 'vue';
-import { ElMessage } from 'element-plus';
-
 const appConfig = useAppConfig();
 const item = appConfig.itemConfig.rate;
+const toast = useToast();
 
 useSeoMeta({
   title: item.title,
@@ -106,7 +106,7 @@ useSeoMeta({
 
 const transCur = ref<string>('JPY');
 const baseCur = ref<string>('CNY');
-const selectedDate = ref<Date>(new Date());
+const selectedDate = ref(new Date().toISOString().slice(0, 10));
 const transNum = ref<number>(100);
 const baseNum = ref<number>(0);
 const rateData = ref<number>(0);
@@ -130,15 +130,13 @@ const baseCurList = [
 ];
 
 const getRate = async () => {
-  const year = selectedDate.value.getFullYear().toString();
-  const month = (selectedDate.value.getMonth() + 1).toString().padStart(2, '0');
-  const day = selectedDate.value.getDate().toString().padStart(2, '0');
+  const [year, month, day] = selectedDate.value.split('-');
   const query = {
     transCur: transCur.value,
     baseCur: baseCur.value,
-    year: year,
-    month: month,
-    day: day,
+    year,
+    month,
+    day,
   };
 
   await $fetch('/api/rate', { query: query })
@@ -148,8 +146,9 @@ const getRate = async () => {
         calcRate();
       }
     })
-    .catch((error) => {
-      ElMessage.error(`${$t('Failed to fetch exchange rate')}: ${error.response.statusText}`);
+    .catch((error: unknown) => {
+      const message = error instanceof Error ? error.message : $t('Unknown error');
+      toast.add({ title: `${$t('Failed to fetch exchange rate')}: ${message}`, color: 'error' });
     });
 };
 

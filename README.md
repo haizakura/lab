@@ -6,7 +6,7 @@ Just some personal tools.
 
 Developed with:
 
-![](https://img.shields.io/badge/-Nuxt-00dc82?style=flat-square&logo=nuxt&logoColor=fff) ![](https://img.shields.io/badge/-Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=fff) ![](https://img.shields.io/badge/-UnoCSS-333333?style=flat-square&logo=unocss&logoColor=fff) ![](https://img.shields.io/badge/-Zod-3e67b1?style=flat-square&logo=zod&logoColor=fff)
+![](https://img.shields.io/badge/-Nuxt-00dc82?style=flat-square&logo=nuxt&logoColor=fff) ![](https://img.shields.io/badge/-Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=fff) ![](https://img.shields.io/badge/-Nuxt_UI-00dc82?style=flat-square&logo=nuxt&logoColor=fff) ![](https://img.shields.io/badge/-Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=fff) ![](https://img.shields.io/badge/-Zod-3e67b1?style=flat-square&logo=zod&logoColor=fff)
 
 ## Tools
 

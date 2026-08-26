@@ -1,5 +1,4 @@
 import md5 from 'md5';
-import CryptoJS from 'crypto-js';
 
 /**
  * Crypto utilities
@@ -31,20 +30,20 @@ class CryptoUtils {
    * Encode/Hash the string
    * @returns Encoded/Hashed string
    */
-  public encode(): string {
+  public async encode(): Promise<string> {
     switch (this.operation) {
       case 'base64':
         return this.encodeBase64();
       case 'md5':
         return this.hashMD5();
       case 'sha1':
-        return this.hashSHA1();
+        return this.hashSHA('SHA-1');
       case 'sha256':
-        return this.hashSHA256();
+        return this.hashSHA('SHA-256');
       case 'sha384':
-        return this.hashSHA384();
+        return this.hashSHA('SHA-384');
       case 'sha512':
-        return this.hashSHA512();
+        return this.hashSHA('SHA-512');
       case 'uri':
         return this.encodeURI();
       case 'uri-component':
@@ -111,52 +110,15 @@ class CryptoUtils {
   }
 
   /**
-   * Hash the string using SHA-1
+   * Hash the string using the browser Web Crypto API
+   * @param algorithm - SHA algorithm supported by SubtleCrypto
    * @returns Hashed string
    */
-  private hashSHA1(): string {
+  private async hashSHA(algorithm: 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512'): Promise<string> {
     try {
-      const res = CryptoJS.SHA1(this.str).toString();
-      return res;
-    } catch (error) {
-      throw new Error(String(error));
-    }
-  }
-
-  /**
-   * Hash the string using SHA-256
-   * @returns Hashed string
-   */
-  private hashSHA256(): string {
-    try {
-      const res = CryptoJS.SHA256(this.str).toString();
-      return res;
-    } catch (error) {
-      throw new Error(String(error));
-    }
-  }
-
-  /**
-   * Hash the string using SHA-384
-   * @returns Hashed string
-   */
-  private hashSHA384(): string {
-    try {
-      const res = CryptoJS.SHA384(this.str).toString();
-      return res;
-    } catch (error) {
-      throw new Error(String(error));
-    }
-  }
-
-  /**
-   * Hash the string using SHA-512
-   * @returns Hashed string
-   */
-  private hashSHA512(): string {
-    try {
-      const res = CryptoJS.SHA512(this.str).toString();
-      return res;
+      const data = new TextEncoder().encode(this.str);
+      const digest = await globalThis.crypto.subtle.digest(algorithm, data);
+      return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
     } catch (error) {
       throw new Error(String(error));
     }

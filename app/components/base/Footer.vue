@@ -5,7 +5,7 @@
     <NuxtLink
       to="https://github.com/haizakura/lab"
       target="_blank"
-      class="underline underline-offset-3 hover:text-brand cursor-pointer"
+      class="cursor-pointer underline underline-offset-3 hover:text-brand"
       >GitHub</NuxtLink
     >
   </div>

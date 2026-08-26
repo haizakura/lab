@@ -19,30 +19,33 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@types/crypto-js": "^4.2.2",
+    "@nuxt/ui": "^4.11.0",
     "@types/md5": "^2.3.6",
-    "crypto-js": "^4.2.0",
-    "dayjs": "^1.11.20",
     "md5": "^2.3.0",
-    "nuxt": "^4.4.2",
-    "qr": "^0.5.5",
-    "uuid": "^11.1.0",
-    "vue": "^3.5.31",
-    "vue-router": "^4.6.4",
-    "zod": "^4.3.6"
+    "nuxt": "^4.5.2",
+    "qr": "^0.6.0",
+    "tailwindcss": "^4.3.3",
+    "uuid": "^14.0.2",
+    "vue": "^3.5.41",
+    "vue-router": "^5.2.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@element-plus/nuxt": "^1.1.5",
+    "@iconify-json/lucide": "^1.2.126",
     "@iconify-json/mdi": "^1.2.3",
-    "@nuxt/icon": "1.15.0",
-    "@nuxtjs/i18n": "^10.2.4",
-    "@unocss/nuxt": "^66.6.7",
-    "element-plus": "^2.13.6",
-    "prettier": "3.6.2",
-    "unocss": "^66.6.7"
+    "@nuxtjs/i18n": "^10.6.0",
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
+    "typescript": "~6.0.3",
+    "vue-tsc": "^3.3.11"
   },
   "packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48"
 }

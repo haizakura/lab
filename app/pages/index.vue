@@ -1,21 +1,31 @@
 <template>
   <div class="project-search">
-    <el-input
-      class="w-full"
+    <UInput
       v-model="search"
+      class="w-full"
       :placeholder="$t('Search')"
       @input="searchType = 'normal'"
-      clearable
+      :ui="{ trailing: 'pe-1' }"
       autofocus
     >
-      <template #prefix>
-        <Icon name="mdi:search" class="text-lg w-6" />
+      <template #leading>
+        <UIcon name="mdi:search" class="w-6 text-lg" />
       </template>
-    </el-input>
+      <template v-if="search" #trailing>
+        <UButton
+          color="neutral"
+          variant="link"
+          icon="mdi:close"
+          size="sm"
+          :aria-label="$t('Clear')"
+          @click="search = ''"
+        />
+      </template>
+    </UInput>
 
-    <el-button class="w-36" type="primary" @click="shuffle">
+    <UButton class="w-36 justify-center" color="primary" @click="shuffle">
       {{ $t('Shuffle') }}
-    </el-button>
+    </UButton>
   </div>
 
   <div class="project-list mt-4">
@@ -53,7 +63,7 @@ const filteredItemConfig = computed(() => {
     });
   }
   if (searchType.value === 'shuffle') {
-    shuffleTrigger.value;
+    void shuffleTrigger.value;
     return Object.values(itemConfig).sort(() => Math.random() - 0.5);
   }
   return Object.values(itemConfig);

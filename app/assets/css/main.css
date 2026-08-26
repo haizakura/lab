@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+@theme static {
+  --color-brand: #409eff;
+  --color-brand-50: #ecf5ff;
+  --color-brand-100: #d9ecff;
+  --color-brand-200: #b3d8ff;
+  --color-brand-300: #8cc5ff;
+  --color-brand-400: #66b1ff;
+  --color-brand-500: #409eff;
+  --color-brand-600: #337ecc;
+  --color-brand-700: #265f99;
+  --color-brand-800: #1a3f66;
+  --color-brand-900: #0d2033;
+  --color-brand-950: #07101a;
+
+  --color-success-50: #f0f9eb;
+  --color-success: #67c23a;
+  --color-success-100: #e1f3d8;
+  --color-success-200: #c2e7b0;
+  --color-success-300: #a4da89;
+  --color-success-400: #85ce61;
+  --color-success-500: #67c23a;
+  --color-success-600: #529b2e;
+  --color-success-700: #3e7423;
+  --color-success-800: #294e17;
+  --color-success-900: #15270c;
+  --color-success-950: #0a1306;
+
+  --color-warning-50: #fdf6ec;
+  --color-warning: #e6a23c;
+  --color-warning-100: #faecd8;
+  --color-warning-200: #f5dab1;
+  --color-warning-300: #f0c78a;
+  --color-warning-400: #ebb563;
+  --color-warning-500: #e6a23c;
+  --color-warning-600: #b88230;
+  --color-warning-700: #8a6124;
+  --color-warning-800: #5c4118;
+  --color-warning-900: #2e200c;
+  --color-warning-950: #171006;
+
+  --color-danger-50: #fef0f0;
+  --color-danger: #f56c6c;
+  --color-danger-100: #fde2e2;
+  --color-danger-200: #fbc4c4;
+  --color-danger-300: #f9a7a7;
+  --color-danger-400: #f78989;
+  --color-danger-500: #f56c6c;
+  --color-danger-600: #c45656;
+  --color-danger-700: #934141;
+  --color-danger-800: #622b2b;
+  --color-danger-900: #311616;
+  --color-danger-950: #190b0b;
+
+  --color-info: #909399;
+  --color-info-500: #909399;
+  --color-content-primary: #303133;
+  --color-regular: #606266;
+  --color-line-base: #dcdfe6;
+  --color-line-light: #e4e7ed;
+  --color-fill-base: #f0f2f5;
+}
+
+:root {
+  color-scheme: light;
+  --ui-primary: var(--color-brand-500);
+  --ui-radius: 0.25rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-content-primary: #e5e7eb;
+  --color-regular: #c0c4cc;
+  --color-info: #a3a6ad;
+  --color-info-500: #a3a6ad;
+  --color-line-base: #414243;
+  --color-line-light: #363637;
+  --color-fill-base: #262727;
+}
+
+body {
+  color: var(--color-content-primary);
+  background: var(--ui-bg);
+}
+
+button:not(:disabled),
+[role='button']:not([aria-disabled='true']) {
+  cursor: pointer;
+}
+
+@layer components {
+  .app {
+    @apply flex min-h-dvh flex-col text-base leading-[1.55rem] antialiased;
+  }
+
+  .header {
+    @apply static top-0 right-0 left-0 z-[1000] block border-b border-solid border-line-light px-5;
+  }
+
+  .header-container {
+    @apply flex h-[60px] w-full items-center justify-between;
+  }
+
+  .header-container-item {
+    @apply flex items-center justify-center;
+  }
+
+  .header-logo {
+    @apply cursor-pointer text-2xl leading-[60px] font-bold text-content-primary;
+  }
+
+  .header-icon {
+    @apply flex cursor-pointer items-center text-2xl leading-[60px] text-regular transition-colors hover:text-brand-500;
+  }
+
+  .main {
+    @apply mx-auto block w-full max-w-[82.5rem] flex-1 px-4 pt-4 pb-8;
+  }
+
+  .footer {
+    @apply flex items-center justify-center px-5 py-4;
+  }
+
+  .card {
+    @apply flex h-full flex-col;
+  }
+
+  .card-header {
+    @apply flex items-center justify-between;
+  }
+
+  .card-header-title {
+    @apply flex items-center gap-2 text-xl font-bold;
+  }
+
+  .card-body {
+    @apply min-h-[3.1rem] leading-[1.55rem] no-underline;
+  }
+
+  .card-bottom {
+    @apply mt-auto flex items-center justify-between leading-[1rem];
+  }
+
+  .project-search {
+    @apply flex w-full flex-row justify-between gap-2;
+  }
+
+  .project-list {
+    @apply grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4;
+  }
+
+  .page {
+    @apply flex h-full items-center justify-center;
+  }
+}

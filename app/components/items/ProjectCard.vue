@@ -1,21 +1,23 @@
 <template>
-  <el-card shadow="hover" class="card">
+  <UCard class="card transition-shadow hover:shadow-md">
     <template #header>
       <div class="card-header cursor-pointer" @click="goTo(name)">
-        <div class="card-header-title text-primary">
-          <Icon :name="icon" />
+        <div class="card-header-title text-content-primary">
+          <UIcon :name="icon" />
           <span>{{ $t(title) }}</span>
         </div>
       </div>
     </template>
     <div class="card-body">
-      <el-text line-clamp="2">{{ $t(desc) }}</el-text>
+      <p class="line-clamp-2">{{ $t(desc) }}</p>
     </div>
     <div class="my-1"></div>
     <div class="card-bottom">
-      <el-text class="cursor-pointer" type="info" size="small" @click="goTo(name)">{{ baseUrl }}{{ path }}</el-text>
+      <button type="button" class="cursor-pointer text-left text-sm text-info" @click="goTo(name)">
+        {{ baseUrl }}{{ path }}
+      </button>
     </div>
-  </el-card>
+  </UCard>
 </template>
 
 <script lang="ts" setup>

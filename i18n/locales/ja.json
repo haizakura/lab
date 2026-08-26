@@ -102,6 +102,11 @@
   "Failed to encode string": "文字列のエンコードに失敗しました",
   "Failed to decode string": "文字列のデコードに失敗しました",
 
+  "Theme": "テーマ",
+  "System": "システム",
+  "Light": "ライト",
+  "Dark": "ダーク",
+
   "Under Development": "ただいま開発中",
   "This project is under development, please wait.": "本プロジェクトはただいま開発中です、お待ちください。"
 }

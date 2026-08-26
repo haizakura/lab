@@ -1,10 +1,10 @@
 <template>
   <div class="page">
-    <el-card :class="cardClass">
+    <UCard :class="cardClass">
       <template #header>
         <div class="card-header">
           <div class="card-header-title">
-            <Icon :name="icon" />
+            <UIcon :name="icon" />
             <span>{{ title }}</span>
           </div>
         </div>
@@ -13,7 +13,7 @@
       <div class="flex flex-col">
         <slot></slot>
       </div>
-    </el-card>
+    </UCard>
   </div>
 </template>
 

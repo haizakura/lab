@@ -7,7 +7,7 @@
     <div class="header-container-item">
       <BaseHeaderTranslate />
       <span class="mx-2"></span>
-      <BaseHeaderBlog />
+      <BaseHeaderColorMode />
       <span class="mx-2"></span>
       <BaseHeaderGithub />
     </div>
