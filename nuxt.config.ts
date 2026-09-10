@@ -1,3 +1,5 @@
+import tailwindcss from '@tailwindcss/vite';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -10,16 +12,21 @@ export default defineNuxtConfig({
   devServer: {
     port: 30000,
   },
-  modules: ['@nuxt/ui', '@nuxtjs/i18n'],
-  ui: {
-    fonts: false,
+  modules: ['@nuxtjs/color-mode', 'shadcn-nuxt', '@nuxtjs/i18n'],
+  shadcn: {
+    prefix: '',
+    componentDir: '@/components/ui',
   },
   colorMode: {
     preference: 'system',
     fallback: 'light',
+    classSuffix: '',
     storageKey: 'haizakura-lab-color-mode',
   },
   css: ['~/assets/css/main.css'],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   nitro: {
     compressPublicAssets: {
       brotli: true,

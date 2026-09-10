@@ -1,103 +1,109 @@
 <template>
   <BasePageContainer :icon="item.icon" :title="item.title" size="small">
     <div class="space-y-4">
-      <UFormField
-        :label="$t('Trans Currency')"
-        orientation="horizontal"
-        size="lg"
-        class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4"
-        :ui="{ container: 'w-full' }"
-      >
-        <USelectMenu
-          v-model="transCur"
-          :items="transCurList"
-          value-key="value"
-          :placeholder="$t('Pick a Transaction Currency')"
-          :aria-label="$t('Trans Currency')"
-          class="w-full"
-        />
-      </UFormField>
+      <div class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4">
+        <Label for="trans-currency">{{ $t('Trans Currency') }}</Label>
+        <Select :model-value="transCur" @update:model-value="setTransCurrency">
+          <SelectTrigger id="trans-currency" class="w-full" :aria-label="$t('Trans Currency')">
+            <SelectValue :placeholder="$t('Pick a Transaction Currency')" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem v-for="currency in transCurList" :key="currency.value" :value="currency.value">
+              {{ currency.label }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
-      <UFormField
-        :label="$t('Base Currency')"
-        orientation="horizontal"
-        size="lg"
-        class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4"
-        :ui="{ container: 'w-full' }"
-      >
-        <USelectMenu
-          v-model="baseCur"
-          :items="baseCurList"
-          value-key="value"
-          :placeholder="$t('Pick a Base Currency')"
-          :aria-label="$t('Base Currency')"
-          class="w-full"
-        />
-      </UFormField>
+      <div class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4">
+        <Label for="base-currency">{{ $t('Base Currency') }}</Label>
+        <Select :model-value="baseCur" @update:model-value="setBaseCurrency">
+          <SelectTrigger id="base-currency" class="w-full" :aria-label="$t('Base Currency')">
+            <SelectValue :placeholder="$t('Pick a Base Currency')" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem v-for="currency in baseCurList" :key="currency.value" :value="currency.value">
+              {{ currency.label }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
-      <UFormField
-        :label="$t('Settlement Date')"
-        orientation="horizontal"
-        size="lg"
-        class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4"
-        :ui="{ container: 'w-full' }"
-      >
-        <UInput
+      <div class="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_18rem] sm:gap-4">
+        <Label for="settlement-date">{{ $t('Settlement Date') }}</Label>
+        <Input
+          id="settlement-date"
           v-model="selectedDate"
           type="date"
           :placeholder="$t('Pick a Settlement Date')"
           :aria-label="$t('Settlement Date')"
           class="w-full"
         />
-      </UFormField>
+      </div>
     </div>
 
     <div class="mt-5 flex justify-center">
-      <UButton
-        color="success"
-        size="xl"
-        icon="mdi:magnify"
-        class="rounded-full"
-        @click="getRate"
-        aria-label="Get Rate"
-      />
+      <Button size="icon-lg" class="rounded-full" @click="getRate" aria-label="Get Rate">
+        <SearchIcon aria-hidden="true" />
+      </Button>
     </div>
 
-    <USeparator v-if="rateData" class="my-6" />
+    <Separator v-if="rateData" class="my-6" />
 
-    <div class="text-center" v-if="rateData">
-      <span class="text-danger font-bold text-3xl">1</span>
-      <span class="text-brand font-bold ml-2">{{ transCur }}</span>
-      <span class="mx-2 text-3xl font-bold text-content-primary">=</span>
-      <span class="text-danger font-bold text-3xl">{{ rateData }}</span>
-      <span class="text-brand font-bold ml-2">{{ baseCur }}</span>
+    <div v-if="rateData" class="text-center">
+      <span class="text-3xl font-bold text-destructive">1</span>
+      <span class="ml-2 font-bold text-primary">{{ transCur }}</span>
+      <span class="mx-2 text-3xl font-bold text-foreground">=</span>
+      <span class="text-3xl font-bold text-destructive">{{ rateData }}</span>
+      <span class="ml-2 font-bold text-primary">{{ baseCur }}</span>
     </div>
 
-    <USeparator v-if="rateData" class="my-6" />
+    <Separator v-if="rateData" class="my-6" />
 
     <div v-if="rateData" class="space-y-4">
-      <UInput v-model.number="transNum" type="number" class="w-full" @input="calcRate" aria-label="Transaction Amount">
-        <template #trailing>
-          <span class="font-bold w-8 text-center">{{ transCur }}</span>
-        </template>
-      </UInput>
-      <UInput v-model.number="baseNum" type="number" class="w-full" aria-label="Base Amount">
-        <template #trailing>
-          <span class="font-bold w-8 text-center">{{ baseCur }}</span>
-        </template>
-      </UInput>
+      <InputGroup>
+        <InputGroupInput
+          :model-value="transNum"
+          type="number"
+          aria-label="Transaction Amount"
+          @update:model-value="setTransactionAmount"
+        />
+        <InputGroupAddon align="inline-end">
+          <InputGroupText class="w-8 justify-center font-bold">{{ transCur }}</InputGroupText>
+        </InputGroupAddon>
+      </InputGroup>
+      <InputGroup>
+        <InputGroupInput
+          :model-value="baseNum"
+          type="number"
+          aria-label="Base Amount"
+          @update:model-value="setBaseAmount"
+        />
+        <InputGroupAddon align="inline-end">
+          <InputGroupText class="w-8 justify-center font-bold">{{ baseCur }}</InputGroupText>
+        </InputGroupAddon>
+      </InputGroup>
     </div>
   </BasePageContainer>
 </template>
 
 <script lang="ts" setup>
+import type { AcceptableValue } from 'reka-ui';
+import { SearchIcon } from '@lucide/vue';
+import { toast } from 'vue-sonner';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from '@/components/ui/input-group';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
+
 definePageMeta({
   name: 'rate',
 });
 
 const appConfig = useAppConfig();
 const item = appConfig.itemConfig.rate;
-const toast = useToast();
 
 useSeoMeta({
   title: item.title,
@@ -129,6 +135,23 @@ const baseCurList = [
   { value: 'USD', label: $t('USD, U.S.Dollar') },
 ];
 
+const setTransCurrency = (value: AcceptableValue) => {
+  transCur.value = String(value);
+};
+
+const setBaseCurrency = (value: AcceptableValue) => {
+  baseCur.value = String(value);
+};
+
+const setTransactionAmount = (value: string | number) => {
+  transNum.value = Number(value);
+  calcRate();
+};
+
+const setBaseAmount = (value: string | number) => {
+  baseNum.value = Number(value);
+};
+
 const getRate = async () => {
   const [year, month, day] = selectedDate.value.split('-');
   const query = {
@@ -148,7 +171,7 @@ const getRate = async () => {
     })
     .catch((error: unknown) => {
       const message = error instanceof Error ? error.message : $t('Unknown error');
-      toast.add({ title: `${$t('Failed to fetch exchange rate')}: ${message}`, color: 'error' });
+      toast.error(`${$t('Failed to fetch exchange rate')}: ${message}`);
     });
 };
 

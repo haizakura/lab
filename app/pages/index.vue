@@ -1,31 +1,20 @@
 <template>
   <div class="project-search">
-    <UInput
-      v-model="search"
-      class="w-full"
-      :placeholder="$t('Search')"
-      @input="searchType = 'normal'"
-      :ui="{ trailing: 'pe-1' }"
-      autofocus
-    >
-      <template #leading>
-        <UIcon name="mdi:search" class="w-6 text-lg" />
-      </template>
-      <template v-if="search" #trailing>
-        <UButton
-          color="neutral"
-          variant="link"
-          icon="mdi:close"
-          size="sm"
-          :aria-label="$t('Clear')"
-          @click="search = ''"
-        />
-      </template>
-    </UInput>
+    <InputGroup>
+      <InputGroupAddon>
+        <SearchIcon aria-hidden="true" />
+      </InputGroupAddon>
+      <InputGroupInput v-model="search" :placeholder="$t('Search')" autofocus @input="searchType = 'normal'" />
+      <InputGroupAddon v-if="search" align="inline-end">
+        <InputGroupButton size="icon-xs" :aria-label="$t('Clear')" @click="search = ''">
+          <XIcon aria-hidden="true" />
+        </InputGroupButton>
+      </InputGroupAddon>
+    </InputGroup>
 
-    <UButton class="w-36 justify-center" color="primary" @click="shuffle">
+    <Button class="w-36 justify-center" @click="shuffle">
       {{ $t('Shuffle') }}
-    </UButton>
+    </Button>
   </div>
 
   <div class="project-list mt-4">
@@ -43,6 +32,10 @@
 </template>
 
 <script lang="ts" setup>
+import { SearchIcon, XIcon } from '@lucide/vue';
+import { Button } from '@/components/ui/button';
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group';
+
 definePageMeta({
   name: 'home',
 });
