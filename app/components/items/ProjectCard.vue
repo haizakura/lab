@@ -1,26 +1,25 @@
 <template>
-  <UCard class="card transition-shadow hover:shadow-md">
-    <template #header>
-      <div class="card-header cursor-pointer" @click="goTo(name)">
-        <div class="card-header-title text-content-primary">
-          <UIcon :name="icon" />
-          <span>{{ $t(title) }}</span>
-        </div>
-      </div>
-    </template>
-    <div class="card-body">
+  <Card class="card transition-shadow hover:shadow-md">
+    <CardHeader class="cursor-pointer" @click="goTo(name)">
+      <CardTitle class="card-header-title text-foreground">
+        <AppIcon :name="icon" class="size-5" />
+        <span>{{ $t(title) }}</span>
+      </CardTitle>
+    </CardHeader>
+    <CardContent class="card-body">
       <p class="line-clamp-2">{{ $t(desc) }}</p>
-    </div>
-    <div class="my-1"></div>
-    <div class="card-bottom">
-      <button type="button" class="cursor-pointer text-left text-sm text-info" @click="goTo(name)">
+    </CardContent>
+    <CardFooter class="card-bottom">
+      <button type="button" class="cursor-pointer text-left text-sm text-muted-foreground" @click="goTo(name)">
         {{ baseUrl }}{{ path }}
       </button>
-    </div>
-  </UCard>
+    </CardFooter>
+  </Card>
 </template>
 
 <script lang="ts" setup>
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+
 defineProps({
   icon: {
     type: String,

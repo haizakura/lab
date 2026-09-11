@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-row items-center justify-center text-sm gap-2">
-    <span class="text-info">Copyright © {{ year }} HAIZAKURA</span>
-    <span class="text-info">|</span>
+  <div class="flex flex-row items-center justify-center gap-2 text-sm">
+    <span class="text-muted-foreground">Copyright © {{ year }} HAIZAKURA</span>
+    <span class="text-muted-foreground">|</span>
     <NuxtLink
       to="https://github.com/haizakura/lab"
       target="_blank"
-      class="cursor-pointer underline underline-offset-3 hover:text-brand"
+      class="cursor-pointer underline underline-offset-3 hover:text-foreground"
       >GitHub</NuxtLink
     >
   </div>

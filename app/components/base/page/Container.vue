@@ -1,23 +1,23 @@
 <template>
   <div class="page">
-    <UCard :class="cardClass">
-      <template #header>
-        <div class="card-header">
-          <div class="card-header-title">
-            <UIcon :name="icon" />
-            <span>{{ title }}</span>
-          </div>
-        </div>
-      </template>
+    <Card :class="cardClass">
+      <CardHeader>
+        <CardTitle class="card-header-title">
+          <AppIcon :name="icon" class="size-5" />
+          <span>{{ title }}</span>
+        </CardTitle>
+      </CardHeader>
 
-      <div class="flex flex-col">
+      <CardContent class="flex flex-col">
         <slot></slot>
-      </div>
-    </UCard>
+      </CardContent>
+    </Card>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 const props = defineProps<{
   icon: string;
   title: string;

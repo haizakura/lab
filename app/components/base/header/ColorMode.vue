@@ -1,54 +1,64 @@
 <template>
   <ClientOnly>
-    <UDropdownMenu :items="colorModeItems">
-      <button type="button" class="header-icon" :aria-label="$t('Theme')">
-        <UIcon :name="currentIcon" />
-      </button>
-    </UDropdownMenu>
+    <button
+      type="button"
+      class="header-icon"
+      :aria-label="`${$t('Theme')}: ${currentLabel}`"
+      :title="currentLabel"
+      @click="cycleColorMode"
+    >
+      <component :is="currentIcon" class="size-5" aria-hidden="true" />
+    </button>
 
     <template #fallback>
       <span class="header-icon" :aria-label="$t('Theme')">
-        <UIcon name="mdi:theme-light-dark" />
+        <MonitorCogIcon class="size-5" aria-hidden="true" />
       </span>
     </template>
   </ClientOnly>
 </template>
 
 <script lang="ts" setup>
+import { MonitorCogIcon, MoonIcon, SunIcon } from '@lucide/vue';
+
 type ColorModePreference = 'system' | 'light' | 'dark';
 
 const colorMode = useColorMode();
+const { t } = useI18n();
+const preferences: ColorModePreference[] = ['system', 'light', 'dark'];
+
+const currentPreference = computed<ColorModePreference>(() => {
+  if (colorMode.preference === 'light' || colorMode.preference === 'dark') {
+    return colorMode.preference;
+  }
+
+  return 'system';
+});
 
 const currentIcon = computed(() => {
-  switch (colorMode.preference) {
+  switch (currentPreference.value) {
     case 'light':
-      return 'mdi:white-balance-sunny';
+      return SunIcon;
     case 'dark':
-      return 'mdi:weather-night';
+      return MoonIcon;
     default:
-      return 'mdi:theme-light-dark';
+      return MonitorCogIcon;
   }
 });
 
-const setColorMode = (preference: ColorModePreference) => {
-  colorMode.preference = preference;
-};
+const currentLabel = computed(() => {
+  switch (currentPreference.value) {
+    case 'light':
+      return t('Light');
+    case 'dark':
+      return t('Dark');
+    default:
+      return t('System');
+  }
+});
 
-const colorModeItems = computed(() => [
-  {
-    label: $t('System'),
-    icon: colorMode.preference === 'system' ? 'mdi:check-circle' : 'mdi:theme-light-dark',
-    onSelect: () => setColorMode('system'),
-  },
-  {
-    label: $t('Light'),
-    icon: colorMode.preference === 'light' ? 'mdi:check-circle' : 'mdi:white-balance-sunny',
-    onSelect: () => setColorMode('light'),
-  },
-  {
-    label: $t('Dark'),
-    icon: colorMode.preference === 'dark' ? 'mdi:check-circle' : 'mdi:weather-night',
-    onSelect: () => setColorMode('dark'),
-  },
-]);
+const cycleColorMode = () => {
+  const currentIndex = preferences.indexOf(currentPreference.value);
+  colorMode.preference = preferences[(currentIndex + 1) % preferences.length] ?? 'system';
+};
 </script>

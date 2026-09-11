@@ -1,167 +1,239 @@
 <template>
   <BasePageContainer :icon="item.icon" :title="item.title" size="x-large">
     <!-- Candidate Characters Toggle -->
-    <UCollapsible v-model:open="isCandidateCharactersExpanded">
-      <button type="button" class="flex cursor-pointer items-center gap-2 text-sm text-regular">
-        <UIcon
-          name="mdi:chevron-down"
-          :class="{ '-rotate-90': !isCandidateCharactersExpanded }"
-          class="transition-transform"
-        />
-        <span>{{ $t('Candidate Characters') }}</span>
-      </button>
-
-      <template #content>
-        <div class="mt-2 w-full rounded-sm border border-line-light p-2">
-          <UCheckboxGroup
-            v-model="charTypesList"
-            :items="candidateCharacterOptions"
-            orientation="horizontal"
-            :ui="{ fieldset: 'flex-wrap gap-x-4 gap-y-2' }"
+    <Collapsible v-model:open="isCandidateCharactersExpanded">
+      <CollapsibleTrigger as-child>
+        <button type="button" class="flex cursor-pointer items-center gap-2 text-sm text-muted-foreground">
+          <ChevronDownIcon
+            :class="{ '-rotate-90': !isCandidateCharactersExpanded }"
+            class="size-4 transition-transform"
+            aria-hidden="true"
           />
-        </div>
-      </template>
-    </UCollapsible>
+          <span>{{ $t('Candidate Characters') }}</span>
+        </button>
+      </CollapsibleTrigger>
+
+      <CollapsibleContent>
+        <fieldset class="mt-2 flex w-full flex-wrap gap-x-4 gap-y-2 rounded-md border border-border p-3">
+          <legend class="sr-only">{{ $t('Candidate Characters') }}</legend>
+          <div v-for="option in candidateCharacterOptions" :key="option.value" class="flex items-center gap-2">
+            <Checkbox
+              :id="`candidate-${option.value}`"
+              :model-value="charTypesList.includes(option.value)"
+              @update:model-value="(checked) => toggleCharacterType(option.value, checked === true)"
+            />
+            <Label :for="`candidate-${option.value}`">{{ option.label }}</Label>
+          </div>
+        </fieldset>
+      </CollapsibleContent>
+    </Collapsible>
 
     <!-- Custom Characters Input -->
-    <UFormField v-if="charTypesList.includes('customCharacters')" :label="$t('Custom Characters')" class="mt-4">
-      <UTextarea
+    <div v-if="charTypesList.includes('customCharacters')" class="mt-4 space-y-2">
+      <Label for="custom-characters">{{ $t('Custom Characters') }}</Label>
+      <Textarea
+        id="custom-characters"
         v-model="customCharactersText"
         placeholder="Enter custom characters here..."
-        autoresize
         :rows="2"
-        :maxrows="10"
-        class="w-full"
+        class="max-h-64 w-full overflow-y-auto"
       />
-    </UFormField>
+    </div>
 
     <!-- Custom Unicode Range Input -->
-    <UFormField v-if="charTypesList.includes('unicodeRange')" :label="$t('Unicode Range')" class="mt-4">
+    <div v-if="charTypesList.includes('unicodeRange')" class="mt-4 space-y-2">
+      <Label>{{ $t('Unicode Range') }}</Label>
       <div class="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
-        <UFormField :error="unicodeFromError" class="w-full">
-          <UInput
+        <div class="space-y-1">
+          <Input
             :model-value="unicodeRangeForm.from"
             placeholder="[0-9A-Fa-f]{1,6}"
             maxlength="6"
             class="w-full"
+            aria-label="Unicode range start"
+            :aria-invalid="Boolean(unicodeFromError)"
+            :aria-describedby="unicodeFromError ? 'unicode-from-error' : undefined"
             @update:model-value="(value) => handleUnicodeInputChange(String(value), 'from')"
           />
-        </UFormField>
-        <UIcon name="mdi:minus" class="mt-2 text-regular" />
-        <UFormField :error="unicodeToError" class="w-full">
-          <UInput
+          <p v-if="unicodeFromError" id="unicode-from-error" class="text-sm text-destructive" role="alert">
+            {{ unicodeFromError }}
+          </p>
+        </div>
+        <MinusIcon class="mt-2 size-4 text-muted-foreground" aria-hidden="true" />
+        <div class="space-y-1">
+          <Input
             :model-value="unicodeRangeForm.to"
             placeholder="[0-9A-Fa-f]{1,6}"
             maxlength="6"
             class="w-full"
+            aria-label="Unicode range end"
+            :aria-invalid="Boolean(unicodeToError)"
+            :aria-describedby="unicodeToError ? 'unicode-to-error' : undefined"
             @update:model-value="(value) => handleUnicodeInputChange(String(value), 'to')"
           />
-        </UFormField>
+          <p v-if="unicodeToError" id="unicode-to-error" class="text-sm text-destructive" role="alert">
+            {{ unicodeToError }}
+          </p>
+        </div>
       </div>
-    </UFormField>
+    </div>
 
     <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
-      <UFormField :label="$t('Pattern')">
-        <USelect
-          v-model="selectedPattern"
-          :items="patternOptions"
-          value-key="value"
-          placeholder="Select a pattern"
-          class="w-full"
-          :aria-label="$t('Pattern')"
-          @update:model-value="(value) => applyPatternSelection(String(value))"
-        />
-      </UFormField>
+      <div class="space-y-2">
+        <Label for="pattern">{{ $t('Pattern') }}</Label>
+        <Select :model-value="selectedPattern" @update:model-value="setSelectedPattern">
+          <SelectTrigger id="pattern" class="w-full" :aria-label="$t('Pattern')">
+            <SelectValue placeholder="Select a pattern" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">{{ $t('No pattern') }}</SelectItem>
+            <SelectSeparator />
+            <SelectGroup>
+              <SelectLabel>{{ $t('Basic Specified Samples') }}</SelectLabel>
+              <SelectItem v-for="option in basicPatternOptions" :key="option.value" :value="option.value">
+                {{ option.label }}
+              </SelectItem>
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel>{{ $t('Unicode Range Samples') }}</SelectLabel>
+              <SelectItem v-for="option in unicodePatternOptions" :key="option.value" :value="option.value">
+                {{ option.label }}
+              </SelectItem>
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel>{{ $t('Custom Text Samples') }}</SelectLabel>
+              <SelectItem v-for="option in customTextOptions" :key="option.value" :value="option.value">
+                {{ option.label }}
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
 
-      <UFormField :label="$t('Use Chars')">
-        <USelect
-          v-model="usageMethod"
-          :items="usageOptions"
-          value-key="value"
-          placeholder="Select Usage Method"
-          class="w-full"
-          :aria-label="$t('Use Chars')"
-        />
-      </UFormField>
+      <div class="space-y-2">
+        <Label for="usage-method">{{ $t('Use Chars') }}</Label>
+        <Select :model-value="usageMethod" @update:model-value="setUsageMethod">
+          <SelectTrigger id="usage-method" class="w-full" :aria-label="$t('Use Chars')">
+            <SelectValue placeholder="Select Usage Method" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem v-for="option in usageOptions" :key="option.value" :value="option.value">
+              {{ option.label }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
-      <UFormField :label="$t('Text Length')">
-        <UInputNumber
-          v-model="textLength"
+      <div class="space-y-2">
+        <Label for="text-length">{{ $t('Text Length') }}</Label>
+        <Input
+          id="text-length"
+          :model-value="textLength"
+          type="number"
           :min="LIMITS.TEXT_LENGTH.MIN"
           :max="LIMITS.TEXT_LENGTH.MAX"
           class="w-full"
           :aria-label="$t('Text Length')"
+          @update:model-value="(value) => (textLength = Number(value))"
         />
-      </UFormField>
+      </div>
 
-      <UFormField :label="$t('Line Break')">
-        <USelect
-          v-model="lineBreak"
-          :items="lineBreakOptions"
-          value-key="value"
-          placeholder="Select Line Break"
-          class="w-full"
-          :aria-label="$t('Line Break')"
-        />
-      </UFormField>
+      <div class="space-y-2">
+        <Label for="line-break">{{ $t('Line Break') }}</Label>
+        <Select :model-value="lineBreakValue" @update:model-value="setLineBreak">
+          <SelectTrigger id="line-break" class="w-full" :aria-label="$t('Line Break')">
+            <SelectValue placeholder="Select Line Break" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem v-for="option in lineBreakOptions" :key="option.value" :value="option.value">
+              {{ option.label }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
-      <UFormField :label="$t('Each Line')">
-        <UInputNumber
-          v-model="eachLine"
+      <div class="space-y-2">
+        <Label for="each-line">{{ $t('Each Line') }}</Label>
+        <Input
+          id="each-line"
+          :model-value="eachLine"
+          type="number"
           :min="LIMITS.EACH_LINE.MIN"
           :max="LIMITS.EACH_LINE.MAX"
           :disabled="!lineBreak"
           class="w-full"
           :aria-label="$t('Each Line')"
+          @update:model-value="(value) => (eachLine = Number(value))"
         />
-      </UFormField>
+      </div>
 
-      <UFormField :label="$t('End of Line')">
-        <USelect
-          v-model="endOfLine"
-          :items="endOfLineOptions"
-          value-key="value"
-          placeholder="Select End of Line"
-          class="w-full"
-          :disabled="!lineBreak"
-          :aria-label="$t('End of Line')"
-        />
-      </UFormField>
+      <div class="space-y-2">
+        <Label for="end-of-line">{{ $t('End of Line') }}</Label>
+        <Select :model-value="endOfLine" :disabled="!lineBreak" @update:model-value="setEndOfLine">
+          <SelectTrigger id="end-of-line" class="w-full" :aria-label="$t('End of Line')">
+            <SelectValue placeholder="Select End of Line" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem v-for="option in endOfLineOptions" :key="option.value" :value="option.value">
+              {{ option.label }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
 
     <!-- Selected candidate characters -->
     <div class="ml-1">
-      <p class="text-sm text-info">{{ $t('Selected Candidate Characters') }}: {{ selectedCharCount }}</p>
+      <p class="text-sm text-muted-foreground">{{ $t('Selected Candidate Characters') }}: {{ selectedCharCount }}</p>
     </div>
 
     <!-- Buttons -->
-    <div class="flex justify-center gap-2 mt-4">
-      <UButton color="success" :aria-label="$t('Generate')" @click="generateText">{{ $t('Generate') }}</UButton>
-      <UButton color="primary" :disabled="!generatedText" :aria-label="$t('Copy')" @click="copyText">{{
-        $t('Copy')
-      }}</UButton>
-      <UButton color="neutral" variant="outline" :aria-label="$t('Clear')" @click="clearText">{{
-        $t('Clear')
-      }}</UButton>
+    <div class="mt-4 flex justify-center gap-2">
+      <Button variant="secondary" :aria-label="$t('Generate')" @click="generateText">{{ $t('Generate') }}</Button>
+      <Button :disabled="!generatedText" :aria-label="$t('Copy')" @click="copyText">{{ $t('Copy') }}</Button>
+      <Button variant="outline" :aria-label="$t('Clear')" @click="clearText">{{ $t('Clear') }}</Button>
     </div>
 
     <!-- Generated Text -->
     <div v-if="generatedText" class="flex flex-col">
-      <USeparator class="my-6" />
-      <UTextarea
+      <Separator class="my-6" />
+      <Textarea
         v-model="generatedText"
-        autoresize
         :rows="2"
-        :maxrows="10"
+        class="max-h-64 overflow-y-auto"
         :aria-label="$t('Generated Text')"
         :wrap="noWrap ? 'off' : 'soft'"
       />
-      <UCheckbox v-model="noWrap" class="mt-2" :label="$t('No Wrap')" />
+      <div class="mt-2 flex items-center gap-2">
+        <Checkbox id="no-wrap" :model-value="noWrap" @update:model-value="(checked) => (noWrap = checked === true)" />
+        <Label for="no-wrap">{{ $t('No Wrap') }}</Label>
+      </div>
     </div>
   </BasePageContainer>
 </template>
 
 <script setup lang="ts">
+import type { AcceptableValue } from 'reka-ui';
+import { ChevronDownIcon, MinusIcon } from '@lucide/vue';
+import { toast } from 'vue-sonner';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
+import { Textarea } from '@/components/ui/textarea';
+
 definePageMeta({
   name: 'longTextMaker',
 });
@@ -220,7 +292,6 @@ const UNICODE_RANGES = {
 
 const appConfig = useAppConfig();
 const item = appConfig.itemConfig.longTextMaker;
-const toast = useToast();
 
 useSeoMeta({
   title: item.title,
@@ -269,6 +340,7 @@ const eachLine = ref(0);
 const endOfLine = ref<EndOfLineType>('lf');
 const generatedText = ref('');
 const noWrap = ref(false);
+const lineBreakValue = computed(() => (lineBreak.value ? 'break' : 'none'));
 
 const getUnicodeError = (field: 'from' | 'to'): string | undefined => {
   const value = unicodeRangeForm.value[field];
@@ -320,16 +392,6 @@ const customTextOptions: SelectOption[] = [
   { value: 'roundCharacters', label: $t('Round Characters') },
 ];
 
-const patternOptions = [
-  { value: 'none', label: $t('No pattern') },
-  { type: 'label' as const, value: 'basic-label', label: $t('Basic Specified Samples') },
-  ...basicPatternOptions,
-  { type: 'label' as const, value: 'unicode-label', label: $t('Unicode Range Samples') },
-  ...unicodePatternOptions,
-  { type: 'label' as const, value: 'custom-label', label: $t('Custom Text Samples') },
-  ...customTextOptions,
-];
-
 const usageOptions: SelectOption[] = [
   { value: 'random', label: $t('Randomly') },
   { value: 'ascending', label: $t('Unicode Ascending') },
@@ -337,8 +399,8 @@ const usageOptions: SelectOption[] = [
 ];
 
 const lineBreakOptions = [
-  { value: false, label: $t('No line break') },
-  { value: true, label: $t('Line break') },
+  { value: 'none', label: $t('No line break') },
+  { value: 'break', label: $t('Line break') },
 ];
 
 const endOfLineOptions: SelectOption[] = [
@@ -355,7 +417,7 @@ const loadCharacterData = async (): Promise<void> => {
   try {
     charsJsonData.value = await $fetch<CharsJsonData>(UNICODE_CONFIG.CDN_URL);
   } catch (error) {
-    toast.add({ title: $t('Failed to load character data') + `: ${error}`, color: 'error' });
+    toast.error($t('Failed to load character data') + `: ${error}`);
   }
 };
 
@@ -444,6 +506,39 @@ const applyPatternSelection = (pattern: string): void => {
 
   const applyConfig = patternConfigs[pattern] || patternConfigs.none;
   applyConfig?.();
+};
+
+const setSelectedPattern = (value: AcceptableValue): void => {
+  const pattern = String(value);
+  selectedPattern.value = pattern;
+  applyPatternSelection(pattern);
+};
+
+const setUsageMethod = (value: AcceptableValue): void => {
+  if (value === 'random' || value === 'ascending' || value === 'descending') {
+    usageMethod.value = value;
+  }
+};
+
+const setEndOfLine = (value: AcceptableValue): void => {
+  if (value === 'lf' || value === 'cr' || value === 'crlf') {
+    endOfLine.value = value;
+  }
+};
+
+const setLineBreak = (value: AcceptableValue): void => {
+  lineBreak.value = value === 'break';
+};
+
+const toggleCharacterType = (value: string, checked: boolean): void => {
+  if (checked) {
+    if (!charTypesList.value.includes(value)) {
+      charTypesList.value.push(value);
+    }
+    return;
+  }
+
+  charTypesList.value = charTypesList.value.filter((characterType) => characterType !== value);
 };
 
 const handleUnicodeInputChange = (value: string, field: 'from' | 'to'): void => {
@@ -562,7 +657,7 @@ const generateText = (): void => {
   const charactersList = createCharactersList();
 
   if (charactersList.length === 0) {
-    toast.add({ title: $t('Please select character types first'), color: 'warning' });
+    toast.warning($t('Please select character types first'));
     return;
   }
 
@@ -579,9 +674,9 @@ const generateText = (): void => {
 const copyText = async (): Promise<void> => {
   try {
     await navigator.clipboard.writeText(generatedText.value);
-    toast.add({ title: $t('Copied to clipboard'), color: 'success' });
+    toast.success($t('Copied to clipboard'));
   } catch (error) {
-    toast.add({ title: $t('Failed to copy text') + `: ${error}`, color: 'error' });
+    toast.error($t('Failed to copy text') + `: ${error}`);
   }
 };
 

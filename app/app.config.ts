@@ -1,53 +1,36 @@
 export default defineAppConfig({
-  ui: {
-    colors: {
-      primary: 'brand',
-      success: 'success',
-      warning: 'warning',
-      error: 'danger',
-      info: 'info',
-      neutral: 'slate',
-    },
-    card: {
-      slots: {
-        root: 'overflow-hidden',
-        header: 'p-4 sm:px-5',
-        body: 'p-4 sm:p-5',
-      },
-    },
-  },
   baseUrl: 'https://lab.nya.run',
   itemConfig: {
     rate: {
-      icon: 'mdi:currency-usd-circle-outline',
+      icon: 'circle-dollar-sign',
       title: 'Exchange Rate Query',
       name: 'rate',
       path: '/rate',
       desc: 'Exchange rates provided on this website are from UnionPay System.',
     },
     longTextMaker: {
-      icon: 'mdi:text-long',
+      icon: 'text',
       title: 'Long Text Maker',
       name: 'longTextMaker',
       path: '/long-text-maker',
       desc: 'Make long text with ease. Also support Chinese, Japanese, etc...',
     },
     randomId: {
-      icon: 'mdi:code-tags',
+      icon: 'braces',
       title: 'Random ID Generator',
       name: 'randomId',
       path: '/random-id',
       desc: 'Generate a random ID. Supports UUID v4, CUID, and UUID v1.',
     },
     encode: {
-      icon: 'mdi:code-json',
+      icon: 'file-json',
       title: 'Encode/Decode String',
       name: 'encode',
       path: '/encode',
       desc: 'Encode and decode string with ease. base64, MD5, URL, etc.',
     },
     underDevelopment: {
-      icon: 'mdi:tools',
+      icon: 'wrench',
       title: 'Under Development',
       name: 'underDevelopment',
       path: '/under-development',
