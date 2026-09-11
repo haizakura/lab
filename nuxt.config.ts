@@ -51,6 +51,7 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
         { charset: 'utf-8' },
       ],
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       noscript: [{ textContent: 'JavaScript is required' }],
     },
   },
